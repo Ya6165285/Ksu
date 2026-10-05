@@ -1,0 +1,214 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Word,Montserrat ExtraBold,100,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,1,0,1,0,4,5,30,30,0,204
+Style: Small,Montserrat ExtraBold,88,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,1,0,1,0,4,5,30,30,0,204
+Style: Pink,Montserrat Black,128,&H00DCBAF2,&H00DCBAF2,&H00000000,&HA0000000,0,1,0,0,100,100,0,0,1,0,4,5,30,30,0,204
+Style: Script,Marck Script,170,&H00DCBAF2,&H00DCBAF2,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,4,5,30,30,0,204
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.07,0:00:00.31,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}как
+Dialogue: 0,0:00:00.31,0:00:00.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}изменилась
+Dialogue: 0,0:00:00.83,0:00:01.07,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}моя
+Dialogue: 0,0:00:01.07,0:00:01.35,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}жизнь
+Dialogue: 1,0:00:01.35,0:00:03.23,Small,,0,0,0,,{\pos(540,1278)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}когда я поняла
+Dialogue: 1,0:00:01.99,0:00:03.23,Small,,0,0,0,,{\pos(540,1382)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}что я очень
+Dialogue: 1,0:00:02.55,0:00:03.23,Pink,,0,0,0,,{\pos(540,1504)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}красивая
+Dialogue: 0,0:00:03.23,0:00:03.39,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}на
+Dialogue: 0,0:00:03.39,0:00:03.67,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}самом
+Dialogue: 0,0:00:03.67,0:00:03.95,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}деле
+Dialogue: 0,0:00:03.95,0:00:04.27,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}просто
+Dialogue: 0,0:00:04.27,0:00:04.95,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}потрясающе
+Dialogue: 0,0:00:04.95,0:00:05.23,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}потому
+Dialogue: 0,0:00:05.23,0:00:05.39,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}что
+Dialogue: 0,0:00:05.39,0:00:05.63,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}люди
+Dialogue: 0,0:00:05.63,0:00:05.79,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}на
+Dialogue: 0,0:00:05.79,0:00:06.11,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}улице
+Dialogue: 0,0:00:06.11,0:00:06.23,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}к
+Dialogue: 0,0:00:06.23,0:00:06.67,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}тебе
+Dialogue: 0,0:00:06.67,0:00:07.15,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}подходят
+Dialogue: 0,0:00:07.15,0:00:07.27,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:00:07.27,0:00:07.75,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}спрашивают
+Dialogue: 0,0:00:07.75,0:00:07.99,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}боже
+Dialogue: 0,0:00:07.99,0:00:08.19,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мой
+Dialogue: 0,0:00:08.19,0:00:08.55,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}девушка
+Dialogue: 0,0:00:08.55,0:00:08.71,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}что
+Dialogue: 0,0:00:08.71,0:00:08.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}вы
+Dialogue: 0,0:00:08.83,0:00:09.19,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}делаете
+Dialogue: 0,0:00:09.19,0:00:09.55,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}своим
+Dialogue: 0,0:00:09.55,0:00:09.87,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}лицом
+Dialogue: 0,0:00:09.87,0:00:10.15,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}чтобы
+Dialogue: 0,0:00:10.15,0:00:10.35,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}быть
+Dialogue: 0,0:00:10.35,0:00:10.63,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}такой
+Dialogue: 0,0:00:10.63,0:00:11.39,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}красивой
+Dialogue: 1,0:00:11.39,0:00:14.17,Small,,0,0,0,,{\pos(540,1278)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мужчины потрясающе
+Dialogue: 1,0:00:12.51,0:00:14.17,Pink,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}знакомятся
+Dialogue: 1,0:00:13.31,0:00:14.17,Small,,0,0,0,,{\pos(540,1522)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}оборачиваются
+Dialogue: 0,0:00:14.17,0:00:14.41,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}если
+Dialogue: 0,0:00:14.41,0:00:14.53,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}я
+Dialogue: 0,0:00:14.53,0:00:14.73,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}иду
+Dialogue: 0,0:00:14.73,0:00:14.89,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}по
+Dialogue: 0,0:00:14.89,0:00:15.17,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}улице
+Dialogue: 0,0:00:15.17,0:00:15.33,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:15.33,0:00:15.65,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}машины
+Dialogue: 0,0:00:15.65,0:00:16.25,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}бибикают
+Dialogue: 0,0:00:16.25,0:00:16.49,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}хотят
+Dialogue: 0,0:00:16.49,0:00:16.61,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}со
+Dialogue: 0,0:00:16.61,0:00:16.81,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мной
+Dialogue: 0,0:00:16.81,0:00:17.61,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}познакомиться
+Dialogue: 0,0:00:17.61,0:00:17.85,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}но
+Dialogue: 0,0:00:17.85,0:00:18.09,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}когда
+Dialogue: 0,0:00:18.09,0:00:18.17,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}я
+Dialogue: 0,0:00:18.17,0:00:18.45,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}пошла
+Dialogue: 0,0:00:18.45,0:00:18.57,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}в
+Dialogue: 0,0:00:18.57,0:00:19.15,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}отношения
+Dialogue: 0,0:00:19.15,0:00:19.27,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 1,0:00:19.27,0:00:21.89,Small,,0,0,0,,{\pos(540,1208)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}благодаря вот этому
+Dialogue: 1,0:00:20.19,0:00:21.89,Small,,0,0,0,,{\pos(540,1312)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}состоянию
+Dialogue: 1,0:00:20.75,0:00:21.89,Pink,,0,0,0,,{\pos(540,1434)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}классной
+Dialogue: 1,0:00:21.15,0:00:21.89,Pink,,0,0,0,,{\pos(540,1574)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}самоценности
+Dialogue: 1,0:00:21.89,0:00:24.14,Small,,0,0,0,,{\pos(540,1268)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}ко мне притянулся
+Dialogue: 1,0:00:22.85,0:00:24.14,Small,,0,0,0,,{\pos(540,1372)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}просто
+Dialogue: 1,0:00:23.17,0:00:24.14,Script,,0,0,0,,{\pos(540,1504)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мужчина мечты
+Dialogue: 0,0:00:24.14,0:00:24.34,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:00:24.34,0:00:24.50,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}на
+Dialogue: 0,0:00:24.50,0:00:24.78,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}самом
+Dialogue: 0,0:00:24.78,0:00:25.02,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}деле
+Dialogue: 0,0:00:25.02,0:00:25.54,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}когда
+Dialogue: 0,0:00:25.54,0:00:25.78,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мы
+Dialogue: 0,0:00:25.78,0:00:26.34,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}понимаем
+Dialogue: 1,0:00:26.34,0:00:28.06,Small,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то что мы
+Dialogue: 1,0:00:26.94,0:00:28.06,Pink,,0,0,0,,{\pos(540,1452)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}очень красивые
+Dialogue: 0,0:00:28.06,0:00:28.46,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:28.46,0:00:28.87,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}все
+Dialogue: 0,0:00:28.87,0:00:29.67,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}обстоятельства
+Dialogue: 0,0:00:29.67,0:00:29.91,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}все
+Dialogue: 0,0:00:29.91,0:00:30.27,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}события
+Dialogue: 0,0:00:30.27,0:00:30.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}складываются
+Dialogue: 0,0:00:30.83,0:00:30.95,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}в
+Dialogue: 0,0:00:30.95,0:00:31.23,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}нашу
+Dialogue: 0,0:00:31.23,0:00:31.67,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}пользу
+Dialogue: 0,0:00:31.67,0:00:31.79,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:00:31.79,0:00:31.99,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}это
+Dialogue: 0,0:00:31.99,0:00:32.31,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}очень
+Dialogue: 0,0:00:32.31,0:00:32.59,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}сильно
+Dialogue: 0,0:00:32.59,0:00:32.99,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}влияет
+Dialogue: 0,0:00:32.99,0:00:33.15,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}на
+Dialogue: 0,0:00:33.15,0:00:33.51,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}выбор
+Dialogue: 0,0:00:33.51,0:00:33.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}нашего
+Dialogue: 0,0:00:33.83,0:00:34.31,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}партнера
+Dialogue: 0,0:00:34.31,0:00:34.59,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}потому
+Dialogue: 0,0:00:34.59,0:00:34.75,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}что
+Dialogue: 0,0:00:34.75,0:00:35.15,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}когда
+Dialogue: 0,0:00:35.15,0:00:35.31,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мы
+Dialogue: 0,0:00:35.31,0:00:35.63,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}думаем
+Dialogue: 0,0:00:35.63,0:00:35.75,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}что
+Dialogue: 0,0:00:35.75,0:00:35.91,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мы
+Dialogue: 0,0:00:35.91,0:00:36.11,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}какая
+Dialogue: 0,0:00:36.11,0:00:36.23,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:36.23,0:00:36.39,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}не
+Dialogue: 0,0:00:36.39,0:00:36.71,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}такая
+Dialogue: 0,0:00:36.71,0:00:37.23,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}неценная
+Dialogue: 0,0:00:37.23,0:00:37.35,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:00:37.35,0:00:37.47,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}так
+Dialogue: 0,0:00:37.47,0:00:37.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}далее
+Dialogue: 0,0:00:37.83,0:00:37.99,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:37.99,0:00:38.27,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}кому
+Dialogue: 0,0:00:38.27,0:00:38.35,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мы
+Dialogue: 0,0:00:38.35,0:00:38.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}притягиваем
+Dialogue: 0,0:00:38.83,0:00:38.91,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:38.91,0:00:38.99,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}есть
+Dialogue: 0,0:00:38.99,0:00:39.47,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}соответственно
+Dialogue: 0,0:00:39.47,0:00:39.83,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мужчину
+Dialogue: 0,0:00:39.83,0:00:40.11,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}который
+Dialogue: 0,0:00:40.11,0:00:40.35,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}может
+Dialogue: 0,0:00:40.35,0:00:40.71,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}позволять
+Dialogue: 0,0:00:40.71,0:00:40.95,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}себе
+Dialogue: 0,0:00:40.95,0:00:41.31,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}делать
+Dialogue: 0,0:00:41.31,0:00:41.47,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}те
+Dialogue: 0,0:00:41.47,0:00:41.67,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}или
+Dialogue: 0,0:00:41.67,0:00:41.95,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}иные
+Dialogue: 0,0:00:41.95,0:00:42.39,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}действия
+Dialogue: 0,0:00:42.39,0:00:42.51,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:42.51,0:00:42.88,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}есть
+Dialogue: 0,0:00:42.88,0:00:43.32,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мужчины
+Dialogue: 0,0:00:43.32,0:00:43.58,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мечты
+Dialogue: 0,0:00:43.58,0:00:43.70,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}не
+Dialogue: 0,0:00:43.70,0:00:44.30,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}притянется
+Dialogue: 0,0:00:44.30,0:00:44.42,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}на
+Dialogue: 0,0:00:44.42,0:00:44.62,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}это
+Dialogue: 0,0:00:44.62,0:00:45.22,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}состояние
+Dialogue: 0,0:00:45.22,0:00:45.46,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}но
+Dialogue: 0,0:00:45.46,0:00:45.70,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}если
+Dialogue: 0,0:00:45.70,0:00:45.82,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}ты
+Dialogue: 0,0:00:45.82,0:00:46.10,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}хочешь
+Dialogue: 0,0:00:46.10,0:00:46.50,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}поменять
+Dialogue: 0,0:00:46.50,0:00:46.70,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}свой
+Dialogue: 0,0:00:46.70,0:00:47.18,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}сценарий
+Dialogue: 0,0:00:47.18,0:00:47.54,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}чтобы
+Dialogue: 0,0:00:47.54,0:00:47.74,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}тебе
+Dialogue: 0,0:00:47.74,0:00:48.34,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}притягивались
+Dialogue: 0,0:00:48.34,0:00:48.70,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}классные
+Dialogue: 0,0:00:48.70,0:00:49.14,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}мужчины
+Dialogue: 0,0:00:49.14,0:00:49.90,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}отношения
+Dialogue: 0,0:00:49.90,0:00:50.42,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}отношения
+Dialogue: 0,0:00:50.42,0:00:50.54,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}к
+Dialogue: 0,0:00:50.54,0:00:51.02,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}себе
+Dialogue: 0,0:00:51.02,0:00:51.30,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}то
+Dialogue: 0,0:00:51.30,0:00:51.46,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}я
+Dialogue: 0,0:00:51.46,0:00:51.90,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}создала
+Dialogue: 0,0:00:51.90,0:00:52.06,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}для
+Dialogue: 0,0:00:52.06,0:00:52.26,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}тебя
+Dialogue: 0,0:00:52.26,0:00:52.74,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}специально
+Dialogue: 0,0:00:52.74,0:00:53.02,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}урок
+Dialogue: 0,0:00:53.02,0:00:53.42,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}благодаря
+Dialogue: 0,0:00:53.42,0:00:53.78,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}которому
+Dialogue: 0,0:00:53.78,0:00:53.90,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}ты
+Dialogue: 0,0:00:53.90,0:00:54.18,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}сможешь
+Dialogue: 0,0:00:54.18,0:00:54.66,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}отследить
+Dialogue: 0,0:00:54.66,0:00:54.86,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}свой
+Dialogue: 0,0:00:54.86,0:00:55.46,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}сценарий
+Dialogue: 0,0:00:55.46,0:00:55.71,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:00:55.71,0:00:56.32,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}просто
+Dialogue: 0,0:00:56.32,0:00:56.84,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}поправить
+Dialogue: 1,0:00:56.84,0:00:59.57,Small,,0,0,0,,{\pos(540,1278)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}свою самооценку до
+Dialogue: 1,0:00:57.84,0:00:59.57,Pink,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}космического
+Dialogue: 1,0:00:58.44,0:00:59.57,Small,,0,0,0,,{\pos(540,1522)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}классного уровня
+Dialogue: 0,0:00:59.57,0:00:59.69,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:00:59.69,0:01:00.01,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}решить
+Dialogue: 0,0:01:00.01,0:01:00.21,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}свой
+Dialogue: 0,0:01:00.21,0:01:00.53,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}вопрос
+Dialogue: 0,0:01:00.53,0:01:01.29,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}самоценностью
+Dialogue: 0,0:01:01.29,0:01:01.69,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}чтобы
+Dialogue: 0,0:01:01.69,0:01:01.89,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}вот
+Dialogue: 0,0:01:01.89,0:01:02.09,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}это
+Dialogue: 0,0:01:02.09,0:01:02.25,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}вот
+Dialogue: 0,0:01:02.25,0:01:02.93,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}состояние
+Dialogue: 0,0:01:02.93,0:01:03.45,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}классной
+Dialogue: 0,0:01:03.45,0:01:03.81,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}женской
+Dialogue: 0,0:01:03.81,0:01:04.21,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}энергии
+Dialogue: 0,0:01:04.21,0:01:04.53,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}просто
+Dialogue: 0,0:01:04.53,0:01:04.89,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}вот
+Dialogue: 0,0:01:04.89,0:01:05.45,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}исходило
+Dialogue: 0,0:01:05.45,0:01:05.61,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}из
+Dialogue: 0,0:01:05.61,0:01:05.89,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}тебя
+Dialogue: 0,0:01:05.89,0:01:06.05,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:01:06.05,0:01:06.37,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}лучшие
+Dialogue: 0,0:01:06.37,0:01:06.81,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}события
+Dialogue: 0,0:01:06.81,0:01:07.41,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}притягивались
+Dialogue: 0,0:01:07.41,0:01:07.49,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}к
+Dialogue: 0,0:01:07.49,0:01:07.75,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}тебе
+Dialogue: 1,0:01:07.75,0:01:09.19,Small,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}поэтому пиши слово
+Dialogue: 1,0:01:08.71,0:01:09.19,Pink,,0,0,0,,{\pos(540,1452)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}маршрут
+Dialogue: 0,0:01:09.19,0:01:09.31,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}и
+Dialogue: 0,0:01:09.31,0:01:09.79,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}забирай
+Dialogue: 0,0:01:09.79,0:01:10.03,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}это
+Dialogue: 0,0:01:10.03,0:01:10.67,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}потрясающее
+Dialogue: 0,0:01:10.67,0:01:11.05,Word,,0,0,0,,{\pos(540,1400)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}видео

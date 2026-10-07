@@ -8,3 +8,4 @@ THREADS → кодовое слово «МАРШРУТ» → Telegram-бот →
 | [02-virusnye-zahody-i-diskussii.md](02-virusnye-zahody-i-diskussii.md) | 20 вирусных заходов + 20 дискуссионных тем (пункты 5–6) |
 | [03-gotovye-threads-po-formatam.md](03-gotovye-threads-po-formatam.md) | По 15 готовых постов в 4 форматах: мысль+раскрытие, личная история, «неприятная правда о…», «если ты сейчас…» (пункты 7–10) |
 | [04-top-10-konversionnyh-tem.md](04-top-10-konversionnyh-tem.md) | 10 самых конверсионных тем с разбором: почему перейдёт, боль, вопрос, CTA (пункт 11) |
+| [05-idei-dlya-reels.md](05-idei-dlya-reels.md) | 33 идеи для Reels в 8 форматах + контент-план на неделю |

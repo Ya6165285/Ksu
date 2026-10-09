@@ -13,8 +13,8 @@ Style: Tiny,Montserrat ExtraBold,56,&H00E8DDF5,&H00FFFFFF,&H00000000,&H90000000,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:00:04.00,Small,,0,0,0,,{\pos(540,520)\fad(200,0)}бесплатный урок
-Dialogue: 0,0:00:00.30,0:00:04.00,Small,,0,0,0,,{\pos(540,1330)\fad(150,0)\fscx80\fscy80\t(0,180,\fscx100\fscy100)}напиши
-Dialogue: 0,0:00:00.55,0:00:04.00,Pink,,0,0,0,,{\pos(540,1480)\fad(100,0)\fscx70\fscy70\t(0,200,\fscx108\fscy108)\t(200,320,\fscx100\fscy100)}МАРШРУТ
-Dialogue: 0,0:00:00.85,0:00:04.00,Small,,0,0,0,,{\pos(540,1630)\fad(150,0)}в комментариях
-Dialogue: 0,0:00:01.20,0:00:04.00,Tiny,,0,0,0,,{\pos(540,1740)\fad(200,0)}и я пришлю тебе урок
+Dialogue: 0,0:00:00.00,0:00:04.00,Small,,0,0,0,,{\pos(540,570)\fad(200,0)}бесплатный урок
+Dialogue: 0,0:00:00.30,0:00:04.00,Small,,0,0,0,,{\pos(540,1285)\fad(150,0)\fscx80\fscy80\t(0,180,\fscx100\fscy100)}напиши
+Dialogue: 0,0:00:00.55,0:00:04.00,Pink,,0,0,0,,{\pos(540,1392)\fad(100,0)\fscx70\fscy70\t(0,200,\fscx108\fscy108)\t(200,320,\fscx100\fscy100)}МАРШРУТ
+Dialogue: 0,0:00:00.85,0:00:04.00,Small,,0,0,0,,{\pos(540,1497)\fad(150,0)}в комментариях
+Dialogue: 0,0:00:01.20,0:00:04.00,Tiny,,0,0,0,,{\pos(540,1572)\fad(200,0)}и я пришлю тебе урок

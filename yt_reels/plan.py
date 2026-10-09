@@ -1,85 +1,135 @@
-"""Reel plan: segments are given in SOURCE seconds; this turns them into specs for reel.py."""
-import json, sys, os, bisect
+"""Reel plan. Segment boundaries and inserts are pinned to phrases in the source transcript."""
+import json, sys, os
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORDS = os.path.join(BASE, "work", "words.json")
 SRC = os.path.join(BASE, "src", "source.bin")
 BR = os.path.join(BASE, "broll")
+ST = os.path.join(BASE, "stickers")
 REPO = "/home/user/Ksu/reels1/assets"
-POP = os.path.join(os.path.dirname(BASE), "reels", "sfx", "pop.wav")
+CLICK = os.path.join(BASE, "ref", "click_clean.wav")
 FILLERS = {"ну", "короче", "блядь", "типа"}
-CTA_OWN = (172.0, 181.2)  # «из этой боли у меня появился мой урок ... почему это может быть»
 
 words = json.load(open(WORDS))["words"]
-starts = [w["s"] for w in words]
 
 
 def find(phrase, near, span=40):
-    """Return (first_idx, last_idx) of phrase occurring near source time `near`."""
-    ws = phrase.split(); n = len(ws)
-    best = None
+    """(first_idx, last_idx) of the phrase occurrence closest to source time `near`."""
+    ws = phrase.split(); n = len(ws); best = None
     for i in range(len(words) - n + 1):
-        if abs(words[i]["s"] - near) > span: continue
+        if abs(words[i]["s"] - near) > span:
+            continue
         if [w["w"] for w in words[i:i + n]] == ws:
-            if best is None or abs(words[i]["s"] - near) < abs(words[best]["s"] - near): best = i
-    if best is None: raise SystemExit(f"phrase not found: {phrase!r} near {near}")
+            if best is None or abs(words[i]["s"] - near) < abs(words[best]["s"] - near):
+                best = i
+    if best is None:
+        raise SystemExit(f"phrase not found: {phrase!r} near {near}")
     return best, best + n - 1
 
 
-def idx_at(t, side):
-    """First word starting at/after t (side='s') or last word ending at/before t (side='e')."""
-    if side == "s":
-        return bisect.bisect_left(starts, t - 0.05)
-    i = bisect.bisect_right(starts, t + 0.05) - 1
-    return i
+CTA = (("из этой боли у меня появился мой урок", 172), ("почему это может быть", 180))
+BRIDGE = (("я нахожусь в счастливых офигенных отношениях", 1207), ("мой лучший друг", 1211))
 
-
+# inserts: (phrase, near, kind, payload)
+#   card    -> (file, ss)        sticker -> name        pair -> ((fileA, ssA), (fileB, ssB), symbol)
 REELS = [
-    dict(id="r1", phr=[(("выход из отношений где меня обеспечивали",141),("попадаются какие то не такие",166)),(("для меня это было действительно тяжело",185),("самых сильных страхов",215))], title=["Он *внушал,* что без него", "я ^пропаду^"],
-         segs=[(141.04, 168.9), (183.9, 223.0)], cta="own",
-         ins=[(150.0, "b08.mov", 0.5, 2.6, "L"), (162.0, "b14.mov", 1.0, 2.4, "R"), (186.5, "b01.mov", 0.2, 2.4, "L"),
-              (208.5, "b03.mov", 4.5, 2.6, "R"), (213.0, "b18.mov", 1.0, 2.4, "L")],
-         zooms=[(208.06, 211.0)]),
-    dict(id="r2", phr=[(("мне было важно когда я выйду из отношений",436),("такого же мужчину как и я",462))], title=["Почему тебе попадаются", "*«не те»* мужчины"],
-         segs=[(424.08, 464.5)], cta="own",
-         ins=[(430.0, "b10.mov", 0.5, 2.4, "L"), (441.0, "b17.mov", 2.0, 2.4, "R"), (452.0, "p06.jpg", 0, 2.2, "L")],
-         zooms=[(445.0, 448.0)]),
-    dict(id="r3", phr=[(("тогда мне попался парень",462),("то что я похудею",506))], title=["Я *похудела,* когда", "перестала себя ^мучить^"],
-         segs=[(461.0, 507.98)], cta="card",
-         ins=[(466.0, "b03.mov", 1.0, 2.4, "R"), (472.0, "b07.mp4", 0.5, 2.4, "L"), (495.0, "b08.mov", 1.5, 2.2, "R")],
-         zooms=[(478.74, 482.0)]),
-    dict(id="r4", phr=[(("моисей должен был вывести за сорок дней",646),("у меня ничего не получается",741))], title=["Ты *сама* продлеваешь", "свои страдания"],
-         segs=[(642.5, 743.0)], cta="card",
-         ins=[(650.0, "b01.mov", 0.3, 2.4, "L"), (672.0, "b08.mov", 0.8, 2.6, "R"), (700.0, "b14.mov", 2.0, 2.4, "L"),
-              (720.0, "b08.mov", 2.0, 2.2, "R")],
-         zooms=[(653.52, 657.0), (727.14, 731.0)]),
-    dict(id="r5", phr=[(("если вы сейчас проживаете тяжелый финансовый этап",745),("поэтому заостряйте на это внимание",812))], title=["Если сейчас *нет денег —*", "послушай это"],
-         segs=[(743.92, 813.38)], cta="card",
-         ins=[(752.0, "b13.mov", 0.5, 2.4, "R"), (770.0, "b02.mov", 0.5, 2.4, "L"), (790.0, "b15.mov", 0.3, 2.4, "R"),
-              (805.0, "b13.mov", 3.0, 2.2, "L")],
-         zooms=[(798.36, 802.0)]),
-    dict(id="r6", phr=[(("там где ваш страх там рост",816),("в моменте сейчас",857))], title=["Эту мысль", "тебе *просто внушили*"],
-         segs=[(813.38, 858.94)], cta="card",
-         ins=[(820.0, "b08.mov", 2.0, 2.4, "L"), (838.0, "b01.mov", 1.0, 2.4, "R"), (850.0, "b05.mov", 0.5, 2.2, "L")],
-         zooms=[(847.52, 851.0)]),
-    dict(id="r7", phr=[(("остановитесь сейчас и вот подумайте",1300),("самый лучший для нас момент",1336))], title=["Вспомни, какой ты была", "*год назад*"],
-         segs=[(1292.48, 1338.94)], cta="card",
-         ins=[(1300.0, "b07.mp4", 0.5, 2.4, "L"), (1314.0, "b12.mov", 2.0, 2.4, "R"), (1326.0, "b09.mov", 0.5, 2.4, "L")],
-         zooms=[(1325.2, 1329.0)]),
-    dict(id="r8", phr=[(("верующему все во благо",1395),("обернулось для меня во благо",1490))], title=["Всё плохое, что случилось,", "было *тебе во благо*"],
-         segs=[(1396.28, 1496.32)], cta="card",
-         ins=[(1410.0, "b01.mov", 0.5, 2.4, "L"), (1425.0, "b08.mov", 0.5, 2.4, "R"), (1442.0, "b10.mov", 1.0, 2.4, "L"),
-              (1470.0, "b12.mov", 4.0, 2.4, "R"), (1485.0, "b11.mov", 0.5, 2.2, "L")],
-         zooms=[(1457.84, 1461.0), (1481.1, 1484.0)]),
+    dict(id="r1", title=["Как я ^вышла^ из отношений,", "в которых *потеряла себя*"],
+         phr=[(("выход из отношений где меня обеспечивали", 141), ("попадаются какие то не такие", 166)),
+              (("для меня это было действительно тяжело", 185), ("самых сильных страхов", 215))],
+         cta="own", bridge=False, zooms=[("я вышла и я жива", 208, 2.6)],
+         ins=[("меня обеспечивали", 143, "pair", (("b15.mov", 0.2), ("b02.mov", 0.5), "+")),
+              ("очень сильно страшно", 147, "sticker", "fear"),
+              ("я без него пропаду", 150, "sticker", "plead"),
+              ("разочаровываются в мужчинах", 160, "card", ("b08.mov", 1.0)),
+              ("какие то не такие", 165, "sticker", "clown"),
+              ("я загнусь", 189, "sticker", "cry"),
+              ("я не буду зарабатывать деньги", 199, "card", ("b13.mov", 0.5)),
+              ("прекрасных отношениях", 211, "pair", (("b03.mov", 5.6), ("b17.mov", 1.0), "+")),
+              ("самых сильных страхов", 214, "sticker", "strong"),
+              ("почему ты сейчас одна", 175, "sticker", "broken")]),
+    dict(id="r2", title=["Как перестать выбирать", "*не тех* мужчин", "и встретить ^достойного^"],
+         phr=[(("мне было важно когда я выйду из отношений", 436), ("такого же мужчину как и я", 462))],
+         cta="own", bridge=True, zooms=[("я была сама по себе достойной", 442, 2.6)],
+         ins=[("выйду из отношений", 435, "card", ("b01.mov", 0.2)),
+              ("самый классный мужчина", 439, "card", ("b03.mov", 5.6)),
+              ("классная энергия", 440, "sticker", "sparkles"),
+              ("самоценной девушкой", 445, "sticker", "crown"),
+              ("ущербная", 449, "sticker", "plead"),
+              ("мне не подходит", 453, "sticker", "clown"),
+              ("на классного такого же мужчину", 457, "card", ("b17.mov", 2.0)),
+              ("счастливых офигенных отношениях", 1208, "pair", (("b18.mov", 1.0), ("b09.mov", 0.5), "+")),
+              ("мой лучший друг", 1211, "sticker", "inlove")]),
+    dict(id="r3", title=["Как я ^похудела,^ когда", "перестала *ненавидеть*", "своё тело"],
+         phr=[(("тогда мне попался парень", 462), ("то что я похудею", 506))],
+         cta="card", bridge=False, zooms=[("и просто этот вес он ушел легко", 476, 2.4)],
+         ins=[("мне попался парень", 462, "card", ("b15.mov", 3.0)),
+              ("окружил меня такой любовью", 472, "pair", (("b03.mov", 5.6), ("b18.mov", 1.0), "+")),
+              ("прошел стресс", 476, "sticker", "relieved"),
+              ("полтора года в зале", 485, "sticker", "gym"),
+              ("по калориям питаться", 496, "sticker", "cake"),
+              ("еще больше срывалось", 501, "sticker", "mindblown"),
+              ("то что я похудею", 506, "sticker", "sparkles")]),
+    dict(id="r4", title=["Как перестать *страдать*", "и начать жить счастливо"],
+         phr=[(("моисей должен был вывести за сорок дней", 646), ("у меня ничего не получается", 741))],
+         cta="card", bridge=False, zooms=[("они выходили сорок лет", 656, 2.4), ("то мы привлекаем еще больше", 724, 2.4)],
+         ins=[("за сорок дней", 647, "sticker", "hourglass"),
+              ("сорок лет", 657, "sticker", "mindblown"),
+              ("встречаемся с подружкой", 665, "sticker", "speak"),
+              ("мы аж плачем", 673, "card", ("b08.mov", 1.0)),
+              ("я не могу похудеть", 692, "sticker", "cry"),
+              ("все сжималось", 702, "sticker", "brain"),
+              ("ропочем на свою жизнь", 719, "sticker", "speak"),
+              ("за три месяца", 729, "sticker", "hourglass"),
+              ("полтора года", 731, "sticker", "plead")]),
+    dict(id="r5", title=["Как перестать", "бояться за деньги,", "*даже если их нет*"],
+         phr=[(("если вы сейчас проживаете тяжелый финансовый этап", 745), ("поэтому заостряйте на это внимание", 812))],
+         cta="card", bridge=False, zooms=[("дочь миллиардера", 808, 2.4)],
+         ins=[("тяжелый финансовый этап", 746, "sticker", "money"),
+              ("на обеспечении у бога", 758, "sticker", "pray"),
+              ("малюсенькие события", 767, "sticker", "sparkles"),
+              ("мандаринку", 774, "sticker", "orange"),
+              ("везет по жизни", 782, "card", ("b02.mov", 0.5)),
+              ("у самого богатого", 797, "pair", (("b13.mov", 0.5), ("b15.mov", 0.2), "+")),
+              ("дочь миллиардера", 808, "sticker", "crown")]),
+    dict(id="r6", title=["Как *раз и навсегда*", "перестать зависеть", "от чужого мнения"],
+         phr=[(("там где ваш страх там рост", 816), ("в моменте сейчас", 857))],
+         cta="own", bridge=True, zooms=[("я живу только в моменте сейчас", 855, 2.0)],
+         ins=[("там где ваш страх", 819, "sticker", "fear"),
+              ("там рост", 820, "sticker", "growth"),
+              ("я так боялась", 823, "card", ("b08.mov", 2.0)),
+              ("внушили словами", 830, "sticker", "speak"),
+              ("духовный анализ", 833, "sticker", "brain"),
+              ("там рылсы", 847, "sticker", "phone"),
+              ("не принимайте эту мысль", 849, "sticker", "stop"),
+              ("счастливых офигенных отношениях", 1208, "pair", (("b18.mov", 1.0), ("b03.mov", 5.6), "+"))]),
+    dict(id="r7", title=["Как за год изменить жизнь", "*до неузнаваемости*"],
+         phr=[(("остановитесь сейчас и вот подумайте", 1300), ("самый лучший для нас момент", 1336))],
+         cta="card", bridge=False, zooms=[("то о чем вы молились", 1323, 2.4)],
+         ins=[("два года назад", 1304, "sticker", "hourglass"),
+              ("блин не получается", 1310, "sticker", "plead"),
+              ("очень много потрясающих событий", 1318, "pair", (("b10.mov", 1.0), ("b12.mov", 3.0), "+")),
+              ("о чем вы молились", 1324, "sticker", "pray"),
+              ("самый лучший для нас момент", 1333, "card", ("b09.mov", 0.5))]),
+    dict(id="r8", title=["Почему худшее в жизни —", "*лучшее, что с тобой*", "*случилось*"],
+         phr=[(("верующему все во благо", 1395), ("обернулось для меня во благо", 1490))],
+         cta="card", bridge=False, zooms=[("но мне это было все во благо", 1456, 2.4)],
+         ins=[("глава из библии", 1400, "sticker", "book"),
+              ("сдали его в рабство", 1416, "sticker", "chains"),
+              ("попал в тюрьму", 1429, "sticker", "lock"),
+              ("правой рукой", 1442, "sticker", "crown"),
+              ("спас братьев", 1445, "sticker", "hearthands"),
+              ("мы начинаем страдать", 1465, "sticker", "cry"),
+              ("пятнадцать лет не рос", 1476, "sticker", "down"),
+              ("обернулось для меня во благо", 1485, "pair", (("b10.mov", 1.0), ("b12.mov", 3.0), "→"))]),
 ]
 
 
 def spec_for(r):
-    ranges = []
-    for (a, ta), (b, tb) in r["phr"]:
-        ranges.append((find(a, ta)[0], find(b, tb)[1]))
+    ranges = [(find(a, ta)[0], find(b, tb)[1]) for (a, ta), (b, tb) in r["phr"]]
     if r["cta"] == "own":
-        ranges.append((find("из этой боли у меня появился мой урок", 172)[0], find("почему это может быть", 180)[1]))
+        if r.get("bridge"):
+            ranges.append((find(*BRIDGE[0])[0], find(*BRIDGE[1])[1]))
+        ranges.append((find(*CTA[0])[0], find(*CTA[1])[1]))
     drop = []
     allidx = [i for a, b in ranges for i in range(a, b + 1)]
     for n, i in enumerate(allidx):
@@ -87,51 +137,58 @@ def spec_for(r):
         if w in FILLERS:
             drop.append(i)
         elif n > 0 and words[allidx[n - 1]]["w"] == w and len(w) > 2:
-            drop.append(allidx[n - 1])  # stutter: keep the second take
+            drop.append(allidx[n - 1])
     return ranges, drop
 
 
-def out_time_map(ranges, drop):
-    """Approximate source->output time mapping (same rules as reel.build_timeline)."""
+def main(sel):
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from reel import build_timeline
-    clips, outw, total, keep = build_timeline({"ranges": ranges, "drop": drop}, words)
-
-    def f(t):
-        best = None
-        for c in clips:
-            if c[0] <= t <= c[1]:
-                return outw[c[2][0]][0] + (t - words[c[2][0]]["s"])
-            if c[0] > t and best is None:
-                best = outw[c[2][0]][0]
-        return best if best is not None else total
-    return f, outw, total, keep
-
-
-def main(sel):
     os.makedirs(os.path.join(BASE, "specs"), exist_ok=True)
     for r in REELS:
         if sel and r["id"] not in sel:
             continue
         ranges, drop = spec_for(r)
-        f, outw, total, keep = out_time_map(ranges, drop)
-        ins = []
-        for t, fn, ss, d, side in r["ins"]:
-            path = os.path.join(BR, fn)
-            ins.append(dict(file=path, t=round(f(t), 2), ss=ss, dur=d, h=480,
-                            x=300 if side == "L" else 780, y=1640, rot=-5 if side == "L" else 5))
-        zooms = [(round(f(a), 2), round(f(b), 2)) for a, b in r["zooms"]]
+        clips, outw, total, keep = build_timeline({"ranges": ranges, "drop": drop}, words)
+        kept = set(keep)
+
+        def t_of(phrase, near):
+            a, _ = find(phrase, near)
+            while a not in kept:
+                a += 1
+            return outw[a][0]
+
+        zooms = []
+        for phrase, near, d in r["zooms"]:
+            t = t_of(phrase, near); zooms.append((round(t, 2), round(min(total, t + d), 2)))
+        ins, syms, last_end, side = [], [], -1.0, 0
+        for phrase, near, kind, pay in r["ins"]:
+            t = t_of(phrase, near)
+            if t < last_end + 0.1:
+                t = last_end + 0.1
+            for za, zb_ in zooms:
+                if za - 1.0 < t < zb_:
+                    t = zb_ + 0.05
+            if kind == "sticker":
+                d = 1.6
+                ins.append(dict(kind="sticker", file=os.path.join(ST, pay + ".png"), t=round(t, 2), dur=d,
+                                size=300, x=[380, 700][side % 2], y=1610, rot=[-6, 6][side % 2]))
+            elif kind == "card":
+                d = 2.4; f, ss = pay
+                ins.append(dict(kind="card", file=os.path.join(BR, f), ss=ss, t=round(t, 2), dur=d,
+                                w=440, x=[340, 740][side % 2], y=1600, rot=[-5, 5][side % 2]))
+            else:
+                d = 2.6; (fa, sa), (fb, sb), sym = pay
+                ins.append(dict(kind="card", file=os.path.join(BR, fa), ss=sa, t=round(t, 2), dur=d, w=400, x=280, y=1600, rot=-6))
+                ins.append(dict(kind="card", file=os.path.join(BR, fb), ss=sb, t=round(t + 0.35, 2), dur=d - 0.35, w=400, x=800, y=1615, rot=6))
+                syms.append(dict(t=round(t + 0.2, 2), dur=d - 0.2, ch=sym, y=1610))
+            last_end = t + d; side += 1
         spec = dict(source=SRC, words=WORDS, work=os.path.join(BASE, "build", r["id"]), title=r["title"],
-                    ranges=ranges, drop=drop, inserts=ins, zooms=zooms, pop=POP,
+                    ranges=ranges, drop=drop, inserts=ins, symbols=syms, zooms=zooms, pop=CLICK,
                     lesson_cover=os.path.join(REPO, "lesson_cover.jpg"), endcard=os.path.join(REPO, "endcard.mp4"))
-        if r["cta"] == "own":
-            spec["cta"] = dict(type="own", first_word=ranges[-1][0])
-        else:
-            spec["cta"] = dict(type="card")
-        p = os.path.join(BASE, "specs", r["id"] + ".json")
-        json.dump(spec, open(p, "w"), ensure_ascii=False, indent=1)
-        txt = " ".join(words[i]["w"] for i in keep)
-        print(r["id"], f"{total:.1f}s", "|", txt[:160], "...", txt[-120:])
+        spec["cta"] = dict(type="own", first_word=ranges[-1][0]) if r["cta"] == "own" else dict(type="card")
+        json.dump(spec, open(os.path.join(BASE, "specs", r["id"] + ".json"), "w"), ensure_ascii=False, indent=1)
+        print(r["id"], f"{total:.1f}s", len(ins), "inserts")
 
 
 if __name__ == "__main__":

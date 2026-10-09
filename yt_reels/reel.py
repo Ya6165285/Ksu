@@ -54,7 +54,7 @@ def build_timeline(spec, words):
 
 
 def title_ass(lines):
-    """Lines use markup: plain = Inter SemiBold, *x* = Cormorant italic, ^x^ = Cormorant upright caps."""
+    """Lines use markup: plain = Inter SemiBold, *x* = Playfair italic, ^x^ = Playfair upright."""
     out = []
     for ln in lines:
         parts = re.split(r"(\*[^*]+\*|\^[^^]+\^)", ln)
@@ -63,13 +63,16 @@ def title_ass(lines):
             if not p:
                 continue
             if p.startswith("*"):
-                s += r"{\fnCormorant Garamond Medium\i1\fs80}" + p[1:-1]
+                s += r"{\fnPlayfair Display Medium\i1\fs82\fsp0}" + p[1:-1]
             elif p.startswith("^"):
-                s += r"{\fnCormorant Garamond Medium\i0\fs80}" + p[1:-1]
+                s += r"{\fnPlayfair Display Medium\i0\fs82\fsp0}" + p[1:-1]
             else:
-                s += r"{\fnInter SemiBold\i0\fs64}" + p
+                s += r"{\fnInter SemiBold\i0\fs70\fsp-1}" + p
         out.append(s)
     return out
+
+
+LINE = 78
 
 
 def make_ass(spec, words, outw, total, keep, cta_t0, path):
@@ -92,7 +95,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     ev = []
     tl = title_ass(spec["title"])
-    y0 = BAND_Y - 60 - 84 * (len(tl) - 1)
+    y0 = BAND_Y - 62 - LINE * (len(tl) - 1)
     # title is hidden during full-screen zooms and replaced by the CTA at the end
     zooms = spec.get("zooms", [])
     cuts = sorted(zooms) + ([(cta_t0, total)] if cta_t0 is not None else [])
@@ -104,7 +107,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     for n, (a, b) in enumerate(spans):
         fad = "\\fad(200,0)" if n == 0 else ""
         for k, s in enumerate(tl):
-            ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y0 + 84 * k}){fad}}}{s}")
+            ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y0 + LINE * k}){fad}}}{s}")
     # one-word subtitles under the band (hidden during full-screen zooms)
     for n, i in enumerate(keep):
         s = outw[i][0]
@@ -116,6 +119,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         y = 1500 if inzoom else SUB_Y
         sty = "Big" if inzoom else "Sub"
         ev.append(f"Dialogue: 1,{ts(s)},{ts(e)},{sty},,0,0,0,,{{\\pos(540,{y})}}{words[i]['w']}")
+    for sym in spec.get("symbols", []):
+        ev.append(f"Dialogue: 4,{ts(sym['t'])},{ts(sym['t'] + sym['dur'])},Big,,0,0,0,,{{\\pos(540,{sym['y']})\\fnInter\\fs130\\fad(120,120)}}{sym['ch']}")
     if cta_t0 is not None:
         c = cta_t0 + 0.2
         ev.append(f"Dialogue: 3,{ts(c)},{ts(total)},Big,,0,0,0,,{{\\pos(540,{BAND_Y - 150})\\fad(150,0)}}напиши {{\\rPink}}МАРШРУТ")
@@ -198,7 +203,7 @@ def main(spec_path, out_path):
         cur = "vz"
     else:
         fc.append("[hz]nullsink")
-    # b-roll cards
+    # b-roll cards and stickers, popping in
     k = 1
     for j, ins in enumerate(spec.get("inserts", [])):
         f = ins["file"]; d = ins.get("dur", 2.4); t0 = ins["t"]
@@ -207,11 +212,17 @@ def main(spec_path, out_path):
             inputs += ["-loop", "1", "-framerate", "30", "-t", f"{d:.2f}", "-i", f]
         else:
             inputs += ["-ss", f"{ins.get('ss', 0):.2f}", "-t", f"{d:.2f}", "-i", f]
-        h = ins.get("h", 520); ang = ins.get("rot", 0) * np.pi / 180
-        cx, cy = ins.get("x", 540), ins.get("y", 1600)
-        fc.append(f"[{k}:v]fps=30,scale=-2:{h},format=rgba,"
-                  f"rotate={ang:.4f}:c=none:ow=rotw({ang:.4f}):oh=roth({ang:.4f}),"
-                  f"fade=t=in:st=0:d=0.15:alpha=1,fade=t=out:st={max(0, d - 0.15):.2f}:d=0.15:alpha=1,"
+        ang = ins.get("rot", 0) * np.pi / 180
+        cx, cy = ins.get("x", 540), ins.get("y", 1610)
+        if ins.get("kind") == "sticker":
+            sz = ins.get("size", 300)
+            base = f"[{k}:v]fps=30,format=rgba,scale={sz}:-2"
+        else:
+            cw = ins.get("w", 440); ch = int(cw * 5 / 4) // 2 * 2
+            base = (f"[{k}:v]fps=30,scale={cw}:{ch}:force_original_aspect_ratio=increase,crop={cw}:{ch},setsar=1,format=rgba")
+        fc.append(base + f",rotate={ang:.4f}:c=none:ow=rotw({ang:.4f}):oh=roth({ang:.4f}),"
+                  f"scale=w='iw*min(1,0.55+3.5*t)':h=-2:eval=frame,"
+                  f"fade=t=out:st={max(0, d - 0.12):.2f}:d=0.12:alpha=1,"
                   f"setpts=PTS-STARTPTS+{t0:.3f}/TB[i{j}]")
         fc.append(f"[{cur}][i{j}]overlay=x={cx}-w/2:y={cy}-h/2:eof_action=pass:enable='between(t,{t0:.3f},{t0 + d:.3f})'[v{j + 1}x]")
         cur = f"v{j + 1}x"; k += 1
@@ -236,7 +247,7 @@ def main(spec_path, out_path):
     track = np.zeros((int((total + 1) * 48000), 2))
     pop, _ = sf.read(spec["pop"])
     for t in pops:
-        i = int(t * 48000); track[i:i + len(pop)] += pop[:len(track) - i] * 0.25
+        i = int(t * 48000); track[i:i + len(pop)] += pop[:len(track) - i] * 0.45
     sfxp = os.path.join(work, "sfx.wav"); sf.write(sfxp, track, 48000)
     inputs += ["-i", sfxp]; sidx = k
     if cta["type"] == "card":

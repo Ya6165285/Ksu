@@ -1,129 +1,197 @@
-"""Instagram carousel 1080x1350: full-bleed photo, dark gradient, Montserrat text with one pink accent."""
-import re, subprocess, sys
+"""Carousel v3 in the style of hey.ksusha posts: full-bleed photo collage, bold white headline
+with a black outline across the middle, italic caption with shadow, white screenshot-like cards."""
+import subprocess
 from PIL import Image, ImageOps, ImageDraw, ImageFont, ImageFilter
 W, H = 1080, 1350
-PINK = (242, 90, 170)
+PINK = (242, 90, 170); INK = (28, 22, 26)
 S = "/tmp/claude-0/-home-user-Ksu/03c5ee2b-73ae-52f6-90d7-fac0ce26511e/scratchpad"
-BR = S + "/yt2/broll/"; SRC = S + "/car/src/"; FR = S + "/car/fr/"
+BR = S + "/yt2/broll/"; SRC = S + "/car/src/"; FR = S + "/car/fr/"; VF = S + "/car/vf/"
+_fc = {}
 def font(style, size):
-    p = subprocess.run(["fc-match", "-f", "%{file}", f"Montserrat:style={style}"], capture_output=True, text=True).stdout
-    return ImageFont.truetype(p, size)
+    if style not in _fc:
+        _fc[style] = subprocess.run(["fc-match", "-f", "%{file}", f"Montserrat:style={style}"], capture_output=True, text=True).stdout
+    return ImageFont.truetype(_fc[style], size)
 
-def photo(path, fx=0.5, fy=0.5, blur=0, dark=0.0):
+def fill(path, w, h, fx=0.5, fy=0.5):
     im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
-    # strip black phone-screenshot bars
-    g = im.convert("L"); px = g.load(); w, h = im.size
+    g = im.convert("L"); px = g.load(); iw, ih = im.size
     top = 0
-    while top < h // 3 and max(px[x, top] for x in range(0, w, 16)) < 12: top += 1
-    bot = h - 1
-    while bot > h * 2 // 3 and max(px[x, bot] for x in range(0, w, 16)) < 12: bot -= 1
-    # also drop the home-indicator strip area if a bar was found
-    if top > 0 or bot < h - 1:
-        im = im.crop((0, top + 4, w, bot - 4))
-    w, h = im.size
-    s = max(W / w, H / h); im = im.resize((round(w * s), round(h * s)), Image.LANCZOS)
-    w, h = im.size
-    x = min(max(int(fx * w - W / 2), 0), w - W); y = min(max(int(fy * h - H / 2), 0), h - H)
-    im = im.crop((x, y, x + W, y + H))
-    if blur: im = im.filter(ImageFilter.GaussianBlur(blur))
-    if dark: im = Image.blend(im, Image.new("RGB", im.size, (0, 0, 0)), dark)
+    while top < ih // 3 and max(px[x, top] for x in range(0, iw, 16)) < 12: top += 1
+    bot = ih - 1
+    while bot > ih * 2 // 3 and max(px[x, bot] for x in range(0, iw, 16)) < 12: bot -= 1
+    if top or bot < ih - 1: im = im.crop((0, top + 6, iw, bot - 6))
+    iw, ih = im.size; s = max(w / iw, h / ih)
+    im = im.resize((round(iw * s), round(ih * s)), Image.LANCZOS); iw, ih = im.size
+    x = min(max(int(fx * iw - w / 2), 0), iw - w); y = min(max(int(fy * ih - h / 2), 0), ih - h)
+    return im.crop((x, y, x + w, y + h))
+
+def collage(tiles):
+    """tiles: (path, x, y, w, h, fx, fy)"""
+    im = Image.new("RGB", (W, H))
+    for p, x, y, w, h, fx, fy in tiles:
+        im.paste(fill(p, w, h, fx, fy), (x, y))
     return im
 
-def gradient(im, side, frac=0.62, strength=0.88):
-    g = Image.new("L", (1, H))
-    for yy in range(H):
-        t = (yy - H * (1 - frac)) / (H * frac) if side == "bottom" else ((H * frac) - yy) / (H * frac)
-        t = max(0.0, min(1.0, t))
-        g.putpixel((0, yy), int(255 * strength * (t ** 1.3)))
-    g = g.resize((W, H))
-    return Image.composite(Image.new("RGB", (W, H), (0, 0, 0)), im, g)
+def band(im, y0, y1, a=0.35):
+    """Soft dark band so the middle text always reads."""
+    m = Image.new("L", (W, H), 0); ImageDraw.Draw(m).rectangle((0, y0, W, y1), fill=int(255 * a))
+    im.paste(Image.new("RGB", (W, H)), (0, 0), m.filter(ImageFilter.GaussianBlur(60)))
 
-def layout(lines, f, maxw):
-    """lines: strings with *pink* parts, one row each (no wrapping)."""
-    rows = []
-    for ln in lines:
-        row, pink, buf = [], False, ""
-        for ch in ln:
-            if ch == "*":
-                if buf: row.append((buf, PINK if pink else (255, 255, 255)))
-                buf, pink = "", not pink
-            else:
-                buf += ch
-        if buf: row.append((buf, PINK if pink else (255, 255, 255)))
-        rows.append(row)
-    return rows
+def segs(line):
+    out, pink, buf = [], False, ""
+    for ch in line:
+        if ch == "*":
+            if buf: out.append((buf, pink))
+            buf, pink = "", not pink
+        else: buf += ch
+    if buf: out.append((buf, pink))
+    return out
 
-def fit(style, size, lines, maxw=960, upper=False):
-    f = font(style, size)
-    plain = [re.sub(r"\*", "", l).upper() if upper else re.sub(r"\*", "", l) for l in lines]
-    w = max(f.getlength(p) for p in plain)
-    return f if w <= maxw else font(style, int(size * maxw / w))
-
-def draw_text(im, lines, f, y0, anchor="bottom", lh=1.28, maxw=940, upper=False):
-    if upper: lines = [l.upper() for l in lines]
-    rows = layout(lines, f, maxw); step = int(f.size * lh)
-    total = step * len(rows)
-    y = y0 - total if anchor == "bottom" else (y0 - total // 2 if anchor == "center" else y0)
-    sh = Image.new("L", (W, H), 0); ds = ImageDraw.Draw(sh)
-    pos = []
-    for r in rows:
-        rw = sum(f.getlength(t) for t, _ in r)
-        x = (W - rw) / 2
-        for t, c in r:
-            pos.append((x, y, t, c)); ds.text((x, y + 5), t, font=f, fill=150); x += f.getlength(t)
-        y += step
-    sh = sh.filter(ImageFilter.GaussianBlur(9))
-    im.paste(Image.new("RGB", (W, H), (0, 0, 0)), (0, 0), sh)
+def write(im, lines, f, y, lh=1.15, stroke=5, maxw=1000, shadow=True):
+    plain = [l.replace("*", "") for l in lines]
+    wmax = max(f.getlength(p) for p in plain)
+    if wmax > maxw: f = ImageFont.truetype(f.path, int(f.size * maxw / wmax))
+    step = int(f.size * lh)
+    if shadow:
+        sh = Image.new("L", (W, H), 0); ds = ImageDraw.Draw(sh); yy = y
+        for l in plain:
+            ds.text(((W - f.getlength(l)) / 2, yy + 6), l, font=f, fill=200, stroke_width=stroke + 2, stroke_fill=200); yy += step
+        im.paste(Image.new("RGB", (W, H)), (0, 0), sh.filter(ImageFilter.GaussianBlur(10)))
     d = ImageDraw.Draw(im)
-    for px_, py_, t, c in pos: d.text((px_, py_), t, font=f, fill=c)
+    for l in lines:
+        ss = segs(l); x = (W - sum(f.getlength(t) for t, _ in ss)) / 2
+        for t, p in ss:
+            d.text((x, y), t, font=f, fill=PINK if p else (255, 255, 255), stroke_width=stroke, stroke_fill=(0, 0, 0)); x += f.getlength(t)
+        y += step
     return y
 
-TITLE = font("ExtraBold", 74); BODY = font("Bold", 54); SMALL = font("SemiBold", 34)
+TITLE = font("ExtraBold", 76); ITAL = font("Bold Italic", 44)
+def headline(im, lines, y, size=76):
+    return write(im, lines, font("ExtraBold", size), y, lh=1.12, stroke=5)
+def caption(im, lines, y):
+    return write(im, lines, ITAL, y, lh=1.3, stroke=0)
 
-SLIDES = [
- dict(img=SRC + "IMG_8812.PNG", fx=0.5, fy=0.62, title=True,
-      text=["Как я встретила", "*мужчину мечты*,", "когда уже", "не верила,", "что такие есть"]),
- dict(img=FR + "b01_0.5.jpg", fx=0.45, fy=0.4,
-      text=["Два года назад", "я вышла из отношений.", "Но они *не вышли из меня*."]),
- dict(img=FR + "b08_1.0.jpg", fx=0.5, fy=0.35,
-      text=["В голове звучали его слова:", "«Кто тебя ещё", "так *полюбит*?»", "«Кто тебе ещё такие", "подарки будет дарить?»"]),
- dict(img=FR + "b02_0.5.jpg", fx=0.5, fy=0.4,
-      text=["Он припоминал подарки.", "Манипулировал.", "А я верила, что", "*со мной что-то не так*."]),
- dict(img=BR + "n12.jpg", fx=0.5, fy=0.5,
-      text=["И я решила:", "все мужчины такие.", "Все *абьюзеры*.", "Нормальных просто нет."]),
- dict(img=FR + "b14_1.0.jpg", fx=0.5, fy=0.4,
-      text=["Потом были свидания.", "Несерьёзные. Балаболы.", "Те, кто *не настроен*", "*на отношения*."]),
- dict(img=FR + "b08_3.0.jpg", fx=0.5, fy=0.35,
-      text=["Я обжигалась снова и снова.", "И в какой-то момент", "*не хотела больше*", "*никуда идти*."]),
- dict(img=BR + "n07.jpg", fx=0.5, fy=0.45,
-      text=["Тогда я поменяла стратегию:", "поменяла окружение,", "перестала слушать", "«все мужики козлы»", "и начала *прокачивать*", "*самоценность*."]),
- dict(img=BR + "n04.jpg", fx=0.5, fy=0.35,
-      text=["Я поняла главное:", "дело не в том,", "что «все такие».", "Дело в том,", "*кого я выбираю*."]),
- dict(img=SRC + "IMG_8813.PNG", fx=0.55, fy=0.45,
-      text=["А потом появился он.", "Я увидела его и подумала:", "*это то, что я искала*."]),
- dict(img=SRC + "IMG_8811.PNG", fx=0.45, fy=0.5,
-      text=["Сейчас он мой *лучший друг*.", "Дарит подарки без повода.", "Мы поддерживаем", "друг друга во всём.", "И мне больше не страшно", "быть собой."]),
- dict(img=BR + "n09.jpg", fx=0.5, fy=0.5, cta=True),
-]
-for n, sl in enumerate(SLIDES, 1):
-    if sl.get("cta"):
-        im = photo(sl["img"], sl["fx"], sl["fy"], blur=6, dark=0.45)
-        y = draw_text(im, ["Если ты сейчас там,", "где была я, напиши", "*МАРШРУТ* в комментариях"], font("Bold", 56), 110, anchor="top")
-        cov = Image.open("/home/user/Ksu/reels1/assets/lesson_cover.jpg").convert("RGB")
-        cw = 900; cov = cov.resize((cw, int(cov.height * cw / cov.width)), Image.LANCZOS)
-        cy = y + 40
-        shadow = Image.new("L", (W, H), 0); ImageDraw.Draw(shadow).rounded_rectangle((90, cy + 12, 90 + cw, cy + 12 + cov.height), 28, fill=170)
-        im.paste(Image.new("RGB", (W, H)), (0, 0), shadow.filter(ImageFilter.GaussianBlur(18)))
-        m = Image.new("L", cov.size, 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, cw, cov.height), 28, fill=255)
-        im.paste(cov, (90, cy), m)
-        draw_text(im, ["и я пришлю тебе урок,", "как понять свой сценарий", "и встретить своего мужчину"], font("Bold", 56), cy + cov.height + 50, anchor="top")
-    else:
-        im = photo(sl["img"], sl["fx"], sl["fy"])
-        im = gradient(im, "bottom", frac=0.7 if sl.get("title") else 0.62)
-        if sl.get("title"):
-            draw_text(im, sl["text"], fit("ExtraBold", 84, sl["text"], 960, True), H - 120, upper=True, lh=1.1)
-            d = ImageDraw.Draw(im); t = "листай →"; d.text((W - 60 - SMALL.getlength(t), H - 80), t, font=SMALL, fill=(255, 255, 255))
-        else:
-            draw_text(im, sl["text"], fit("Bold", 60, sl["text"], 960), H - 100)
-    im.save(f"{S}/car/out/slide_{n:02d}.jpg", quality=94)
-    print("slide", n)
+def card(im, x, y, w, rows, title=None, rot=0, check=None):
+    """White rounded card with dark text rows; check='x' or 'v' draws markers."""
+    fb = font("Bold", 40); fm = font("SemiBold", 42)
+    lh = 60; pad = 38
+    hgt = pad * 2 + (lh * len(rows)) + (56 if title else 0)
+    c = Image.new("RGBA", (w, hgt), (0, 0, 0, 0)); d = ImageDraw.Draw(c)
+    d.rounded_rectangle((0, 0, w - 1, hgt - 1), 28, fill=(255, 255, 255, 245))
+    yy = pad
+    if title:
+        d.text((pad, yy), title, font=fb, fill=INK); yy += 56
+    for r in rows:
+        xx = pad
+        if check:
+            cy = yy + 22
+            if check == "v":
+                d.ellipse((xx, cy - 16, xx + 32, cy + 16), fill=PINK)
+                d.line([(xx + 8, cy), (xx + 14, cy + 7), (xx + 25, cy - 7)], fill=(255, 255, 255), width=5)
+            else:
+                d.line([(xx + 6, cy - 10), (xx + 26, cy + 10)], fill=INK, width=5); d.line([(xx + 26, cy - 10), (xx + 6, cy + 10)], fill=INK, width=5)
+            xx += 52
+        for t, p in segs(r):
+            d.text((xx, yy), t, font=fm, fill=PINK if p else INK); xx += fm.getlength(t)
+        yy += lh
+    c = c.rotate(rot, resample=Image.BICUBIC, expand=True)
+    sh = Image.new("L", (W, H), 0); sh.paste(c.split()[3].point(lambda v: v * 0.5), (x + 6, y + 14))
+    im.paste(Image.new("RGB", (W, H)), (0, 0), sh.filter(ImageFilter.GaussianBlur(16)))
+    im.paste(c, (x, y), c)
+    return y + c.height
+
+def photo_card(im, path, x, y, w, h, rot=0, fx=0.5, fy=0.5):
+    p = fill(path, w, h, fx, fy).convert("RGBA")
+    fr = Image.new("RGBA", (w + 20, h + 20), (255, 255, 255, 255)); fr.paste(p, (10, 10))
+    m = Image.new("L", fr.size, 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, fr.width - 1, fr.height - 1), 22, fill=255); fr.putalpha(m)
+    fr = fr.rotate(rot, resample=Image.BICUBIC, expand=True)
+    sh = Image.new("L", (W, H), 0); sh.paste(fr.split()[3].point(lambda v: v * 0.55), (x + 8, y + 16))
+    im.paste(Image.new("RGB", (W, H)), (0, 0), sh.filter(ImageFilter.GaussianBlur(16)))
+    im.paste(fr, (x, y), fr)
+
+HW, HH = W // 2, H // 2
+slides = []
+
+# 1. cover: four photos of the two of you
+im = collage([(SRC + "IMG_8812.PNG", 0, 0, HW, HH, 0.5, 0.6), (SRC + "IMG_8811.PNG", HW, 0, HW, HH, 0.45, 0.45),
+              (BR + "n06.jpg", 0, HH, HW, HH, 0.4, 0.5), (BR + "n09.jpg", HW, HH, HW, HH, 0.45, 0.55)])
+band(im, 470, 860, 0.45)
+y = headline(im, ["Как я встретила", "*мужчину мечты*"], 500, 84)
+caption(im, ["когда уже не верила, что такие есть"], y + 20)
+slides.append(im)
+
+# 2. left the relationship + his words
+im = collage([(VF + "V330.jpg", 0, 0, HW, H, 0.47, 0.5), (VF + "V830.jpg", HW, 0, HW, H, 0.47, 0.5)])
+band(im, 120, 560, 0.4)
+y = headline(im, ["Два года назад", "я вышла из отношений"], 160)
+caption(im, ["Но они не вышли из меня.", "В голове звучали его слова:"], y + 16)
+card(im, 100, 740, 880, ["«Кто тебя ещё так полюбит?»", "«Кто тебе ещё такие", "подарки будет дарить?»", "«Ты без меня пропадёшь»"], title="Бывший:", rot=-2)
+slides.append(im)
+
+# 3. manipulation with gifts
+im = collage([(FR + "b02_0.5.jpg", 0, 0, W, HH, 0.5, 0.45), (VF + "V650.jpg", 0, HH, W, HH, 0.47, 0.35)])
+band(im, 500, 860, 0.45)
+y = headline(im, ["Он манипулировал", "подарками"], 530)
+caption(im, ["Припоминал всё, что дарил.", "А я верила, что со мной что-то не так"], y + 16)
+slides.append(im)
+
+# 4. all men are the same
+im = collage([(BR + "n12.jpg", 0, 0, HW, H, 0.5, 0.55), (VF + "V160.jpg", HW, 0, HW, H, 0.47, 0.5)])
+band(im, 480, 900, 0.45)
+y = headline(im, ["И я решила:", "все мужчины такие"], 520)
+caption(im, ["Все абьюзеры. Нормальных просто нет"], y + 16)
+slides.append(im)
+
+# 5. dates
+im = collage([(VF + "V520.jpg", 0, 0, W, H, 0.47, 0.42)])
+band(im, 100, 560, 0.45)
+y = headline(im, ["Потом были", "свидания"], 150, 84)
+caption(im, ["Я обжигалась снова и снова", "и не хотела больше никуда идти"], y + 16)
+card(im, 130, 840, 820, ["несерьёзные", "балаболы", "не настроенные на отношения"], check="x", rot=2)
+slides.append(im)
+
+# 6. new strategy
+im = collage([(BR + "n08.jpg", 0, 0, HW, HH, 0.5, 0.55), (BR + "n07.jpg", HW, 0, HW, HH, 0.55, 0.5),
+              (BR + "n10.jpg", 0, HH, HW, HH, 0.5, 0.5), (BR + "n04.jpg", HW, HH, HW, HH, 0.4, 0.4)])
+band(im, 420, 1000, 0.5)
+y = headline(im, ["Тогда я поменяла", "стратегию"], 450)
+card(im, 120, y + 30, 840, ["поменяла окружение", "перестала слушать", "«все мужики козлы»", "прокачала *самоценность*"], check="v", rot=-1.5)
+slides.append(im)
+
+# 7. main insight
+im = collage([(BR + "n05.jpg", 0, 0, HW, H, 0.45, 0.45), (BR + "n03.jpg", HW, 0, HW, H, 0.35, 0.5)])
+band(im, 460, 900, 0.45)
+y = headline(im, ["Дело не в том,", "что «все такие»"], 500)
+caption(im, ["Дело в том, кого я выбираю"], y + 16)
+slides.append(im)
+
+# 8. and then he appeared
+im = collage([(SRC + "IMG_8813.PNG", 0, 0, HW, H, 0.55, 0.45), (SRC + "IMG_8814.PNG", HW, 0, HW, HH, 0.5, 0.45),
+              (SRC + "IMG_8815.PNG", HW, HH, HW, HH, 0.55, 0.55)])
+band(im, 480, 880, 0.45)
+y = headline(im, ["А потом", "появился он"], 510, 86)
+caption(im, ["Я увидела его и подумала:", "это то, что я искала"], y + 16)
+slides.append(im)
+
+# 9. now: best friend
+im = collage([(SRC + "IMG_8809.JPG", 0, 0, HW, HH, 0.5, 0.65), (FR + "kiss1.jpg", HW, 0, HW, HH, 0.5, 0.4),
+              (BR + "n02.jpg", 0, HH, HW, HH, 0.5, 0.45), (SRC + "IMG_8811.PNG", HW, HH, HW, HH, 0.45, 0.45)])
+band(im, 450, 900, 0.5)
+y = headline(im, ["Сейчас он мой", "*лучший друг*"], 480)
+caption(im, ["Дарит подарки без повода, мы поддерживаем", "друг друга, и мне не страшно быть собой"], y + 16)
+slides.append(im)
+
+# 10. CTA
+im = collage([(BR + "n01.jpg", 0, 0, HW, HH, 0.5, 0.35), (BR + "n03.jpg", HW, 0, HW, HH, 0.5, 0.45),
+              (BR + "n05.jpg", 0, HH, HW, HH, 0.5, 0.45), (BR + "n06.jpg", HW, HH, HW, HH, 0.55, 0.5)])
+band(im, 60, 1300, 0.55)
+y = headline(im, ["Хочешь так же?"], 110, 90)
+caption(im, ["Если ты сейчас там, где была я"], y + 10)
+cov = Image.open("/home/user/Ksu/reels1/assets/lesson_cover.jpg").convert("RGB")
+photo_card(im, "/home/user/Ksu/reels1/assets/lesson_cover.jpg", 120, 350, 800, 450, rot=-2)
+card(im, 100, 880, 880, ["Напиши *МАРШРУТ* в комментариях,", "и я пришлю тебе урок,", "как понять свой сценарий", "и встретить своего мужчину"], rot=1.5)
+slides.append(im)
+
+for n, im in enumerate(slides, 1):
+    im.save(f"{S}/car/out3/slide_{n:02d}.jpg", quality=94)
+print(len(slides))

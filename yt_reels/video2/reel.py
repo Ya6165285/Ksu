@@ -46,9 +46,10 @@ def cut_before_next(words, b):
         jump = env[k] - env[k - 2]
         if jump > best:
             best, bk = jump, k
+    nxt = words[b + 1]["s"] + 0.01      # never let the next word through
     if bk is not None and best > 5:
-        return e - 0.1 + (bk - 2) * 0.01
-    return e + 0.05
+        return min(e - 0.1 + (bk - 2) * 0.01, nxt)
+    return min(e + 0.05, nxt)
 
 
 def build_timeline(spec, words):
@@ -78,7 +79,7 @@ def build_timeline(spec, words):
     # a short audio fade at the clip end hides it)
     if clips:
         b = clips[-1][2][-1]
-        clips[-1][1] = cut_before_next(words, b)
+        clips[-1][1] = spec.get("end_at") or cut_before_next(words, b)
     t = 0.0; outw = {}
     for c in clips:
         for i in c[2]:
@@ -171,8 +172,21 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         ev.append(f"Dialogue: 4,{ts(sym['t'])},{ts(sym['t'] + sym['dur'])},Big,,0,0,0,,{{\\pos(540,{sym['y']})\\fnInter\\fs130\\fad(120,120)}}{sym['ch']}")
     if cta_t0 is not None:
         c = cta_t0 + 0.2
-        ev.append(f"Dialogue: 3,{ts(c)},{ts(total)},Big,,0,0,0,,{{\\pos(540,{BAND_Y - 150})\\fad(150,0)}}напиши {{\\rPink}}МАРШРУТ")
-        ev.append(f"Dialogue: 3,{ts(c + 0.25)},{ts(total)},Sub,,0,0,0,,{{\\pos(540,{BAND_Y - 70})\\fad(150,0)}}в комментариях и я пришлю тебе урок")
+        fad = "\\fad(150,0)"
+        if spec.get("cta", {}).get("type") == "overlay":
+            from PIL import ImageFont
+            ask = spec["cta"].get("ask", "УЗНАЛА СЕБЯ?")
+            fpath = subprocess.run(["fc-match", "-f", "%{file}", "Montserrat:style=ExtraBold"], capture_output=True, text=True).stdout
+            qfs = min(62, 62 * 980 / (ImageFont.truetype(fpath, 62).getlength(ask) * 1.03 + 0.7 * len(ask)))
+            q = r"{\fnMontserrat ExtraBold\b0\i0\fs%.0f\fscx103\fsp%.1f}" % (qfs, qfs * 0.0105) + ask
+            yq = BAND_Y - 330
+            ev.append(f"Dialogue: 2,{ts(c)},{ts(total)},Title,,0,0,0,,{{\\pos(544,{yq + 6}){fad}\\c&H000000&\\alpha&H60&\\blur9\\shad0}}{q}")
+            ev.append(f"Dialogue: 3,{ts(c)},{ts(total)},Title,,0,0,0,,{{\\pos(540,{yq}){fad}\\shad0}}{q}")
+            c += 0.25
+        ev.append(f"Dialogue: 3,{ts(c)},{ts(total)},Big,,0,0,0,,{{\\pos(540,{BAND_Y - 235}){fad}}}напиши {{\\rPink}}МАРШРУТ")
+        lines = spec.get("cta", {}).get("lines") or ["в комментариях, и я пришлю тебе урок,", "как понять свой сценарий", "и встретить своего мужчину"]
+        for n, line in enumerate(lines):
+            ev.append(f"Dialogue: 3,{ts(c + 0.25)},{ts(total)},Sub,,0,0,0,,{{\\pos(540,{BAND_Y - 165 + 62 * n}){fad}}}{line}")
     open(path, "w").write(hdr + "\n".join(ev) + "\n")
 
 
@@ -211,6 +225,9 @@ def main(spec_path, out_path):
     clips, outw, total, keep = build_timeline(spec, words)
     cta = spec.get("cta", {"type": "card"})
     cta_t0 = None
+    if cta["type"] == "overlay":
+        # lesson cover and МАРШРУТ appear over her last words
+        cta_t0 = max(0.0, total - cta.get("dur", 5.0))
     if cta["type"] == "own":
         # CTA fragment is the last range: find its first word's output time
         cta_t0 = outw[cta["first_word"]][0]
@@ -231,7 +248,7 @@ def main(spec_path, out_path):
     head = os.path.join(work, "head.mkv")
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", head])
     # own CTA: hold the last frame (cover + МАРШРУТ text) a little longer
-    if cta["type"] == "own":
+    if cta["type"] in ("own", "overlay"):
         held = os.path.join(work, "head_hold.mkv")
         run(["ffmpeg", "-v", "error", "-y", "-i", head, "-vf", "tpad=stop_mode=clone:stop_duration=1.5",
              "-af", "apad=pad_dur=1.5", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p",
@@ -288,7 +305,7 @@ def main(spec_path, out_path):
         fc.append(f"[{cur}][i{j}]overlay=x={cx}-w/2:y={cy}-h/2:eof_action=pass:enable='between(t,{t0:.3f},{t0 + d:.3f})'[v{j + 1}x]")
         cur = f"v{j + 1}x"; k += 1
     # lesson cover during own-CTA
-    if cta["type"] == "own":
+    if cta["type"] in ("own", "overlay"):
         inputs += ["-loop", "1", "-framerate", "30", "-t", f"{total - cta_t0:.2f}", "-i", spec["lesson_cover"]]
         fc.append(f"[{k}:v]scale=720:-2,format=rgba,fade=t=in:st=0:d=0.25:alpha=1,setpts=PTS-STARTPTS+{cta_t0:.3f}/TB[cov]")
         fc.append(f"[{cur}][cov]overlay=x=(W-w)/2:y=1385:eof_action=pass:enable='gte(t,{cta_t0:.3f})'[vcov]")

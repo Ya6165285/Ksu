@@ -44,15 +44,17 @@ BRIDGE_INS = [("притянулся реально очень классный 
               ("его первый раз увидела", 1044, "card", ("kiss1.mp4", 0)),
               ("это то самое", 1047, "card", ("kiss2.mp4", 0))]
 
+OVERLAY = 5.0   # seconds of her last words under the lesson cover + МАРШРУТ
+
 REELS = [
-    dict(id="n1", title=["Почему тебе кажется,", "что *нормальных мужчин* нет"],
+    dict(id="n1", end_at=477.70, title=["Почему тебе кажется,", "что *нормальных мужчин* нет"],
          phr=[(("давайте разберем сначала вот это", 178), ("ну а я же знала ну так и есть", 222)),
               (("но опыт это не равно закон", 322), ("это не значит то что так всегда", 329)),
               (("тут знаете нужно поменять вашу установку", 464), ("будут классно ко мне относиться", 482))],
          zooms=[("но опыт это не равно закон", 322, 2.4)],
          ins=[("мужчина изменил", 182, "card", ("b08.mov", 1.0)),
               ("подружка нам сказала", 209, "card", ("b14.mov", 2.0)),
-              ("будут классно ко мне относиться", 481, "pair", (("n06.jpg", 0), ("n02.jpg", 0), "+"))]),
+              ("есть еще и другие мужчины", 473, "pair", (("n09.jpg", 0), ("n03.jpg", 0), "+"))]),
     dict(id="n2", title=["Как одна неприятная история", "*ломает* все твои отношения"],
          phr=[(("у меня была такая ситуация", 224), ("и замечать только их", 298)),
               (("тоже самое то есть вот у нас происходит в принципе в отношениях", 300), ("вы начинаете думать то что нормальных мужчин нет", 320))],
@@ -74,8 +76,8 @@ REELS = [
               (("понимаете вот это две абсолютно разных мотивации", 619), ("просто потому что вот нам сейчас вместе классно", 638))],
          zooms=[("две абсолютно разных мотивации", 620, 2.2)],
          ins=[("я в него столько всего вложила", 509, "card", ("b13.mov", 0.5)),
-              ("настолько много любви", 551, "card", ("n09.jpg", 0)),
-              ("на день рождения", 558, "pair", (("n02.jpg", 0), ("n03.jpg", 0), "+")),
+              ("настолько много любви", 551, "card", ("n05.jpg", 0)),
+              ("на день рождения", 558, "pair", (("n03.jpg", 0), ("n09.jpg", 0), "+")),
               ("нам сейчас вместе классно", 637, "card", ("b17.mov", 1.0))]),
     dict(id="n5", title=["Почему ты снова и снова", "выбираешь *не того* мужчину"],
          phr=[(("главный вопрос который я хочу чтобы вы себе задали", 1625), ("и какие сценарии я повторяю", 1652)),
@@ -103,16 +105,16 @@ REELS = [
               (("и вот полгода я реально посвятила тому что я занималась собой", 924), ("что же со мной вообще как бы будет", 933)),
               (("я поменяла стратегию не в пользу того чтобы ходить и обжигаться", 943), ("ставить его под одну гребенку то что все мужчины такие", 967)),
               (("и когда я ходила на свидание во первых я это делала супер выборочно", 1037), ("он такой светлый он такой теплый", 1048))],
-         bridge=[], zooms=[("я реально посвятила тому что я занималась собой", 925, 2.2)],
+         cta="story", bridge=[], zooms=[("я реально посвятила тому что я занималась собой", 925, 2.2)],
          ins=[("людей которые в счастливых отношениях", 912, "card", ("n10.jpg", 0)),
               ("я занималась собой", 928, "pair", (("n04.jpg", 0), ("n08.jpg", 0), "+")),
               ("ходить и обжигаться", 945, "card", ("b08.mov", 1.5))]),
     dict(id="n9", title=["Что делать, если мужчинам", "от тебя *нужен только секс*"],
          phr=[(("во первых я вот когда мужчины стали ну там хотеть секса от меня", 986), ("с какой призмой мы на это смотрим", 1033))],
          zooms=[("ого прикольно меня видит сексуальной", 999, 2.2)],
-         ins=[("вы привлекательны этому мужчине", 993, "card", ("n04.jpg", 0)),
+         ins=[("вы привлекательны этому мужчине", 993, "card", ("n03.jpg", 0)),
               ("вызывало какую то агрессию", 1005, "card", ("b08.mov", 1.0)),
-              ("сексуальной классной девушкой красивой", 1011, "pair", (("n05.jpg", 0), ("n02.jpg", 0), "+"))]),
+              ("сексуальной классной девушкой красивой", 1011, "pair", (("n05.jpg", 0), ("n04.jpg", 0), "+"))]),
     dict(id="n10", title=["Разлюбит ли мужчина,", "если ты *поправишься*"],
          phr=[(("а если бы твоя девушка сильно поправилась", 1130), ("а почему это должно меня заставить расстаться с девушкой", 1143)),
               (("а вот если бы я поправилась на пять килограмм", 1176), ("мне кажется даже вкусненько", 1184)),
@@ -123,6 +125,8 @@ REELS = [
               ("посмотри какая ты красивая", 1240, "card", ("n05.jpg", 0)),
               ("он меня выбирает в любом состоянии", 1275, "pair", (("n02.jpg", 0), ("n06.jpg", 0), "+"))]),
     dict(id="n11", title=["Что настоящий мужчина", "*делает* для своей женщины"],
+         cta_text=dict(ask="ХОЧЕШЬ ЗДОРОВЫХ ОТНОШЕНИЙ?",
+                       lines=["в комментариях, и я пришлю тебе урок", "о гармоничных отношениях", "и самоценности"]),
          phr=[(("что для тебя значит фраза моя девушка может на меня положиться", 1405), ("в эмоциональном плане если очень тяжело", 1437)),
               (("в плане финансовых вопросов мужчина как мне кажется должен сам закрывать этот вопрос", 1441), ("не чувствовать вот это недоуважение", 1462)),
               (("мне нравится дарить подарки", 1482), ("иногда сумочку", 1509))],
@@ -136,7 +140,7 @@ REELS = [
               (("и не позволяй ни тем мужчинам убедить тебя что твоего мужчины не существует", 1938), ("он есть и он к тебе придет", 1950))],
          zooms=[("три мужчины это не равно все мужчины", 1857, 2.4)],
          ins=[("тебе изменяли", 1855, "card", ("b08.mov", 1.0)),
-              ("носить ее на руках", 1876, "pair", (("n06.jpg", 0), ("n09.jpg", 0), "+")),
+              ("носить ее на руках", 1876, "pair", (("n09.jpg", 0), ("n03.jpg", 0), "+")),
               ("он есть и он к тебе придет", 1950, "card", ("n12.jpg", 0))]),
 ]
 
@@ -144,9 +148,10 @@ REELS = [
 def spec_for(r):
     rng = lambda a, b: (find(*a)[0], find(*b)[1])
     ranges = [rng(a, b) for a, b in r["phr"]]
-    for a, b in r.get("bridge", [BRIDGE]):
-        ranges.append(rng(a, b))
-    ranges.append(rng(*CTA))
+    if r.get("cta") == "story":
+        for a, b in r.get("bridge", [BRIDGE]):
+            ranges.append(rng(a, b))
+        ranges.append(rng(*CTA))
     drop = []
     allidx = [i for a, b in ranges for i in range(a, b + 1)]
     cta0 = ranges[-1][0]
@@ -161,8 +166,13 @@ def spec_for(r):
             drop += [i, allidx[n + 1]]
         elif n > 0 and words[allidx[n - 1]]["w"] == w and len(w) > 2:
             drop.append(allidx[n - 1])
-        elif n > 1 and n + 1 < len(allidx) and [words[allidx[n - 2]]["w"], words[allidx[n - 1]]["w"]] == [w, nx]:
-            drop += [allidx[n - 2], allidx[n - 1]]      # two-word stutter: "людей которые людей которые"
+        else:
+            # repeated phrase: "людей которые людей которые", "я же говорила я же говорила"
+            for k in (3, 2):
+                if n >= k and n + k <= len(allidx) and \
+                        [words[j]["w"] for j in allidx[n - k:n]] == [words[j]["w"] for j in allidx[n:n + k]]:
+                    drop += allidx[n - k:n]
+                    break
     return ranges, sorted(set(drop))
 
 
@@ -177,7 +187,7 @@ def main(sel):
         bs = find(*BRIDGE[0])[0]
         if any(x <= bs <= y for x, y in ranges):
             r = dict(r, ins=r["ins"] + BRIDGE_INS)
-        clips, outw, total, keep = build_timeline({"ranges": ranges, "drop": drop}, words)
+        clips, outw, total, keep = build_timeline({"ranges": ranges, "drop": drop, "end_at": r.get("end_at")}, words)
         kept = set(keep)
 
         def t_of(phrase, near):
@@ -208,8 +218,19 @@ def main(sel):
                 ins.append(dict(kind="card", file=os.path.join(BR, fb), ss=sb, t=round(t + 0.35, 2), dur=d - 0.35, w=400, x=800, y=1615, rot=6))
                 syms.append(dict(t=round(t + 0.2, 2), dur=d - 0.2, ch=sym, y=1610))
             last_end = t + d; side += 1
-        cta_first = ranges[-1][0]
-        cta_t = outw[min(i for i in keep if i >= cta_first)][0]
+        story = r.get("cta") == "story"
+        if story:
+            cta_first = ranges[-1][0]
+            cta_t = outw[min(i for i in keep if i >= cta_first)][0]
+        else:
+            cta_t = total - OVERLAY
+        # inserts that would start under the lesson cover are dropped (a pair goes as a whole)
+        late = [x for x in ins if x["t"] > cta_t - 1.4]
+        if late:
+            cut = min(x["t"] for x in late) - 0.4
+            ins = [x for x in ins if x["t"] < cut]
+            syms = [y for y in syms if y["t"] < cut]
+            print(f"  {r['id']}: dropped {len(late)} late insert(s)")
         for x in ins:
             if x["t"] + x["dur"] > cta_t - 0.05:
                 x["dur"] = round(cta_t - 0.05 - x["t"], 2)
@@ -217,11 +238,12 @@ def main(sel):
                     raise SystemExit(f"{r['id']}: insert at {x['t']} runs into the lesson fragment")
         for y in syms:
             y["dur"] = round(min(y["dur"], cta_t - 0.05 - y["t"]), 2)
-        spec = dict(source=SRCS[0], sources=SRCS, audios=AUDIOS, gains=GAINS, words=WORDS,
+        spec = dict(end_at=r.get("end_at"), source=SRCS[0], sources=SRCS, audios=AUDIOS, gains=GAINS, words=WORDS,
                     work=os.path.join(BASE, "build", r["id"]), title=r["title"],
                     ranges=ranges, drop=drop, inserts=ins, symbols=syms, zooms=zooms, pop=CLICK,
                     lesson_cover=os.path.join(REPO, "lesson_cover.jpg"), endcard=os.path.join(REPO, "endcard.mp4"),
-                    cta=dict(type="own", first_word=min(i for i in keep if i >= cta_first)))
+                    cta=dict(type="own", first_word=min(i for i in keep if i >= cta_first)) if story
+                    else dict(type="overlay", dur=OVERLAY, **r.get("cta_text", {})))
         json.dump(spec, open(os.path.join(BASE, "specs", r["id"] + ".json"), "w"), ensure_ascii=False, indent=1)
         print(r["id"], f"{total:.1f}s", len(ins), "inserts")
 

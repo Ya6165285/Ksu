@@ -39,6 +39,11 @@ CTA = (("из этой боли у меня появился мой урок", 1
 # her own words about meeting her man, leads into the lesson
 BRIDGE = (("и притянулся реально очень классный парень", 1043), ("он такой светлый он такой теплый", 1048))
 
+# flowers/gifts and the two of them together while she talks about meeting him
+BRIDGE_INS = [("притянулся реально очень классный парень", 1042, "pair", (("n06.jpg", 0), ("n02.jpg", 0), "+")),
+              ("его первый раз увидела", 1044, "card", ("kiss1.mp4", 0)),
+              ("это то самое", 1047, "card", ("kiss2.mp4", 0))]
+
 REELS = [
     dict(id="n1", title=["Почему тебе кажется,", "что *нормальных мужчин* нет"],
          phr=[(("давайте разберем сначала вот это", 178), ("ну а я же знала ну так и есть", 222)),
@@ -98,11 +103,10 @@ REELS = [
               (("и вот полгода я реально посвятила тому что я занималась собой", 924), ("что же со мной вообще как бы будет", 933)),
               (("я поменяла стратегию не в пользу того чтобы ходить и обжигаться", 943), ("ставить его под одну гребенку то что все мужчины такие", 967)),
               (("и когда я ходила на свидание во первых я это делала супер выборочно", 1037), ("он такой светлый он такой теплый", 1048))],
-         zooms=[("это то что я искала это то самое", 1046, 2.4)],
+         bridge=[], zooms=[("я реально посвятила тому что я занималась собой", 925, 2.2)],
          ins=[("людей которые в счастливых отношениях", 912, "card", ("n10.jpg", 0)),
               ("я занималась собой", 928, "pair", (("n04.jpg", 0), ("n08.jpg", 0), "+")),
-              ("ходить и обжигаться", 945, "card", ("b08.mov", 1.5)),
-              ("супер выборочно", 1039, "card", ("b01.mov", 0.3))]),
+              ("ходить и обжигаться", 945, "card", ("b08.mov", 1.5))]),
     dict(id="n9", title=["Что делать, если мужчинам", "от тебя *нужен только секс*"],
          phr=[(("во первых я вот когда мужчины стали ну там хотеть секса от меня", 986), ("с какой призмой мы на это смотрим", 1033))],
          zooms=[("ого прикольно меня видит сексуальной", 999, 2.2)],
@@ -157,6 +161,8 @@ def spec_for(r):
             drop += [i, allidx[n + 1]]
         elif n > 0 and words[allidx[n - 1]]["w"] == w and len(w) > 2:
             drop.append(allidx[n - 1])
+        elif n > 1 and n + 1 < len(allidx) and [words[allidx[n - 2]]["w"], words[allidx[n - 1]]["w"]] == [w, nx]:
+            drop += [allidx[n - 2], allidx[n - 1]]      # two-word stutter: "людей которые людей которые"
     return ranges, sorted(set(drop))
 
 
@@ -168,6 +174,9 @@ def main(sel):
         if sel and r["id"] not in sel:
             continue
         ranges, drop = spec_for(r)
+        bs = find(*BRIDGE[0])[0]
+        if any(x <= bs <= y for x, y in ranges):
+            r = dict(r, ins=r["ins"] + BRIDGE_INS)
         clips, outw, total, keep = build_timeline({"ranges": ranges, "drop": drop}, words)
         kept = set(keep)
 
@@ -202,8 +211,12 @@ def main(sel):
         cta_first = ranges[-1][0]
         cta_t = outw[min(i for i in keep if i >= cta_first)][0]
         for x in ins:
-            if x["t"] + x["dur"] > cta_t - 0.1:
-                raise SystemExit(f"{r['id']}: insert at {x['t']} runs into the lesson fragment")
+            if x["t"] + x["dur"] > cta_t - 0.05:
+                x["dur"] = round(cta_t - 0.05 - x["t"], 2)
+                if x["dur"] < 1.2:
+                    raise SystemExit(f"{r['id']}: insert at {x['t']} runs into the lesson fragment")
+        for y in syms:
+            y["dur"] = round(min(y["dur"], cta_t - 0.05 - y["t"]), 2)
         spec = dict(source=SRCS[0], sources=SRCS, audios=AUDIOS, gains=GAINS, words=WORDS,
                     work=os.path.join(BASE, "build", r["id"]), title=r["title"],
                     ranges=ranges, drop=drop, inserts=ins, symbols=syms, zooms=zooms, pop=CLICK,

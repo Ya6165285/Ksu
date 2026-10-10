@@ -24,6 +24,31 @@ def ts(x):
     return f"{int(x // 3600)}:{int(x % 3600 // 60):02d}:{x % 60:05.2f}"
 
 
+AUDIO16 = os.path.join(os.path.dirname(ROOT), "work", "audio16.wav")
+
+
+def cut_before_next(words, b):
+    """End time for the final word: the end of the quiet gap right before the next word starts."""
+    e = words[b]["e"]
+    if b + 1 >= len(words) or words[b + 1]["s"] - e > 0.35:
+        return e + 0.16
+    try:
+        a, sr = sf.read(AUDIO16, start=int((e - 0.1) * 16000), stop=int((e + 0.35) * 16000))
+    except Exception:
+        return e + 0.05
+    fr = 160
+    env = [20 * np.log10(np.sqrt(np.mean(a[i:i + fr] ** 2)) + 1e-9) for i in range(0, len(a) - fr, fr)]
+    # next word onset = sharpest energy rise close to the nominal word end (e-0.03 .. e+0.10)
+    best, bk = 0.0, None
+    for k in range(9, min(len(env), 21)):
+        jump = env[k] - env[k - 2]
+        if jump > best:
+            best, bk = jump, k
+    if bk is not None and best > 5:
+        return e - 0.1 + (bk - 2) * 0.01
+    return e + 0.05
+
+
 def build_timeline(spec, words):
     """Turn kept word indices into clips; returns clips and per-word out times."""
     seen = set(); keep = []
@@ -49,7 +74,7 @@ def build_timeline(spec, words):
     # a short audio fade at the clip end hides it)
     if clips:
         b = clips[-1][2][-1]
-        clips[-1][1] = max(clips[-1][1], words[b]["e"] + 0.16)
+        clips[-1][1] = cut_before_next(words, b)
     t = 0.0; outw = {}
     for c in clips:
         for i in c[2]:
@@ -66,6 +91,14 @@ def title_ass(lines):
     from PIL import ImageFont
     path = subprocess.run(["fc-match", "-f", "%{file}", "Montserrat:style=ExtraBold"], capture_output=True, text=True).stdout
     f = ImageFont.truetype(path, 100)
+    # every hook ends with a colon (it leads into the video)
+    lines = list(lines)
+    last = lines[-1].rstrip()
+    if last.endswith("*"):
+        last = last[:-1].rstrip(",.;:—- ") + "*:"
+    else:
+        last = last.rstrip(",.;:—- ") + ":"
+    lines[-1] = last
     plain = [re.sub(r"\*", "", ln).upper() for ln in lines]
     # glyphs 4% wider and ~1.7% of size extra letter spacing (measured on the reference screenshot)
     widest = max(f.getlength(p) * 1.03 + 1.05 * len(p) for p in plain)
@@ -180,7 +213,7 @@ def main(spec_path, out_path):
         for n, (s, e, _) in enumerate(clips):
             f = os.path.join(work, f"c{n:03d}.mkv")
             d = e - s
-            fo = 0.14 if n == len(clips) - 1 else 0.01
+            fo = 0.04 if n == len(clips) - 1 else 0.01
             run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s:.3f}", "-i", src, "-t", f"{d:.3f}",
                  "-vf", "scale=1920:1080,setsar=1,fps=30",
                  "-af", f"afade=t=in:d=0.01,afade=t=out:st={max(0, d - fo):.3f}:d={fo},aresample=48000",

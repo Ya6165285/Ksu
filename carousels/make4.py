@@ -91,12 +91,12 @@ text_card(im, 120, H - card_h(840, t5, 29) - 50, 840, t5, rot=-1, size=29)
 slides.append(im)
 
 # 6. new approach: collage (people around me, events, flowers, me) with the card in the middle
-im = collage([(BR + "n10.jpg", 0, 0, W // 2, H // 2, 0.5, 0.5), (BR + "n01.jpg", W // 2, 0, W // 2, H // 2, 0.5, 0.3),
-              (BR + "n09.jpg", 0, H // 2, W // 2, H // 2, 0.45, 0.55), (BR + "n05.jpg", W // 2, H // 2, W // 2, H // 2, 0.45, 0.22)])
+im = collage([(BR + "n10.jpg", 0, 0, W // 2, H // 2, 0.5, 0.5), (BR + "n03.jpg", W // 2, 0, W // 2, H // 2, 0.4, 0.42),
+              (BR + "n09.jpg", 0, H // 2, W // 2, H // 2, 0.45, 0.55), (BR + "n01.jpg", W // 2, H // 2, W // 2, H // 2, 0.5, 0.3)])
 band(im, 30, 300, 0.45)
 headline(im, ["Я изменила не требования,", "а свой *подход*"], 60, 66)
 t6 = "— Сменила окружение.\n\n— Перестала слушать разговоры о том, что «все мужики козлы».\n\n— Начала работать над *самоценностью* и перестала искать подтверждение своей значимости в мужчинах."
-text_card(im, 230, 650 - card_h(620, t6, 26), 620, t6, rot=1, size=26)
+text_card(im, 230, (H - card_h(620, t6, 26)) // 2, 620, t6, rot=1, size=26)
 slides.append(im)
 
 # 7. the main thing

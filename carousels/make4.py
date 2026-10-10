@@ -91,12 +91,12 @@ text_card(im, 120, H - card_h(840, t5, 29) - 50, 840, t5, rot=-1, size=29)
 slides.append(im)
 
 # 6. new approach: collage (people around me, events, flowers, me) with the card in the middle
-im = collage([(BR + "n10.jpg", 0, 0, W // 2, H // 2, 0.5, 0.5), (FR + "event.jpg", W // 2, 0, W // 2, H // 2, 0.5, 0.45),
-              (BR + "n09.jpg", 0, H // 2, W // 2, H // 2, 0.45, 0.55), (BR + "n05.jpg", W // 2, H // 2, W // 2, H // 2, 0.45, 0.4)])
+im = collage([(BR + "n10.jpg", 0, 0, W // 2, H // 2, 0.5, 0.5), (BR + "n01.jpg", W // 2, 0, W // 2, H // 2, 0.5, 0.3),
+              (BR + "n09.jpg", 0, H // 2, W // 2, H // 2, 0.45, 0.55), (BR + "n05.jpg", W // 2, H // 2, W // 2, H // 2, 0.45, 0.22)])
 band(im, 30, 300, 0.45)
 headline(im, ["Я изменила не требования,", "а свой *подход*"], 60, 66)
 t6 = "— Сменила окружение.\n\n— Перестала слушать разговоры о том, что «все мужики козлы».\n\n— Начала работать над *самоценностью* и перестала искать подтверждение своей значимости в мужчинах."
-text_card(im, 170, (H - card_h(740, t6, 30)) // 2 + 60, 740, t6, rot=1, size=30)
+text_card(im, 230, 650 - card_h(620, t6, 26), 620, t6, rot=1, size=26)
 slides.append(im)
 
 # 7. the main thing
@@ -113,14 +113,15 @@ y = headline(im, ["А потом", "появился он"], 70, 86)
 caption(im, ["Я увидела его и подумала:", "это то, что я искала"], y + 12)
 slides.append(im)
 
-# 9. today: gifts behind, the two of you in a big card that nothing covers
-im = collage([(FR + "b03_5.6.jpg", 0, 0, W // 2, H // 2, 0.45, 0.4), (FR + "b17_1.0.jpg", W // 2, 0, W // 2, H // 2, 0.5, 0.45),
-              (FR + "b18_1.0.jpg", 0, H // 2, W // 2, H // 2, 0.5, 0.45), (BR + "p16.png", W // 2, H // 2, W // 2, H // 2, 0.5, 0.5)])
-band(im, 0, H, 0.35)
-band(im, 0, 260, 0.45); band(im, 1110, H, 0.5)
-headline(im, ["Сегодня он мой любимый", "мужчина и *лучший друг*"], 50, 64)
-photo_card(im, SRC + "IMG_8811.PNG", 290, 250, 480, 800, rot=-2, fx=0.45, fy=0.45)
-caption(im, ["Дарит подарки без повода. Мы поддерживаем", "друг друга во всём. И мне больше", "не страшно быть собой"], 1145)
+# 9. today: a wall of gifts and flowers, the two of you in a smaller card
+T3 = H // 3
+im = collage([(FR + "b03_5.6.jpg", 0, 0, W // 2, T3, 0.45, 0.45), (FR + "b17_1.0.jpg", W // 2, 0, W // 2, T3, 0.5, 0.5),
+              (FR + "b18_1.0.jpg", 0, T3, W // 2, T3, 0.5, 0.45), (BR + "p16.png", W // 2, T3, W // 2, T3, 0.5, 0.45),
+              (BR + "n06.jpg", 0, 2 * T3, W // 2, H - 2 * T3, 0.5, 0.55), (BR + "n01.jpg", W // 2, 2 * T3, W // 2, H - 2 * T3, 0.5, 0.3)])
+band(im, 0, 240, 0.5); band(im, 1150, H, 0.55)
+headline(im, ["Сегодня он мой любимый", "мужчина и *лучший друг*"], 40, 64)
+photo_card(im, SRC + "IMG_8811.PNG", 345, 330, 380, 620, rot=-2, fx=0.45, fy=0.45)
+caption(im, ["Дарит подарки без повода. Мы поддерживаем", "друг друга во всём. И мне больше", "не страшно быть собой"], 1170)
 slides.append(im)
 
 # 10. CTA

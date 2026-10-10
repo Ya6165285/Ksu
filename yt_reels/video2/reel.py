@@ -75,6 +75,9 @@ def build_timeline(spec, words):
         hi = words[b + 1]["s"] if b + 1 < len(words) and words[b + 1].get("src", 0) == sa else c[1] + 1
         c[0] = max(c[0] - PRE, (lo + c[0]) / 2)
         c[1] = min(c[1] + POST, (hi + c[1]) / 2)
+    # ASR word starts run a little late: let the very first word start earlier if asked
+    if clips and spec.get("start_pad"):
+        clips[0][0] = max(0.0, words[clips[0][2][0]]["s"] - spec["start_pad"])
     # the reel ends on this word: keep its full tail (the next source word may start right away;
     # a short audio fade at the clip end hides it)
     if clips:

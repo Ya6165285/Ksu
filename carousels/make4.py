@@ -49,7 +49,7 @@ im = bg(SRC + "IMG_8812.PNG", 0.5, 0.55)
 band(im, 40, 520, 0.4)
 y = headline(im, ["Как я встретила", "*мужчину мечты*,"], 90, 84)
 caption(im, ["когда уже не верила, что такие есть"], y + 14)
-photo_card(im, SRC + "chat_clean.png", 455, 880, 570, 406, rot=-4, fx=0.5, fy=0.5)
+photo_card(im, SRC + "chat_clean.png", 12, 845, 720, 455, rot=2.5, fx=0.5, fy=1.0)
 slides.append(im)
 
 # 2. the abusive relationship

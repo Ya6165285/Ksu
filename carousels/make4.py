@@ -36,6 +36,9 @@ def text_card(im, x, y, w, text, rot=0, size=40):
     im.paste(c, (x, y), c)
     return y + c.height
 
+def card_h(w, text, size=40):
+    probe = Image.new("RGB", (W, H)); return text_card(probe, 0, 0, w, text, size=size)
+
 def bg(path, fx=0.5, fy=0.5):
     return fill(path, W, H, fx, fy)
 
@@ -55,25 +58,36 @@ y = headline(im, ["Два года назад я вышла", "из отноше
 text_card(im, 80, 820, 920, "в которых были *абьюз и постоянные манипуляции*.\n\nНо самое страшное — я искренне верила, что проблема во мне. Что со мной что-то не так и именно я виновата во всём происходящем.", rot=-1.5, size=38)
 slides.append(im)
 
-# 3. all men are the same: black slide
-im = Image.new("RGB", (W, H), (8, 6, 7))
-y = headline(im, ["Потом я решила:"], 430, 70)
-y = headline(im, ["все мужчины", "такие"], y + 30, 104)
-caption(im, ["Все абьюзеры.", "Нормальных просто нет"], y + 40)
+# 3. all men are the same: black editorial slide
+im = Image.new("RGB", (W, H), (10, 7, 9))
+glow = Image.new("L", (W, H), 0); ImageDraw.Draw(glow).ellipse((-300, 700, 700, 1700), fill=90)
+im.paste(Image.new("RGB", (W, H), (120, 30, 80)), (0, 0), glow.filter(ImageFilter.GaussianBlur(200)))
+d = ImageDraw.Draw(im); x = 90; y = 300
+f1 = font("SemiBold", 50); d.text((x, y), "Потом я решила:", font=f1, fill=(200, 185, 193)); y += 110
+fb = font("ExtraBold", 138)
+for line, col in [("ВСЕ", (255, 255, 255)), ("МУЖЧИНЫ", (255, 255, 255)), ("ТАКИЕ.", PINK)]:
+    d.text((x, y), line, font=fb, fill=col); y += 150
+y += 30; d.rectangle((x, y, x + 140, y + 8), fill=PINK); y += 60
+fi = font("Bold Italic", 54)
+for line in ["Все абьюзеры.", "Нормальных просто нет."]:
+    d.text((x, y), line, font=fi, fill=(255, 255, 255)); y += 76
 slides.append(im)
 
-# 4. dates: restaurant
-im = bg(FR + "rest.jpg", 0.5, 0.35)
-band(im, 40, 400, 0.45)
-headline(im, ["Потом были", "свидания"], 90, 86)
-text_card(im, 80, 940, 920, "Я снова и снова *разочаровывалась* в мужчинах.\n\nИ в какой-то момент настолько устала, что больше не хотела ни с кем знакомиться.", rot=1.5, size=38)
+# 4. dates: four restaurant photos, compact text across the middle
+im = collage([(SRC + "IMG_8824.PNG", 0, 0, W // 2, H // 2, 0.5, 0.42), (SRC + "IMG_8823.PNG", W // 2, 0, W // 2, H // 2, 0.5, 0.35),
+              (SRC + "IMG_8822.PNG", 0, H // 2, W // 2, H // 2, 0.5, 0.55), (SRC + "IMG_8825.PNG", W // 2, H // 2, W // 2, H // 2, 0.5, 0.5)])
+band(im, 520, 900, 0.35)
+y = headline(im, ["Потом были свидания"], 560, 70)
+t4 = "Я снова и снова *разочаровывалась* в мужчинах. И в какой-то момент настолько устала, что больше не хотела ни с кем знакомиться."
+text_card(im, 160, y + 14, 760, t4, rot=-1, size=30)
 slides.append(im)
 
 # 5. the realisation: keep the face clear
 im = bg(BR + "p06.jpg", 0.5, 0.3)
 band(im, 20, 300, 0.45)
 headline(im, ["Но потом я поняла одну вещь"], 70, 64)
-text_card(im, 70, 880, 940, "Если я продолжу смотреть на мужчин через призму прошлых разочарований, то даже *достойному мужчине* будет сложно появиться в моей жизни.\n\nЯ не хотела больше жить с убеждением, что хороших мужчин не существует.", rot=-1, size=34)
+t5 = "Если я продолжу смотреть на мужчин через призму прошлых разочарований, то даже *достойному мужчине* будет сложно появиться в моей жизни.\n\nЯ не хотела больше жить с убеждением, что хороших мужчин не существует."
+text_card(im, 120, H - card_h(840, t5, 29) - 50, 840, t5, rot=-1, size=29)
 slides.append(im)
 
 # 6. new approach: collage (people around me, events, flowers, me) with the card in the middle
@@ -81,7 +95,8 @@ im = collage([(BR + "n10.jpg", 0, 0, W // 2, H // 2, 0.5, 0.5), (FR + "event.jpg
               (BR + "n09.jpg", 0, H // 2, W // 2, H // 2, 0.45, 0.55), (BR + "n05.jpg", W // 2, H // 2, W // 2, H // 2, 0.45, 0.4)])
 band(im, 30, 300, 0.45)
 headline(im, ["Я изменила не требования,", "а свой *подход*"], 60, 66)
-text_card(im, 70, 420, 940, "— Сменила окружение.\n\n— Перестала слушать разговоры о том, что «все мужики козлы».\n\n— Начала работать над *самоценностью* и перестала искать подтверждение своей значимости в мужчинах.", rot=1, size=38)
+t6 = "— Сменила окружение.\n\n— Перестала слушать разговоры о том, что «все мужики козлы».\n\n— Начала работать над *самоценностью* и перестала искать подтверждение своей значимости в мужчинах."
+text_card(im, 170, (H - card_h(740, t6, 30)) // 2 + 60, 740, t6, rot=1, size=30)
 slides.append(im)
 
 # 7. the main thing
@@ -102,10 +117,10 @@ slides.append(im)
 im = collage([(FR + "b03_5.6.jpg", 0, 0, W // 2, H // 2, 0.45, 0.4), (FR + "b17_1.0.jpg", W // 2, 0, W // 2, H // 2, 0.5, 0.45),
               (FR + "b18_1.0.jpg", 0, H // 2, W // 2, H // 2, 0.5, 0.45), (BR + "p16.png", W // 2, H // 2, W // 2, H // 2, 0.5, 0.5)])
 band(im, 0, H, 0.35)
-band(im, 20, 420, 0.4)
-y = headline(im, ["Сегодня он мой любимый", "мужчина и *лучший друг*"], 50, 64)
-caption(im, ["Дарит подарки без повода. Мы поддерживаем", "друг друга во всём. И мне больше", "не страшно быть собой"], y + 10)
-photo_card(im, SRC + "IMG_8811.PNG", 250, 470, 560, 760, rot=-2, fx=0.45, fy=0.45)
+band(im, 0, 260, 0.45); band(im, 1110, H, 0.5)
+headline(im, ["Сегодня он мой любимый", "мужчина и *лучший друг*"], 50, 64)
+photo_card(im, SRC + "IMG_8811.PNG", 290, 250, 480, 800, rot=-2, fx=0.45, fy=0.45)
+caption(im, ["Дарит подарки без повода. Мы поддерживаем", "друг друга во всём. И мне больше", "не страшно быть собой"], 1145)
 slides.append(im)
 
 # 10. CTA

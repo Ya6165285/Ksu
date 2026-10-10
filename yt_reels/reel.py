@@ -53,26 +53,30 @@ def build_timeline(spec, words):
     return clips, outw, t, keep
 
 
+PINK_T = "&H00AA5AF2"   # #F25AAA, same pink as the МАРШРУТ call-to-action
+
+
 def title_ass(lines):
-    """Lines use markup: plain = Inter SemiBold, *x* = Playfair italic, ^x^ = Playfair upright."""
+    """Montserrat Bold caps, white with *pink* accents; one size for all lines, fitted to 980 px."""
+    from PIL import ImageFont
+    path = subprocess.run(["fc-match", "-f", "%{file}", "Montserrat:style=ExtraBold"], capture_output=True, text=True).stdout
+    f = ImageFont.truetype(path, 100)
+    plain = [re.sub(r"\*", "", ln).upper() for ln in lines]
+    # glyphs 4% wider and ~1.7% of size extra letter spacing (measured on the reference screenshot)
+    widest = max(f.getlength(p) * 1.03 + 1.05 * len(p) for p in plain)
+    fs = min(66, 100 * 820 / (0.6407 * widest))
     out = []
     for ln in lines:
-        parts = re.split(r"(\*[^*]+\*|\^[^^]+\^)", ln)
         s = ""
-        for p in parts:
+        for p in re.split(r"(\*[^*]+\*)", ln):
             if not p:
                 continue
             if p.startswith("*"):
-                s += r"{\fnPlayfair Display Medium\i1\fs82\fsp0}" + p[1:-1]
-            elif p.startswith("^"):
-                s += r"{\fnPlayfair Display Medium\i0\fs82\fsp0}" + p[1:-1]
+                s += r"{\c" + PINK_T + "&}" + p[1:-1].upper()
             else:
-                s += r"{\fnInter SemiBold\i0\fs70\fsp-1}" + p
-        out.append(s)
-    return out
-
-
-LINE = 78
+                s += r"{\c&H00FFFFFF&}" + p.upper()
+        out.append(r"{\fnMontserrat ExtraBold\b0\i0\fs%.0f\fscx103\fsp%.1f}" % (fs, fs * 0.0105) + s)
+    return out, fs
 
 
 def make_ass(spec, words, outw, total, keep, cta_t0, path):
@@ -85,8 +89,8 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Title,Inter SemiBold,64,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,20,20,0,204
-Style: Sub,Inter Medium,54,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,0,0,1,0,2,5,20,20,0,204
+Style: Title,Montserrat,64,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,0,3,5,20,20,0,204
+Style: Sub,Inter,54,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,0,0,1,0,2,5,20,20,0,204
 Style: Big,Inter Bold,70,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,0,0,1,0,3,5,20,20,0,204
 Style: Pink,Inter ExtraBold,96,&H00AA5AF2,&H00AA5AF2,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,20,20,0,204
 
@@ -94,8 +98,8 @@ Style: Pink,Inter ExtraBold,96,&H00AA5AF2,&H00AA5AF2,&H00000000,&H00000000,0,0,0
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     ev = []
-    tl = title_ass(spec["title"])
-    y0 = BAND_Y - 62 - LINE * (len(tl) - 1)
+    tl, tfs = title_ass(spec["title"]); LINE = int(tfs * 0.74)
+    y0 = BAND_Y - int(tfs * 0.62) - LINE * (len(tl) - 1)
     # title is hidden during full-screen zooms and replaced by the CTA at the end
     zooms = spec.get("zooms", [])
     cuts = sorted(zooms) + ([(cta_t0, total)] if cta_t0 is not None else [])
@@ -107,7 +111,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     for n, (a, b) in enumerate(spans):
         fad = "\\fad(200,0)" if n == 0 else ""
         for k, s in enumerate(tl):
-            ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y0 + LINE * k}){fad}}}{s}")
+            sh = re.sub(r"\\c&H[0-9A-F]+&", "", s)
+            ev.append(f"Dialogue: 1,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(544,{y0 + LINE * k + 6}){fad}\\c&H000000&\\alpha&H60&\\blur9\\shad0}}{sh}")
+            ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y0 + LINE * k}){fad}\\shad0}}{s}")
     # one-word subtitles under the band (hidden during full-screen zooms)
     for n, i in enumerate(keep):
         s = outw[i][0]

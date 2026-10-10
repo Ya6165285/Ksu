@@ -45,6 +45,11 @@ def build_timeline(spec, words):
         hi = words[b + 1]["s"] if b + 1 < len(words) else c[1] + 1
         c[0] = max(c[0] - PRE, (lo + c[0]) / 2)
         c[1] = min(c[1] + POST, (hi + c[1]) / 2)
+    # the reel ends on this word: keep its full tail (the next source word may start right away;
+    # a short audio fade at the clip end hides it)
+    if clips:
+        b = clips[-1][2][-1]
+        clips[-1][1] = max(clips[-1][1], words[b]["e"] + 0.16)
     t = 0.0; outw = {}
     for c in clips:
         for i in c[2]:
@@ -175,13 +180,21 @@ def main(spec_path, out_path):
         for n, (s, e, _) in enumerate(clips):
             f = os.path.join(work, f"c{n:03d}.mkv")
             d = e - s
+            fo = 0.14 if n == len(clips) - 1 else 0.01
             run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s:.3f}", "-i", src, "-t", f"{d:.3f}",
                  "-vf", "scale=1920:1080,setsar=1,fps=30",
-                 "-af", f"afade=t=in:d=0.01,afade=t=out:st={max(0, d - 0.01):.3f}:d=0.01,aresample=48000",
+                 "-af", f"afade=t=in:d=0.01,afade=t=out:st={max(0, d - fo):.3f}:d={fo},aresample=48000",
                  "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p", "-c:a", "pcm_s16le", f])
             L.write(f"file 'c{n:03d}.mkv'\n")
     head = os.path.join(work, "head.mkv")
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", head])
+    # own CTA: hold the last frame (cover + МАРШРУТ text) a little longer
+    if cta["type"] == "own":
+        held = os.path.join(work, "head_hold.mkv")
+        run(["ffmpeg", "-v", "error", "-y", "-i", head, "-vf", "tpad=stop_mode=clone:stop_duration=1.5",
+             "-af", "apad=pad_dur=1.5", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p",
+             "-c:a", "pcm_s16le", held])
+        head = held; total += 1.5
     # 2) card CTA: append the prepared end card
     if cta["type"] == "card":
         cta_t0 = total
@@ -257,10 +270,10 @@ def main(spec_path, out_path):
     sfxp = os.path.join(work, "sfx.wav"); sf.write(sfxp, track, 48000)
     inputs += ["-i", sfxp]; sidx = k
     if cta["type"] == "card":
-        fc.append(f"[0:a]apad=whole_dur={total:.3f},loudnorm=I=-14:TP=-1.5:LRA=11[va]")
+        fc.append(f"[0:a]aresample=48000,apad=whole_dur={total:.3f}[va]")
     else:
-        fc.append(f"[0:a]loudnorm=I=-14:TP=-1.5:LRA=11[va]")
-    fc.append(f"[va][{sidx}:a]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.95[aout]")
+        fc.append(f"[0:a]aresample=48000,apad=whole_dur={total:.3f}[va]")
+    fc.append(f"[va][{sidx}:a]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.95,apad=whole_dur={total:.3f}[aout]")
     run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", "[vout]", "-map", "[aout]",
          "-t", f"{total:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out_path])

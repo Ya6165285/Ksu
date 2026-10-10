@@ -44,7 +44,7 @@ REELS = [
               ("прекрасных отношениях", 211, "pair", (("b03.mov", 5.6), ("b17.mov", 1.0), "+")),]),
     dict(id="r2", title=["Как перестать выбирать не тех", "и встретить *достойного*"],
          phr=[(("мне было важно когда я выйду из отношений", 436), ("такого же мужчину как и я", 462))],
-         cta="own", bridge=True, zooms=[("я была сама по себе достойной", 442, 2.6)],
+         cta="own", bridge=[(("и тогда мне попался парень", 462), ("повлиял на мою жизнь", 465)), BRIDGE], zooms=[("я была сама по себе достойной", 442, 2.6)],
          ins=[("выйду из отношений", 435, "card", ("b01.mov", 0.2)),
               ("самый классный мужчина", 439, "card", ("b03.mov", 5.6)),
               ("на классного такого же мужчину", 457, "card", ("b17.mov", 2.0)),
@@ -67,11 +67,11 @@ REELS = [
          ins=[("везет по жизни", 782, "card", ("b02.mov", 0.5)),
               ("у самого богатого", 797, "pair", (("b13.mov", 0.5), ("b15.mov", 0.2), "+")),]),
     dict(id="r6", title=["Как раз и навсегда перестать", "зависеть от *чужого мнения*"],
-         phr=[(("там где ваш страх там рост", 816), ("в моменте сейчас", 857))],
-         cta="own", bridge=True, zooms=[("я живу только в моменте сейчас", 855, 2.0)],
+         phr=[(("там где ваш страх там рост", 816), ("что я вышла из этих отношений", 861))],
+         cta="own", bridge=[(("я нахожусь в прекрасных отношениях", 211), ("самых сильных страхов", 215))], zooms=[("я живу только в моменте сейчас", 855, 2.0)],
          ins=[("не принимайте эту мысль", 849, "card", ("b05.mov", 2.0)),
               ("я так боялась", 823, "card", ("b08.mov", 2.0)),
-              ("счастливых офигенных отношениях", 1208, "pair", (("b18.mov", 1.0), ("b03.mov", 5.6), "+"))]),
+              ("в прекрасных отношениях", 211, "pair", (("b18.mov", 1.0), ("b03.mov", 5.6), "+"))]),
     dict(id="r7", title=["Как за год изменить жизнь", "*до неузнаваемости*"],
          phr=[(("остановитесь сейчас и вот подумайте", 1300), ("самый лучший для нас момент", 1336))],
          cta="card", bridge=False, zooms=[("то о чем вы молились", 1323, 2.4)],
@@ -91,8 +91,11 @@ REELS = [
 def spec_for(r):
     ranges = [(find(a, ta)[0], find(b, tb)[1]) for (a, ta), (b, tb) in r["phr"]]
     if r["cta"] == "own":
-        if r.get("bridge"):
-            ranges.append((find(*BRIDGE[0])[0], find(*BRIDGE[1])[1]))
+        br = r.get("bridge")
+        if br is True:
+            br = [BRIDGE]
+        for (a, ta), (b, tb) in (br or []):
+            ranges.append((find(a, ta)[0], find(b, tb)[1]))
         ranges.append((find(*CTA[0])[0], find(*CTA[1])[1]))
     drop = []
     allidx = [i for a, b in ranges for i in range(a, b + 1)]
@@ -117,10 +120,11 @@ def main(sel):
         kept = set(keep)
 
         def t_of(phrase, near):
-            a, _ = find(phrase, near)
-            while a not in kept:
-                a += 1
-            return outw[a][0]
+            a, b = find(phrase, near)
+            for i in range(a, b + 1):
+                if i in kept:
+                    return outw[i][0]
+            raise SystemExit(f"{r['id']}: insert phrase {phrase!r} is not inside the reel")
 
         zooms = []
         for phrase, near, d in r["zooms"]:

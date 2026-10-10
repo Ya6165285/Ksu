@@ -17,3 +17,15 @@ b19 подарки/деньги с чужим текстом «трачу нак
 b14 девушка говорит в камеру — эмоции
 p06 фото девушка в очках — образ
 p16 розы-буквы KSU — романтика
+n01 overhead hydrangea basket + her feet (gift flowers)
+n02 Ksu smiling, balloons, pink roses + basket (birthday/gifts, villa)
+n03 Ksu lying on flower basket, balloons (dreamy, gifts)
+n04 Ksu white corset, hydrangea basket, Bali terrace (luxury life)
+n05 Ksu standing at table with hydrangea basket (Bali)
+n06 Ksu sitting among many bouquets (abundance, gifts from man)
+n07 stage "Мой путь" Ksu speaking to audience (event)
+n08 Ksu at laptop, skyscraper view (work, online business, Moscow City)
+n09 Ksu on sofa with many bouquets, balloons
+n10 group of 6 women photo (students/team/community)
+n11 hydrangea basket overhead (dup of n01, screenshot)
+n12 roses vase in skyscraper window at sunset (city, view)

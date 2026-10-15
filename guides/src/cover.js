@@ -73,36 +73,34 @@ function photo(W, H, rot) {
     <img src="file://${IMG}/pajama.jpg" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%"></div></div>`;
 }
 
-const textBlock = (scale = 1) => `
+const textBlock = (scale = 1, heart = true) => `
   <span class="tag" style="font-size:${17 * scale}px;padding:${12 * scale}px ${26 * scale}px;background:rgba(11,11,13,.55)"><b>✦</b>Dubai • Girls night</span>
   <div style="font:700 ${118 * scale}px/0.98 Osw;text-transform:uppercase;margin-top:${28 * scale}px">
    <span style="background:linear-gradient(180deg,#fff 30%,#d6d6dc);-webkit-background-clip:text;color:transparent">Давай найдём</span><br>
-   <span style="color:var(--pink);text-shadow:0 0 40px rgba(240,71,154,.6)">тебе любовь!</span> <span style="font-size:${84 * scale}px">❤️</span></div>
+   <span style="color:var(--pink);text-shadow:0 0 40px rgba(240,71,154,.6)">тебе любовь!</span> ${heart ? `<span style="font-size:${84 * scale}px">❤️</span>` : ''}</div>
   <div style="font:500 ${32 * scale}px/1.3 Mont;color:#fff;margin-top:${22 * scale}px">Закрытый онлайн-девичник из Дубая</div>
   <div style="font:600 ${21 * scale}px Mont;letter-spacing:.06em;color:#F7B6D6;margin-top:${16 * scale}px;text-transform:uppercase">Самоценность <b style="color:var(--pink)">•</b> Достойные мужчины <b style="color:var(--pink)">•</b> Отношения мечты</div>
   <div class="btn" style="margin-top:${38 * scale}px;font-size:${30 * scale}px;padding:${16 * scale}px ${34 * scale}px;box-shadow:0 0 50px rgba(240,71,154,.55)">📍 25 октября · 15:00 МСК · бесплатно</div>`;
 
-const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;${sky}">
- ${stars(1600, 900, 120)}
- ${moon(1500, 300, 60)}
- ${skyline(1600, 900, 600, 0.95, 0.57)}
- <div style="position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.8))"></div>
- <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.85) 0%,rgba(11,11,13,.45) 40%,rgba(11,11,13,0) 58%)"></div>
- ${hearts([[1060, 610, 46, .9, -15], [1520, 520, 34, .8, 12], [1010, 200, 26, .7, 8], [1530, 140, 40, .85, -10]])}
- ${spark(980, 120, 30)}${spark(1490, 820, 24)}${spark(90, 820, 22)}${spark(760, 60, 20)}
- <div style="position:absolute;right:150px;top:70px;z-index:3">${photo(410, 728, 4)}</div>
- <div style="position:absolute;left:90px;top:110px;width:900px;z-index:4">${textBlock(1)}</div>
+const PH = `file://${IMG}/pajama_dubai.jpg`;
+const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;background:#0B0B0D">
+ <div class="grid"></div>
+ <div style="position:absolute;right:0;top:0;width:820px;height:900px">
+  <img src="${PH}" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0B0B0D 0%,rgba(11,11,13,.75) 14%,rgba(11,11,13,0) 40%)"></div>
+ </div>
+ ${hearts([[700, 640, 40, .9, -15], [740, 150, 28, .75, 10]])}
+ ${spark(690, 90, 26)}${spark(90, 820, 22)}
+ <div style="position:absolute;left:90px;top:110px;width:860px;z-index:4">${textBlock(1, false)}</div>
 </section>`;
 
-const V1 = `<section class="slide" style="width:1080px;height:1920px;padding:0;${sky}">
- ${stars(1080, 1920, 160)}
- ${moon(820, 120, 80)}
- ${skyline(1080, 1920, 820, 0.86, 0.12)}
- <div style="position:absolute;left:0;right:0;bottom:0;height:880px;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.7) 30%,rgba(11,11,13,.55) 60%,rgba(11,11,13,.2) 100%)"></div>
- ${hearts([[120, 300, 50, .9, -15], [900, 760, 42, .85, 12], [160, 980, 30, .7, 8], [880, 260, 34, .8, -10]])}
- ${spark(100, 150, 32)}${spark(960, 560, 26)}${spark(80, 700, 22)}
- <div style="position:absolute;left:50%;top:170px;transform:translateX(-50%);z-index:3">${photo(470, 836, -3)}</div>
- <div style="position:absolute;left:80px;right:80px;top:1110px;z-index:4">${textBlock(0.9)}</div>
+const V1 = `<section class="slide" style="width:1080px;height:1920px;padding:0;background:#0B0B0D">
+ <div style="position:absolute;left:0;right:0;top:0;height:1920px">
+  <img src="${PH}" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%">
+  <div style="position:absolute;left:0;right:0;bottom:0;height:720px;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.82) 38%,rgba(11,11,13,.92))"></div>
+ </div>
+ ${hearts([[90, 1250, 44, .9, -15], [950, 1230, 36, .85, 12]])}
+ <div style="position:absolute;left:80px;right:80px;top:1340px;z-index:4">${textBlock(0.9)}</div>
 </section>`;
 
 (async () => {

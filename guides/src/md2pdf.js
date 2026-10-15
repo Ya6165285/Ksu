@@ -26,6 +26,7 @@ td{border-bottom:1px solid #f1d4e2;padding:8px 10px;vertical-align:top}
 blockquote{margin:0 0 14px;padding:14px 18px;background:#fff1f7;border-left:4px solid #F0479A;border-radius:10px}
 code{background:#f6eef2;padding:1px 5px;border-radius:4px;font-size:.92em}
 a{color:#E0357F}
+.pic{margin:4px 0 10px;page-break-inside:avoid}.pic img{width:58%;border-radius:12px;display:block;box-shadow:0 4px 14px rgba(0,0,0,.15)}.pic .cap{font-size:12.5px;color:#9a6a80;margin-top:6px}
 .post{background:#fff6fa;border:1.5px solid #f6c3db;border-radius:14px;padding:16px 20px;margin:6px 0 14px}
 .post p{margin:0 0 8px}
 .post blockquote{background:#fff}

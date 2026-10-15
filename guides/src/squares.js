@@ -105,7 +105,7 @@ const T = {
     ${at('left:56px;width:600px;top:70px', `${tag(tg)}${title(w, p, 104, 132)}${s ? sub(s, 42) : ''}${b ? pill(b, 42) : ''}`)}`,
   gifts: ({ w, p, s, b }) => `${books(75, 70, 1.0)}${heart(40, 40, 56, -15)}${heart(990, 40, 50, 12)}
     ${at('left:56px;right:56px;top:600px', `${title(w, p, 120, 150)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
-  count: ({ n, unit, s, b, gifts, ph }) => gifts ? countG({ n, unit, s }) : `${ph === 'dress' ? photoRight(P.dress, '45% 18%', 560) : polC('right:56px;top:150px', 420, 680, 4)}${heart(940, 50, 64, 12)}
+  count: ({ n, unit, s, b, gifts, ph }) => gifts ? countG({ n, unit, s }) : `${ph === 'dress' ? `<div style="position:absolute;right:0;top:0;bottom:0;width:660px;z-index:1"><img src="${P.dress}" style="width:100%;height:100%;object-fit:cover;object-position:40% 18%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.85) 14%,#000 24%)"></div>` : polC('right:56px;top:150px', 420, 680, 4)}${heart(940, 50, 64, 12)}
     ${at('left:56px;top:36px;bottom:56px;width:' + (ph === 'dress' ? 560 : 520) + 'px;display:flex;flex-direction:column', `${tag('Обратный отсчёт')}
       <div style="display:flex;align-items:flex-end;gap:10px;margin-top:10px">
        <div style="font:700 ${n.length > 1 ? 400 : 460}px/0.84 Osw;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div></div>

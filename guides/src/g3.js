@@ -3,7 +3,7 @@ const { deco, foot, tag, prog, chain, result, ul, framed, cta, crop, IMG } = L;
 const B = 'Гайд · красоты недостаточно';
 
 const ITEMS = [
-  ['Самоценность', 'Она не доказывает, что достойна.', 'Она это знает',
+  ['Самоценность', 'Она не доказывает —', 'она знает, что достойна',
     'Такая женщина не радуется крохам внимания, не боится спросить «кто мы друг другу?» и не ищет проблему в себе, когда мужчина отдаляется. Мужчина чувствует: <b>её нужно заслужить</b> — и именно это включает в нём желание стараться.',
     '«Что изменить в себе, чтобы он выбрал меня?»', '«А он достоин быть рядом со мной?»',
     'Каждый вечер записывай <b>3 вещи, за которые ты сегодня уважаешь себя</b>. Не за внешность — за поступки.'],
@@ -33,87 +33,88 @@ const ITEMS = [
     'Вспомни <b>3 последних мужчин</b>. Что зацепило в каждом? Если везде недоступность — это твой сценарий.'],
 ];
 
+const PH = (W, H) => `<div style="${crop('p-001.jpg', 1370, 190, 490, 700, W, Math.round(W * 700 / 490))};height:${H}px"></div>`;
+
 module.exports = function () {
   const s = []; const N = 13; let i = 0; const add = h => s.push(h);
+  const bottom = (h) => `<div class="z" style="position:absolute;left:90px;right:90px;bottom:130px">${h}</div>`;
 
   // 1 cover
   i++; add(`<section class="slide">${deco(2)}
-   <div class="z" style="width:860px;margin-top:60px">
+   ${framed('left:290px;top:110px', PH(600, 820), -3)}
+   <div class="z" style="position:absolute;left:90px;right:90px;top:1000px">
     ${tag('Гайд · подарок с девичника')}
-    <div class="h" style="font-size:140px;margin-top:30px"><span class="w">Красоты</span><br><span class="p">недостаточно</span></div>
-    <div class="sub" style="width:760px">Что на самом деле заставляет мужчину <em>влюбиться</em> и <em>выбрать тебя</em></div>
-    <div style="display:flex;gap:16px;margin-top:40px"><span class="pill"><b>7</b>вещей важнее внешности</span><span class="pill"><b>1</b>чек-лист</span></div>
+    <div class="h" style="font-size:132px;margin-top:26px"><span class="w">Красоты</span><br><span class="p">недостаточно</span></div>
+    <div class="sub" style="font-size:32px">Что на самом деле заставляет мужчину <em>влюбиться</em> и <em>выбрать тебя</em></div>
    </div>
-   ${framed('right:120px;top:90px', `<div style="${crop('p-007.jpg', 1320, 150, 560, 830, 430, 637)}"></div>`, 4)}
    ${foot(B, i, N)}</section>`);
 
   // 2 intro
   i++; add(`<section class="slide">${deco(0)}
-   <div class="z cols" style="gap:60px">
-    <div class="col">
+   <div class="z">
      ${tag('Ты видела это много раз')}
-     <div class="h m"><span class="w">Красота привлекает</span><br><span class="p">внимание.</span> <span class="w">Но не удерживает</span></div>
-     <div class="txt" style="margin-top:26px;font-size:23px">
+     <div class="h"><span class="w">Красота привлекает</span> <span class="p">внимание.</span><br><span class="w">Но не удерживает</span></div>
+     <div class="txt" style="margin-top:44px;font-size:31px">
       <p>Красивая, ухоженная, умная девушка — одна. Годами. А рядом подруга, «самая обычная», выходит замуж за мужчину, который носит её на руках.</p>
       <p>И ты думаешь: «Что с ней не так? Что со мной не так?»</p></div>
-    </div>
+     <div class="card hl" style="margin-top:50px;padding:38px 42px"><div class="quote" style="font-size:34px">Мужчина влюбляется не во внешность. Он влюбляется в то, <span style="color:var(--pink)">как он себя чувствует рядом с тобой.</span></div></div>
    </div>
-   <div class="z" style="position:absolute;left:90px;right:90px;bottom:86px">${result('Правда', 'Мужчина влюбляется не во внешность. Он влюбляется в то, <b>как он себя чувствует рядом с тобой</b>.')}</div>
    ${foot(B, i, N)}</section>`);
 
   // 3 why
   i++; add(`<section class="slide">${deco(1)}
    <div class="z">${tag('Почему так')}
-    <div class="h m"><span class="w">Почему красивые девушки</span><br><span class="p">остаются одни</span></div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px">
+    <div class="h"><span class="w">Почему красивые</span><br><span class="p">остаются одни</span></div>
+    <div style="display:grid;gap:22px;margin-top:50px">
     ${[['01', 'Ставка на внешность', 'Ждут, что красоты хватит. А когда не хватает, решают: «значит, надо стать ещё красивее».'], ['02', 'Не те мужчины', 'Красота притягивает тех, кто ищет «трофей», а не жену. Они приходят за картинкой и уходят, когда она надоедает.'], ['03', 'Внутри — без опоры', 'В красивой обёртке часто живёт девушка, которая не чувствует своей ценности. Мужчины считывают именно это, а не макияж.']]
-      .map(([n, t, d], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="padding:30px"><span class="num">${n}</span><h4 style="margin:18px 0 12px;font-size:34px">${t}</h4><div class="txt" style="font-size:21px">${d}</div></div>`).join('')}
-   </div>
-   <div class="z" style="margin-top:28px">${result('Вопрос', 'Тебя учили ухаживать за собой, учиться, работать, зарабатывать. <b>Но кто учил тебя быть женщиной, которую выбирают?</b>')}</div>
+      .map(([n, t, d], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="padding:32px 38px"><div style="display:flex;gap:20px;align-items:center"><span class="num">${n}</span><h4 style="margin:0;font-size:40px">${t}</h4></div><div class="txt" style="font-size:26px;margin-top:14px">${d}</div></div>`).join('')}
+    </div></div>
+   ${bottom(result('Вопрос', 'Тебя учили ухаживать за собой, учиться, работать, зарабатывать. <b>Но кто учил тебя быть женщиной, которую выбирают?</b>'))}
    ${foot(B, i, N)}</section>`);
 
-  // 4 map
-  i++; add(`<section class="slide">${deco(2)}
+  // 4 vertical route
+  i++;
+  const ys = ITEMS.map((_, k) => 520 + k * 155);
+  const xs = ITEMS.map((_, k) => (k % 2 ? 760 : 480));
+  let d = `M ${xs[0]} ${ys[0] - 120} `; for (let k = 0; k < 7; k++) { d += `S ${xs[k] + (k % 2 ? 140 : -140)} ${ys[k] - 40}, ${xs[k]} ${ys[k]} `; } d += `S ${xs[6]} ${ys[6] + 160}, ${xs[6] - 60} ${ys[6] + 220}`;
+  add(`<section class="slide">${deco(2)}
    <div class="z">${tag('Что решает больше, чем красота')}
-    <div class="h m"><span class="w">7 вещей, за которые</span> <span class="p">выбирают женщину</span></div></div>
-   <svg class="z" style="position:absolute;left:0;top:430px" width="1600" height="300" viewBox="0 0 1600 300">
-    <path d="M0 230 C 120 230, 160 120, 260 120 S 400 240, 480 240 S 620 120, 700 120 S 840 240, 920 240 S 1060 120, 1140 120 S 1280 240, 1360 240 S 1500 140, 1600 120" fill="none" stroke="#F0479A" stroke-width="5" style="filter:drop-shadow(0 0 10px #F0479A)"/>
-   </svg>
-   ${ITEMS.map(([t], k) => { const x = 160 + k * 213, up = k % 2 === 0; const y = up ? 550 : 670; return `
-    <div class="z" style="position:absolute;left:${x - 48}px;top:${y - 48}px;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff7dbd,#E0357F);box-shadow:0 0 30px rgba(240,71,154,.7);display:flex;align-items:center;justify-content:center;font:700 36px Osw;color:#fff">0${k + 1}</div>
-    <div class="z" style="position:absolute;left:${x - 110}px;width:220px;text-align:center;top:${up ? y - 120 : y + 62}px;font:700 28px/1.05 Osw;text-transform:uppercase;color:#fff">${t}</div>`; }).join('')}
+    <div class="h m"><span class="w">7 вещей, за которые</span><br><span class="p">выбирают женщину</span></div></div>
+   <svg class="z" style="position:absolute;left:0;top:0" width="1240" height="1754" viewBox="0 0 1240 1754"><path d="${d}" fill="none" stroke="#F0479A" stroke-width="6" stroke-linecap="round"/></svg>
+   ${ITEMS.map(([t], k) => { const x = xs[k], y = ys[k], left = k % 2 === 0; return `
+    <div class="z" style="position:absolute;left:${x - 52}px;top:${y - 52}px;width:104px;height:104px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff7dbd,#E0357F);border:4px solid #0B0B0D;display:flex;align-items:center;justify-content:center;font:700 40px Osw;color:#fff">0${k + 1}</div>
+    <div class="z" style="position:absolute;top:${y - 26}px;${left ? `right:${1240 - x + 80}px;text-align:right` : `left:${x + 80}px`};font:700 40px/1.1 Osw;text-transform:uppercase;color:#fff;white-space:nowrap">${t}</div>`; }).join('')}
    ${foot(B, i, N)}</section>`);
 
   // 5-11 items
   ITEMS.forEach(([t, l1, l2, d, bad, good, pr], k) => {
     i++; add(`<section class="slide">${deco(k)}
-     <div class="wm" style="font-size:440px;top:170px">0${k + 1}</div>
-     <div class="z" style="width:1200px">${tag(`${String(k + 1).padStart(2, '0')} / 07 · ${t}`)}${prog(7, k + 1)}
-      <div class="h s" style="margin-top:24px"><span class="w">${l1}</span><br><span class="p">${l2}</span></div>
-      <div class="txt" style="margin-top:18px;font-size:22px">${d}</div></div>
-     <div class="z cols" style="margin-top:26px">
-      <div class="col bad"><div class="lbl">✕&nbsp; Сейчас</div><div style="font:500 22px/1.4 Mont;color:#C9C9CF">${bad}</div></div>
-      <div class="col good"><div class="lbl">✓&nbsp; Новая точка</div><div style="font:600 22px/1.4 Mont;color:#fff">${good}</div></div>
-     </div>
-     <div class="z" style="position:absolute;left:90px;right:90px;bottom:80px">${result('Практика', pr)}</div>
+     <div class="wm" style="font-size:460px">0${k + 1}</div>
+     <div class="z">${tag(`${String(k + 1).padStart(2, '0')} / 07 · ${t}`)}${prog(7, k + 1)}
+      <div class="h m" style="margin-top:220px"><span class="w">${l1}</span><br><span class="p">${l2}</span></div>
+      <div class="txt" style="margin-top:36px;font-size:30px">${d}</div>
+      <div style="display:grid;gap:18px;margin-top:44px">
+       <div class="bad"><div class="lbl">✕&nbsp; Сейчас</div><div style="font:500 27px/1.4 Mont;color:#C9C9CF">${bad}</div></div>
+       <div class="good"><div class="lbl">✓&nbsp; Новая точка</div><div style="font:600 27px/1.4 Mont;color:#fff">${good}</div></div>
+      </div></div>
+     ${bottom(result('Практика', pr))}
      ${foot(B, i, N)}</section>`);
   });
 
   // 12 checklist
   i++; add(`<section class="slide">${deco(1)}
-   <div class="z cols" style="gap:60px;align-items:flex-start">
-    <div class="col" style="flex:1.25">
+   <div class="z">
      ${tag('Чек-лист')}
-     <div class="h s"><span class="w">Что из этого</span> <span class="p">есть у тебя?</span></div>
-     <div style="margin-top:20px">
-      ${['Я не доказываю мужчине, что достойна любви', 'У меня есть своя жизнь, которая не крутится вокруг мужчины', 'Я знаю свою норму и не снижаю её из-за симпатии', 'Рядом со мной мужчине спокойно: я не контролирую и не давлю', 'Я умею принимать заботу без «я сама»', 'Я замечаю и хвалю ум и силу мужчины', 'Я выбираю по поступкам, а не по химии'].map(t => `<div class="chk" style="font-size:22px;padding:12px 0"><i></i>${t}</div>`).join('')}
-     </div></div>
-    <div class="col" style="margin-top:100px;display:grid;gap:16px">
+     <div class="h"><span class="w">Что из этого</span><br><span class="p">есть у тебя?</span></div>
+     <div style="margin-top:34px">
+      ${['Я не доказываю мужчине, что достойна любви', 'У меня есть своя жизнь, которая не крутится вокруг мужчины', 'Я знаю свою норму и не снижаю её из-за симпатии', 'Рядом со мной мужчине спокойно: я не контролирую и не давлю', 'Я умею принимать заботу без «я сама»', 'Я замечаю и хвалю ум и силу мужчины', 'Я выбираю по поступкам, а не по химии'].map(t => `<div class="chk" style="font-size:27px;padding:16px 0"><i></i>${t}</div>`).join('')}
+     </div>
+     <div style="display:grid;gap:14px;margin-top:40px">
      ${[['6–7', 'Ты на верном пути. Осталось встретить того, кто это оценит ♥'], ['3–5', 'Сильная база, но несколько точек тормозят твой маршрут'], ['0–2', 'Дело точно не во внешности. Ты просто повторяешь модель, которую тебя никто не учил менять']]
-       .map(([n, d], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="display:flex;gap:22px;align-items:center;padding:22px 26px"><div style="font:700 48px/1 Osw;color:var(--pink);min-width:96px">${n}</div><div class="txt" style="font-size:20px;color:#fff">${d}</div></div>`).join('')}
-    </div></div>
+       .map(([n, d], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="display:flex;gap:26px;align-items:center;padding:22px 30px"><div style="font:700 54px/1 Osw;color:var(--pink);min-width:110px">${n}</div><div class="txt" style="font-size:24px;color:#fff">${d}</div></div>`).join('')}
+     </div></div>
    ${foot(B, i, N)}</section>`);
 
-  i++; add(cta(B, i, N, 1));
+  i++; add(cta(B, i, N, 1, PH(380, 470)));
   return s;
 };

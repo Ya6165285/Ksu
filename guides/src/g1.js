@@ -44,42 +44,39 @@ module.exports = function () {
   const add = (h) => s.push(h);
 
   // 1 cover
-  i++; add(`<section class="slide">${deco(0)}
-   <div class="z" style="width:860px;margin-top:40px">
-    ${tag('Тест · подарок с девичника')}
-    <div class="h xl" style="margin-top:34px"><span class="w">Почему за тобой</span><br><span class="p">не ухаживают?</span></div>
-    <div class="sub" style="width:760px">Найди свою <em>невидимую ошибку</em>, которая отталкивает достойных мужчин</div>
-    <div style="display:flex;gap:16px;margin-top:36px">
-     <span class="pill"><b>8</b>вопросов</span><span class="pill"><b>5</b>минут</span><span class="pill"><b>1</b>честный ответ</span></div>
+  i++; add(`<section class="slide" style="padding-top:0">${deco(0)}
+   <div style="position:absolute;left:0;right:0;top:0;height:1020px;z-index:1">
+    <img src="file://${IMG}/v-000.jpg" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,0) 55%,rgba(11,11,13,.85) 85%,var(--bg) 100%)"></div>
    </div>
-   <div style="position:absolute;right:0;top:0;width:700px;height:900px;z-index:1">
-    <img src="file://${IMG}/v-000.jpg" style="width:100%;height:100%;object-fit:cover;object-position:40% 15%">
-    <div style="position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,rgba(11,11,13,.6) 22%,rgba(11,11,13,0) 48%)"></div>
+   <div class="z" style="position:absolute;left:90px;right:90px;top:900px">
+    ${tag('Тест · подарок с девичника')}
+    <div class="h xl" style="margin-top:30px"><span class="w">Почему за тобой</span><br><span class="p">не ухаживают?</span></div>
+    <div class="sub" style="font-size:31px">Найди свою <em>невидимую ошибку</em>, которая отталкивает достойных мужчин</div>
+    <div style="display:flex;gap:16px;margin-top:40px">
+     <span class="pill"><b>8</b>вопросов</span><span class="pill"><b>5</b>минут</span><span class="pill"><b>1</b>честный ответ</span></div>
    </div>${foot(B, i, N)}</section>`);
 
   // 2 intro
   i++; add(`<section class="slide">${deco(1)}
-   <div class="z cols" style="gap:70px;align-items:flex-start">
-    <div class="col">
+   <div class="z">
      ${tag('Прежде чем начать')}
-     <div class="h m"><span class="w">Дело не</span><br><span class="p">во внешности</span></div>
-     <div class="txt" style="margin-top:26px">
+     <div class="h"><span class="w">Дело не</span><br><span class="p">во внешности</span></div>
+     <div class="txt" style="margin-top:34px;font-size:28px">
       <p>Ты красивая, умная, интересная. Но почему-то мужчины либо не ухаживают, либо быстро перестают стараться, либо выбирают тебя «на время».</p>
       <p>У каждой из нас есть <b>невидимая ошибка</b> — то, что мы делаем на автомате и даже не замечаем. Именно она решает, будут за тобой ухаживать или нет.</p></div>
-    </div>
-    <div class="col" style="flex:.85;margin-top:40px">
-     <div class="lbl">Как проходить тест</div>
-     <div style="display:grid;gap:16px">
+     <div class="lbl" style="margin-top:60px">Как проходить тест</div>
+     <div style="display:grid;gap:20px">
       ${[['01', 'Отвечай честно', 'Выбирай вариант, который ближе всего — даже если он тебе не нравится'], ['02', 'Записывай букву', 'Отмечай букву ответа на каждый из 8 вопросов'], ['03', 'Посчитай', 'Каких букв больше всего — это и есть твоя невидимая ошибка']]
-        .map(([n, t, d], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="display:flex;gap:22px;align-items:flex-start"><span class="num">${n}</span><div><h4 style="font-size:28px;margin-bottom:6px">${t}</h4><div class="txt" style="font-size:20px">${d}</div></div></div>`).join('')}
-     </div></div></div>${foot(B, i, N)}</section>`);
+        .map(([n, t, d], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="display:flex;gap:24px;align-items:flex-start;padding:30px 34px"><span class="num">${n}</span><div><h4 style="font-size:34px;margin-bottom:8px">${t}</h4><div class="txt" style="font-size:24px">${d}</div></div></div>`).join('')}
+     </div></div>${foot(B, i, N)}</section>`);
 
   // 3-6 questions
   for (let p = 0; p < 4; p++) {
     i++; add(`<section class="slide">${deco(p)}
      <div class="z">${tag(`Вопросы ${p * 2 + 1}–${p * 2 + 2}`)}${prog(4, p + 1)}</div>
-     <div class="z cols" style="margin-top:40px">
-      ${[0, 1].map(k => { const [q, o] = Q[p * 2 + k]; return `<div class="col card" style="padding:34px 38px;min-height:650px">
+     <div class="z" style="display:grid;gap:34px;margin-top:44px">
+      ${[0, 1].map(k => { const [q, o] = Q[p * 2 + k]; return `<div class="card" style="padding:40px 44px">
         <span class="num">${String(p * 2 + k + 1).padStart(2, '0')}</span>
         <div class="q">${q}</div>
         ${o.map((t, j) => `<div class="opt"><span class="l">${LET[j]}</span><span>${t}</span></div>`).join('')}
@@ -90,50 +87,50 @@ module.exports = function () {
   // 7 key
   i++; add(`<section class="slide">${deco(2)}
    <div class="z">${tag('Считаем результат')}
-    <div class="h m"><span class="w">Каких букв</span> <span class="p">больше?</span></div>
-    <div class="sub">Это и есть твоя невидимая ошибка</div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:44px">
-    ${R.map(([l, a, b]) => `<div class="card" style="text-align:center;padding:34px 18px">
-      <div style="font:700 92px/1 Osw;color:var(--pink);text-shadow:0 0 30px rgba(240,71,154,.5)">${l}</div>
-      <div style="font:700 26px/1.15 Osw;text-transform:uppercase;color:#fff;margin-top:16px">${a}<br>${b}</div></div>`).join('')}
+    <div class="h"><span class="w">Каких букв</span><br><span class="p">больше?</span></div>
+    <div class="sub" style="font-size:30px">Это и есть твоя невидимая ошибка</div></div>
+   <div class="z" style="display:grid;gap:18px;margin-top:50px">
+    ${R.map(([l, a, b], k) => `<div class="card" style="display:flex;align-items:center;gap:34px;padding:26px 34px">
+      <div style="font:700 84px/1 Osw;color:var(--pink);width:70px;text-align:center">${l}</div>
+      <div style="font:700 38px/1.1 Osw;text-transform:uppercase;color:#fff">${a} ${b}</div></div>`).join('')}
    </div>
-   <div class="z" style="margin-top:34px">${result('Поровну?', 'Если у тебя поровну двух-трёх букв — это нормально. Отношения ломаются не в одной точке, а по цепочке.')}</div>
+   <div class="z" style="position:absolute;left:90px;right:90px;bottom:130px">${result('Поровну?', 'Если у тебя поровну двух-трёх букв — это нормально. Отношения ломаются не в одной точке, а по цепочке.')}</div>
    ${foot(B, i, N)}</section>`);
 
   // 8-12 results
   R.forEach(([l, a, b, d1, d2, ch, step], k) => {
     i++; add(`<section class="slide">${deco(k)}
      <div class="wm">${l}</div>
-     <div class="z" style="width:1080px">
+     <div class="z">
       ${tag(`Больше «${l}»`)}${prog(5, k + 1)}
-      <div class="h m"><span class="w">${a}</span> <span class="p">${b}</span></div>
-      <div class="txt" style="margin-top:22px;font-size:23px"><p>${d1}</p><p>${d2}</p></div>
-      <div class="card" style="margin-top:26px;padding:20px 28px"><div class="lbl" style="margin-bottom:10px">${k === 1 ? 'Поменяй вопрос' : 'Как это работает'}</div>${chain(ch)}</div>
+      <div class="h xl" style="margin-top:230px"><span class="w">${a}</span><br><span class="p">${b}</span></div>
+      <div class="txt" style="margin-top:40px;font-size:31px"><p>${d1}</p><p>${d2}</p></div>
+      <div class="card" style="margin-top:50px;padding:32px 36px"><div class="lbl" style="margin-bottom:14px">${k === 1 ? 'Поменяй вопрос' : 'Как это работает'}</div>${chain(ch)}</div>
      </div>
-     <div class="z" style="position:absolute;left:90px;right:90px;bottom:86px">${result('Первый шаг', step)}</div>
+     <div class="z" style="position:absolute;left:90px;right:90px;bottom:130px">${result('Первый шаг', step)}</div>
      ${foot(B, i, N)}</section>`);
   });
 
   // 13 equal / chain
   i++; add(`<section class="slide">${deco(1)}
    <div class="z">${tag('Если букв поровну')}
-    <div class="h m"><span class="w">Отношения ломаются</span><br><span class="p">не в одной точке</span></div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px">
+    <div class="h"><span class="w">Отношения ломаются</span><br><span class="p">не в одной точке</span></div></div>
+   <div class="z" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:50px">
     ${[['Прошлое', 'Не доверяет после предательства'], ['Самоценность', 'Соглашается на минимум'], ['Сценарий', 'Цепляют недоступные мужчины'], ['Знакомства', 'Внутри всё хорошо, но нет новых людей'], ['Общение', 'Не умеет говорить о потребностях'], ['Себя', 'Растворяется и теряет себя']]
-      .map(([t, d], k) => `<div class="card ${k === 1 ? 'hl' : ''}"><h4>${t}</h4><div class="txt" style="font-size:20px">${d}</div></div>`).join('')}
+      .map(([t, d], k) => `<div class="card ${k === 1 ? 'hl' : ''}" style="padding:32px;min-height:220px"><h4 style="font-size:36px">${t}</h4><div class="txt" style="font-size:24px">${d}</div></div>`).join('')}
    </div>
-   <div class="z" style="margin-top:30px">${result('Важно', 'Нужен не «один секрет», а вся цепочка — и поиск, где ломается именно твой маршрут.')}</div>
+   <div class="z" style="position:absolute;left:90px;right:90px;bottom:130px">${result('Важно', 'Нужен не «один секрет», а вся цепочка — и поиск, где ломается именно твой маршрут.')}</div>
    ${foot(B, i, N)}</section>`);
 
   // 14 bridge
   i++; add(`<section class="slide">${deco(0)}
-   <div class="z" style="width:1000px;margin-top:40px">
+   <div class="z" style="margin-top:200px">
     ${tag('Что дальше')}
-    <div class="h"><span class="w">Знать —</span><br><span class="p">не значит изменить</span></div>
-    <div class="txt" style="margin-top:28px;font-size:25px;width:880px">
+    <div class="h xl"><span class="w">Знать —</span><br><span class="p">не значит<br>изменить</span></div>
+    <div class="txt" style="margin-top:44px;font-size:31px">
      <p>Теперь ты знаешь свою невидимую ошибку. Но она годами работает на автомате — и одного понимания мало.</p>
      <p>Её нужно увидеть в твоей конкретной истории, понять, откуда она взялась, и заменить новым выбором.</p></div>
-    <div class="card hl" style="margin-top:34px;width:880px"><div class="quote">Твоя личная жизнь меняется не тогда, когда появляется новый мужчина. <span style="color:var(--pink)">А когда ты впервые выбираешь по-другому.</span></div></div>
+    <div class="card hl" style="margin-top:50px;padding:36px 40px"><div class="quote" style="font-size:30px">Твоя личная жизнь меняется не тогда, когда появляется новый мужчина. <span style="color:var(--pink)">А когда ты впервые выбираешь по-другому.</span></div></div>
    </div>${foot(B, i, N)}</section>`);
 
   // 15 CTA

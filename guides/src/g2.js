@@ -14,115 +14,119 @@ const BLOCKS = [
   ['Переписка', 'Комплименты', 'в переписке', 'маленькие сообщения, которые делают его день', ['«Думаю о тебе и улыбаюсь 🙂»', '«Ты сегодня сделал мой день»', '«Мне так не хватало твоего голоса»', '«С тобой даже обычный вечер становится особенным»', '«Скучаю по твоим объятиям»'], null],
 ];
 
+const PH = (W, H) => `<div style="${crop('p-000.jpg', 1090, 30, 820, 1095, W, Math.round(W * 1095 / 820))};height:${H}px"></div>`;
+
 module.exports = function () {
   const s = []; const N = 15; let i = 0; const add = h => s.push(h);
+  const bottom = (h) => `<div class="z" style="position:absolute;left:90px;right:90px;bottom:130px">${h}</div>`;
 
   // 1 cover
   i++; add(`<section class="slide">${deco(1)}
-   <div class="z" style="width:860px;margin-top:60px">
+   ${framed('left:260px;top:120px', PH(640, 780), 3)}
+   <div class="z" style="position:absolute;left:90px;right:90px;top:990px">
     ${tag('Гайд · подарок с девичника')}
-    <div class="h" style="font-size:150px;margin-top:30px"><span class="w">Скажи ему</span><br><span class="p">это</span></div>
-    <div class="sub" style="width:780px">Комплименты, после которых мужчина начинает <em>ухаживать</em>, <em>вкладываться</em> и <em>влюбляться</em></div>
+    <div class="h" style="font-size:150px;margin-top:26px"><span class="w">Скажи ему</span> <span class="p">это</span></div>
+    <div class="sub" style="font-size:32px">Комплименты, после которых мужчина начинает <em>ухаживать</em>, <em>вкладываться</em> и <em>влюбляться</em></div>
     <div style="display:flex;gap:16px;margin-top:40px"><span class="pill"><b>40+</b>готовых фраз</span><span class="pill"><b>7</b>дней практики</span></div>
    </div>
-   ${framed('right:120px;top:90px', `<div style="${crop('p-000.jpg', 1090, 30, 820, 1095, 450, 601)}"></div>`, 4)}
    ${foot(B, i, N)}</section>`);
 
   // 2 intro
   i++; add(`<section class="slide">${deco(0)}
    <div class="z">${tag('Почему это работает')}
-    <div class="h m"><span class="w">Мужчина вкладывается туда,</span><br><span class="p">где его вклад замечают</span></div></div>
-   <div class="z cols" style="margin-top:36px">
-    <div class="col bad"><div class="lbl">Женщине важно</div><div class="quote" style="font-size:28px">Чувствовать, что её <b style="color:#fff">любят</b></div></div>
-    <div class="col good"><div class="lbl">Мужчине важно</div><div class="quote" style="font-size:28px">Чувствовать, что он <b>справляется</b>, что он <b>нужен</b> и что рядом с ним тебе <b>хорошо</b></div></div>
+    <div class="h m"><span class="w">Мужчина вкладывается</span><br><span class="p">туда, где его замечают</span></div>
+    <div style="display:grid;gap:20px;margin-top:50px">
+     <div class="bad"><div class="lbl">Женщине важно</div><div class="quote" style="font-size:32px">Чувствовать, что её <b>любят</b></div></div>
+     <div class="good"><div class="lbl">Мужчине важно</div><div class="quote" style="font-size:32px">Чувствовать, что он <b>справляется</b>, что он <b>нужен</b> и что рядом с ним тебе <b>хорошо</b></div></div>
+    </div>
+    <div class="txt" style="margin-top:40px;font-size:29px">Когда он делает что-то для тебя, а слышит «не надо, я сама», «а почему не так?» или тишину — желание стараться пропадает. А когда видит, что его забота делает тебя счастливой, ему хочется давать ещё и ещё.</div>
    </div>
-   <div class="z txt" style="margin-top:26px;font-size:23px;width:1300px">Когда он делает что-то для тебя, а слышит «не надо, я сама», «а почему не так?» или тишину — желание стараться пропадает. А когда видит, что его забота делает тебя счастливой, ему хочется давать ещё и ещё.</div>
-   <div class="z" style="position:absolute;left:90px;right:90px;bottom:86px">${result('Секрет', 'Особенно мужчины ценят, когда женщина замечает их <b>УМ</b> и <b>СИЛУ</b>. Внешность ему хвалят мама и друзья — а то, что он умный и сильный, он хочет услышать от тебя.')}</div>
+   ${bottom(result('Секрет', 'Особенно мужчины ценят, когда женщина замечает их <b>УМ</b> и <b>СИЛУ</b>. Внешность ему хвалят мама и друзья — а то, что он умный и сильный, он хочет услышать от тебя.'))}
    ${foot(B, i, N)}</section>`);
 
   // 3 rules
   i++; add(`<section class="slide">${deco(2)}
    <div class="z">${tag('3 правила')}
-    <div class="h m"><span class="w">Комплимент,</span> <span class="p">который работает</span></div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px">
+    <div class="h"><span class="w">Комплимент,</span><br><span class="p">который работает</span></div>
+    <div style="display:grid;gap:22px;margin-top:50px">
     ${[['01', 'За поступок, а не «вообще»', '«Ты такой хороший»', '«Мне так приятно, что ты сам заехал за мной»'], ['02', 'Через свои чувства', '«Ты молодец»', '«Рядом с тобой я чувствую себя такой спокойной»'], ['03', 'Только искренне', 'Лесть и дежурные фразы', 'Найди то, что тебе правда в нём нравится']]
-      .map(([n, t, b, g], k) => `<div class="card ${k === 0 ? 'hl' : ''}" style="padding:30px">
-       <span class="num">${n}</span><h4 style="margin:18px 0 22px;font-size:34px">${t}</h4>
-       <div style="font:500 20px/1.4 Mont;color:#8E8E96;margin-bottom:14px">✕&nbsp; ${b}</div>
-       <div style="font:600 21px/1.4 Mont;color:#fff"><span style="color:var(--pink)">✓</span>&nbsp; ${g}</div></div>`).join('')}
-   </div>
-   <div class="z" style="margin-top:28px">${result('Важно', 'Мужчины очень хорошо чувствуют фальшь. Если не нравится — не хвали.')}</div>
+      .map(([n, t, b, g], k) => `<div class="card ${k === 0 ? 'hl' : ''}" style="padding:34px 38px">
+       <div style="display:flex;gap:20px;align-items:center"><span class="num">${n}</span><h4 style="margin:0;font-size:40px">${t}</h4></div>
+       <div style="font:500 26px/1.4 Mont;color:#8E8E96;margin:22px 0 12px">✕&nbsp; ${b}</div>
+       <div style="font:600 27px/1.4 Mont;color:#fff"><span style="color:var(--pink)">✓</span>&nbsp; ${g}</div></div>`).join('')}
+    </div></div>
+   ${bottom(result('Важно', 'Мужчины очень хорошо чувствуют фальшь. Если не нравится — не хвали.'))}
    ${foot(B, i, N)}</section>`);
 
   // 4 formula
   i++; add(`<section class="slide">${deco(1)}
    <div class="z">${tag('Волшебная формула')}
-    <div class="h m"><span class="w">После таких слов</span><br><span class="p">хочется сделать это снова</span></div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px">
+    <div class="h m"><span class="w">После таких слов</span><br><span class="p">хочется сделать это снова</span></div>
+    <div style="display:grid;gap:22px;margin-top:50px">
     ${[['01', 'Что он сделал', '«Ты сам забронировал ресторан и всё продумал»'], ['02', 'Что ты почувствовала', '«Я весь вечер чувствовала себя такой беззаботной»'], ['03', 'Что это для тебя значит', '«Мне так нравится, что с тобой можно ни о чём не думать»']]
-      .map(([n, t, e], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="padding:30px;position:relative">
-       <div style="font:700 70px/1 Osw;color:var(--pink);text-shadow:0 0 26px rgba(240,71,154,.5)">${n}</div>
-       <h4 style="margin:14px 0 14px;font-size:36px">${t}</h4><div class="txt" style="font-size:21px;color:#fff">${e}</div></div>`).join('')}
-   </div>
-   <div class="z card" style="margin-top:28px;padding:22px 30px">${chain(['Что он сделал', 'что ты почувствовала', 'что это для тебя значит'])}</div>
+      .map(([n, t, e], k) => `<div class="card ${k === 2 ? 'hl' : ''}" style="display:flex;gap:34px;align-items:center;padding:34px 38px">
+       <div style="font:700 96px/1 Osw;color:var(--pink)">${n}</div>
+       <div><h4 style="margin:0 0 10px;font-size:40px">${t}</h4><div class="txt" style="font-size:27px;color:#fff">${e}</div></div></div>`).join('')}
+    </div></div>
+   ${bottom(`<div class="card" style="padding:30px 34px"><div class="lbl">Запомни формулу</div>${chain(['Что он сделал', 'что ты почувствовала', 'что это значит'])}</div>`)}
    ${foot(B, i, N)}</section>`);
 
   // 5-11 blocks
   BLOCKS.forEach(([short, a, b, sub, items, tip], k) => {
     i++;
+    const list = (arr) => `<div style="display:grid;gap:16px">${arr.map(t => `<div class="phrase">${t}</div>`).join('')}</div>`;
     let body;
     if (short === 'Сила') {
-      body = `<div class="cols" style="margin-top:28px">
-        <div class="col"><div class="lbl">Физическая сила</div><div style="display:grid;gap:12px">${['«Ты такой сильный, рядом с тобой я чувствую себя защищённой»', '«Мне так нравятся твои объятия — в них ничего не страшно»', '«Ого, ты так легко это поднял»', '«Мне нравится, какие у тебя сильные руки»'].map(t => `<div class="phrase">${t}</div>`).join('')}</div></div>
-        <div class="col"><div class="lbl">Внутренняя сила</div><div style="display:grid;gap:12px">${['«Мне нравится, что на тебя можно положиться»', '«Ты так спокойно справился, я восхищаюсь тобой»', '«Я вижу, какой ты сильный, и я в тебя верю»', '«Ты из тех мужчин, которые держат слово. Это так редко»'].map(t => `<div class="phrase">${t}</div>`).join('')}</div></div></div>`;
+      body = `<div style="margin-top:40px"><div class="lbl">Физическая сила</div>${list(['«Ты такой сильный, рядом с тобой я чувствую себя защищённой»', '«Мне так нравятся твои объятия — в них ничего не страшно»', '«Ого, ты так легко это поднял»', '«Мне нравится, какие у тебя сильные руки»'])}
+        <div class="lbl" style="margin-top:34px">Внутренняя сила</div>${list(['«Мне нравится, что на тебя можно положиться»', '«Ты так спокойно справился, я восхищаюсь тобой»', '«Я вижу, какой ты сильный, и я в тебя верю»', '«Ты из тех мужчин, которые держат слово. Это так редко»'])}</div>`;
     } else {
-      body = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px">${items.map(t => `<div class="phrase">${t}</div>`).join('')}</div>`;
+      body = `<div style="margin-top:44px">${list(items)}</div>`;
     }
     add(`<section class="slide">${deco(k)}
      <div class="z">${tag(`Блок ${String(k + 1).padStart(2, '0')} · ${short}`)}${prog(7, k + 1)}
-      <div class="h m"><span class="w">${a}</span> <span class="p">${b}</span></div>
-      <div class="sub" style="font-size:24px;color:var(--mut);margin-top:10px">— ${sub}</div>
+      <div class="h" style="margin-top:34px"><span class="w">${a}</span><br><span class="p">${b}</span></div>
+      <div class="sub" style="font-size:28px;color:var(--mut);margin-top:14px">— ${sub}</div>
       ${body}</div>
-     ${tip ? `<div class="z" style="position:absolute;left:90px;right:90px;bottom:86px">${result('Сильнее всего', tip)}</div>` : ''}
+     ${tip ? bottom(result('Сильнее всего', tip)) : ''}
      ${foot(B, i, N)}</section>`);
   });
 
   // 12 mistakes
   i++; add(`<section class="slide">${deco(2)}
    <div class="z">${tag('Чего не говорить')}
-    <div class="h s"><span class="w">6 «комплиментов», после которых</span><br><span class="p">мужчина перестаёт стараться</span></div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px">
+    <div class="h s"><span class="w">6 «комплиментов», после которых</span><br><span class="p">мужчина перестаёт стараться</span></div>
+    <div style="display:grid;gap:16px;margin-top:40px">
     ${[['С упрёком', '«Наконец-то ты догадался подарить цветы»'], ['Со сравнением', '«Ты не такой, как мой бывший»'], ['Как маленькому', '«Ой, ты мой умничка, справился»'], ['С поправкой', '«Спасибо, но в следующий раз бери розовые»'], ['Обесценивание заботы', '«Да не надо было, я бы сама»'], ['Сомнение в уме и силе', '«Дай я сама, у тебя не получится»']]
-      .map(([t, e], k) => `<div class="card ${k >= 4 ? 'hl' : ''}" style="padding:22px 26px"><div style="display:flex;gap:14px;align-items:center;margin-bottom:10px"><span class="num" style="min-width:40px;height:36px;font-size:18px">✕</span><h4 style="margin:0;font-size:26px">${t}</h4></div><div class="txt" style="font-size:20px">${e}</div></div>`).join('')}
-   </div>
-   <div class="z" style="margin-top:22px">${result('Запомни', '«Я сама» мужчина слышит как «твоя забота мне не нужна». А сомнение в его уме или силе бьёт по самому важному — <b>по уважению</b>.')}</div>
+      .map(([t, e], k) => `<div class="card ${k >= 4 ? 'hl' : ''}" style="display:flex;gap:22px;align-items:center;padding:22px 28px"><span class="num" style="min-width:44px;height:40px">✕</span><div><h4 style="margin:0 0 4px;font-size:30px">${t}</h4><div class="txt" style="font-size:24px">${e}</div></div></div>`).join('')}
+    </div></div>
+   ${bottom(result('Запомни', '«Я сама» мужчина слышит как «твоя забота мне не нужна». А сомнение в его уме или силе бьёт по самому важному — <b>по уважению</b>.'))}
    ${foot(B, i, N)}</section>`);
 
   // 13 challenge
   i++; add(`<section class="slide">${deco(0)}
    <div class="z">${tag('Практика')}
-    <div class="h m"><span class="w">Челлендж</span> <span class="p">на 7 дней</span></div>
-    <div class="sub" style="width:1200px">Каждый день — один искренний комплимент по формуле: <b>что сделал → что почувствовала → что это значит</b></div></div>
-   <div class="z" style="display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-top:40px">
-    ${['Ум', 'Сила', 'Забота', 'Решения', 'Характер', 'Внешность', 'Переписка'].map((t, k) => `<div class="card ${k < 2 ? 'hl' : ''}" style="text-align:center;padding:24px 10px">
-      <div style="font:600 14px Mont;letter-spacing:.2em;color:var(--mut)">ДЕНЬ</div>
-      <div style="font:700 64px/1.05 Osw;color:var(--pink)">${k + 1}</div>
-      <div style="font:700 22px Osw;text-transform:uppercase;color:#fff;margin-top:6px">${t}</div>
-      <div style="width:30px;height:30px;border:2px solid var(--pink);border-radius:9px;margin:16px auto 0"></div></div>`).join('')}
-   </div>
-   <div class="z" style="position:absolute;left:90px;right:90px;bottom:86px">${result('Если ты одна', 'Говори комплименты папе, брату, другу, коллеге. Это тренировка: ты учишься замечать и принимать мужскую заботу — и когда появится «тот самый», ты уже будешь это уметь.')}</div>
+    <div class="h"><span class="w">Челлендж</span><br><span class="p">на 7 дней</span></div>
+    <div class="sub" style="font-size:29px">Каждый день — один искренний комплимент по формуле: <b>что сделал → что почувствовала → что это значит</b>. Начни с ума и силы.</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px">
+    ${['Ум', 'Сила', 'Забота', 'Решения', 'Характер', 'Внешность', 'Переписка'].map((t, k) => `<div class="card ${k < 2 ? 'hl' : ''}" style="text-align:center;padding:26px 10px">
+      <div style="font:600 16px Mont;letter-spacing:.2em;color:var(--mut)">ДЕНЬ</div>
+      <div style="font:700 78px/1.05 Osw;color:var(--pink)">${k + 1}</div>
+      <div style="font:700 26px Osw;text-transform:uppercase;color:#fff;margin-top:6px">${t}</div>
+      <div style="width:34px;height:34px;border:2px solid var(--pink);border-radius:9px;margin:18px auto 0"></div></div>`).join('')}
+    </div></div>
+   ${bottom(result('Если ты одна', 'Говори комплименты папе, брату, другу, коллеге. Это тренировка: ты учишься замечать и принимать мужскую заботу — и когда появится «тот самый», ты уже будешь это уметь.'))}
    ${foot(B, i, N)}</section>`);
 
   // 14 bridge
   i++; add(`<section class="slide">${deco(1)}
-   <div class="z" style="width:1100px;margin-top:40px">
+   <div class="z" style="margin-top:220px">
     ${tag('А если не работает?')}
-    <div class="h"><span class="w">Значит, дело</span><br><span class="p">не в словах</span></div>
-    <div class="txt" style="margin-top:28px;font-size:25px;width:950px">
+    <div class="h xl"><span class="w">Значит, дело</span><br><span class="p">не в словах</span></div>
+    <div class="txt" style="margin-top:44px;font-size:31px">
      <p>Ты хвалишь, благодаришь, принимаешь заботу — а мужчина всё равно не ухаживает?</p>
      <p>Возможно, ты выбираешь мужчин, которые не умеют или не хотят вкладываться. Или есть <b>невидимая ошибка</b>, которая отталкивает тех, кто готов.</p></div>
    </div>${foot(B, i, N)}</section>`);
 
-  i++; add(cta(B, i, N, 0));
+  i++; add(cta(B, i, N, 0, PH(380, 470)));
   return s;
 };

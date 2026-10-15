@@ -16,7 +16,7 @@ const GUIDES = {
   fs.mkdirSync(OUT, { recursive: true });
   fs.mkdirSync(PREV, { recursive: true });
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
+  const page = await browser.newPage({ viewport: { width: 1240, height: 1754 } });
   for (const [k, [title, file]] of Object.entries(GUIDES)) {
     if (only.length && !only.includes(k)) continue;
     if (!fs.existsSync(path.join(__dirname, k + '.js'))) continue;
@@ -29,7 +29,7 @@ const GUIDES = {
     await page.waitForTimeout(300);
     const els = await page.$$('section.slide');
     for (let j = 0; j < els.length; j++) await els[j].screenshot({ path: path.join(PREV, `${k}-${String(j + 1).padStart(2, '0')}.png`) });
-    await page.pdf({ path: path.join(OUT, file + '.pdf'), width: '1600px', height: '900px', printBackground: true });
+    await page.pdf({ path: path.join(OUT, file + '.pdf'), width: '1240px', height: '1754px', printBackground: true });
     console.log(k, els.length, 'slides');
   }
   await browser.close();

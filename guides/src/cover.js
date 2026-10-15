@@ -22,9 +22,9 @@ function skyline(W, H, base, bx0 = 0.62, ax0 = 0.18) {
   }
   const burjX = W * bx0;
   let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="position:absolute;left:0;bottom:0">
-   <defs><linearGradient id="bld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a1a44"/><stop offset="1" stop-color="#140912"/></linearGradient></defs>`;
+   <defs><linearGradient id="bld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a1030"/><stop offset="1" stop-color="#14070e"/></linearGradient></defs>`;
   // back layer
-  for (const [bx, bw, bh] of b) svg += `<rect x="${bx}" y="${H - bh * 0.75 - 40}" width="${bw}" height="${bh}" fill="#3a1536" opacity=".75"/>`;
+  for (const [bx, bw, bh] of b) svg += `<rect x="${bx}" y="${H - bh * 0.75 - 40}" width="${bw}" height="${bh}" fill="#3a0f28" opacity=".75"/>`;
   // Burj Khalifa
   const t = base;
   const tiers = [[60, 0], [46, 0.28], [34, 0.5], [22, 0.68], [12, 0.82], [5, 0.92]];
@@ -54,7 +54,7 @@ function hearts(list) {
 const sky = `background:
   radial-gradient(ellipse 60% 40% at 62% 100%, rgba(255,140,120,.55), rgba(255,140,120,0) 70%),
   radial-gradient(ellipse 80% 55% at 50% 100%, rgba(240,71,154,.55), rgba(240,71,154,0) 75%),
-  linear-gradient(180deg, #0B0B0D 0%, #170a19 30%, #451540 62%, #8a2a5c 85%, #c8506a 100%)`;
+  linear-gradient(180deg, #0B0B0D 0%, #1a0812 30%, #4a1232 62%, #8e2258 85%, #d0407e 100%)`;
 
 function stars(W, H, n) {
   seed = 3; let s = '';
@@ -82,25 +82,24 @@ const textBlock = (scale = 1, heart = true) => `
   <div style="font:600 ${21 * scale}px Mont;letter-spacing:.06em;color:#F7B6D6;margin-top:${16 * scale}px;text-transform:uppercase">Самоценность <b style="color:var(--pink)">•</b> Достойные мужчины <b style="color:var(--pink)">•</b> Отношения мечты</div>
   <div class="btn" style="margin-top:${38 * scale}px;font-size:${30 * scale}px;padding:${16 * scale}px ${34 * scale}px;box-shadow:0 0 50px rgba(240,71,154,.55)">📍 25 октября · 15:00 МСК · бесплатно</div>`;
 
-const PH = `file://${IMG}/pajama_dubai.jpg`;
-const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;background:#0B0B0D">
- <div class="grid"></div>
- <div style="position:absolute;right:0;top:0;width:820px;height:900px">
-  <img src="${PH}" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%">
-  <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0B0B0D 0%,rgba(11,11,13,.75) 14%,rgba(11,11,13,0) 40%)"></div>
- </div>
- ${hearts([[700, 640, 40, .9, -15], [740, 150, 28, .75, 10]])}
- ${spark(690, 90, 26)}${spark(90, 820, 22)}
- <div style="position:absolute;left:90px;top:110px;width:860px;z-index:4">${textBlock(1, false)}</div>
+const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;${sky}">
+ ${stars(1600, 900, 120)}
+ ${skyline(1600, 900, 600, 0.95, 0.57)}
+ <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.85) 0%,rgba(11,11,13,.45) 40%,rgba(11,11,13,0) 58%)"></div>
+ ${hearts([[1060, 610, 46, .9, -15], [1520, 520, 34, .8, 12], [1010, 200, 26, .7, 8]])}
+ ${spark(980, 120, 30)}${spark(1490, 820, 24)}${spark(90, 820, 22)}
+ <div style="position:absolute;right:150px;top:70px;z-index:3">${photo(410, 728, 4)}</div>
+ <div style="position:absolute;left:90px;top:110px;width:900px;z-index:4">${textBlock(1, false)}</div>
 </section>`;
 
-const V1 = `<section class="slide" style="width:1080px;height:1920px;padding:0;background:#0B0B0D">
- <div style="position:absolute;left:0;right:0;top:0;height:1920px">
-  <img src="${PH}" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%">
-  <div style="position:absolute;left:0;right:0;bottom:0;height:720px;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.82) 38%,rgba(11,11,13,.92))"></div>
- </div>
- ${hearts([[90, 1250, 44, .9, -15], [950, 1230, 36, .85, 12]])}
- <div style="position:absolute;left:80px;right:80px;top:1340px;z-index:4">${textBlock(0.9)}</div>
+const V1 = `<section class="slide" style="width:1080px;height:1920px;padding:0;${sky}">
+ ${stars(1080, 1920, 160)}
+ ${skyline(1080, 1920, 820, 0.86, 0.12)}
+ <div style="position:absolute;left:0;right:0;bottom:0;height:880px;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.7) 30%,rgba(11,11,13,.55) 60%,rgba(11,11,13,.2) 100%)"></div>
+ ${hearts([[120, 300, 50, .9, -15], [900, 760, 42, .85, 12], [880, 260, 34, .8, -10]])}
+ ${spark(100, 150, 32)}${spark(960, 560, 26)}
+ <div style="position:absolute;left:50%;top:150px;transform:translateX(-50%);z-index:3">${photo(500, 890, -3)}</div>
+ <div style="position:absolute;left:80px;right:80px;top:1180px;z-index:4">${textBlock(0.9)}</div>
 </section>`;
 
 (async () => {

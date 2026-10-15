@@ -29,7 +29,7 @@ body{font-family:Mont,sans-serif;color:var(--txt);-webkit-font-smoothing:antiali
  background-size:260px 190px,260px 190px,65px 47px,65px 47px;pointer-events:none}
 .glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
 .spark{position:absolute;color:#fff;font-size:26px;line-height:1}
-.petal{position:absolute;left:0;top:0;width:200px;height:190px;background:url(file://${IMG}/p-000.jpg) 0 0/2304px 1296px no-repeat;opacity:.9}
+.petal{position:absolute;left:0;top:0;width:200px;height:190px;background:url(file://${IMG}/p-000.jpg) 0 0/2304px 1296px no-repeat;opacity:.9;-webkit-mask-image:radial-gradient(circle at 0 0,#000 50%,transparent 78%)}
 .z{position:relative;z-index:2}
 .tag{background:#0E0E11;display:inline-flex;align-items:center;gap:12px;border:1.5px solid rgba(255,255,255,.22);border-radius:999px;padding:11px 24px;font:600 15px Mont;letter-spacing:.22em;text-transform:uppercase;color:#fff}
 .tag b{color:var(--pink);font-size:18px;letter-spacing:0}

@@ -74,7 +74,7 @@ function photo(W, H, rot) {
 }
 
 const textBlock = (scale = 1, heart = true) => `
-  <span class="tag" style="font-size:${17 * scale}px;padding:${12 * scale}px ${26 * scale}px;background:rgba(11,11,13,.55)"><b>✦</b>Dubai • Girls night</span>
+  <span class="tag" style="font-size:${17 * scale}px;padding:${12 * scale}px ${26 * scale}px;background:rgba(11,11,13,.55)"><b>✦</b>Girls night</span>
   <div style="font:700 ${118 * scale}px/0.98 Osw;text-transform:uppercase;margin-top:${28 * scale}px">
    <span style="background:linear-gradient(180deg,#fff 30%,#d6d6dc);-webkit-background-clip:text;color:transparent">Давай найдём</span><br>
    <span style="color:var(--pink);text-shadow:0 0 40px rgba(240,71,154,.6)">тебе любовь!</span> ${heart ? `<span style="font-size:${84 * scale}px">❤️</span>` : ''}</div>
@@ -82,9 +82,8 @@ const textBlock = (scale = 1, heart = true) => `
   <div style="font:600 ${21 * scale}px Mont;letter-spacing:.06em;color:#F7B6D6;margin-top:${16 * scale}px;text-transform:uppercase">Самоценность <b style="color:var(--pink)">•</b> Достойные мужчины <b style="color:var(--pink)">•</b> Отношения мечты</div>
   <div class="btn" style="margin-top:${38 * scale}px;font-size:${30 * scale}px;padding:${16 * scale}px ${34 * scale}px;box-shadow:0 0 50px rgba(240,71,154,.55)">📍 25 октября · 15:00 МСК · бесплатно</div>`;
 
-const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;${sky}">
- ${stars(1600, 900, 120)}
- ${skyline(1600, 900, 600, 0.95, 0.57)}
+const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.32),rgba(240,71,154,0) 45%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.2),rgba(240,71,154,0) 40%),#0B0B0D">
+ <div class="grid"></div><div class="petal"></div>
  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.85) 0%,rgba(11,11,13,.45) 40%,rgba(11,11,13,0) 58%)"></div>
  ${hearts([[1060, 610, 46, .9, -15], [1520, 520, 34, .8, 12], [1010, 200, 26, .7, 8]])}
  ${spark(980, 120, 30)}${spark(1490, 820, 24)}${spark(90, 820, 22)}
@@ -92,9 +91,8 @@ const H1 = `<section class="slide" style="width:1600px;height:900px;padding:0;${
  <div style="position:absolute;left:90px;top:110px;width:900px;z-index:4">${textBlock(1, false)}</div>
 </section>`;
 
-const V1 = `<section class="slide" style="width:1080px;height:1920px;padding:0;${sky}">
- ${stars(1080, 1920, 160)}
- ${skyline(1080, 1920, 820, 0.86, 0.12)}
+const V1 = `<section class="slide" style="width:1080px;height:1920px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.32),rgba(240,71,154,0) 45%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.2),rgba(240,71,154,0) 40%),#0B0B0D">
+ <div class="grid"></div><div class="petal"></div>
  <div style="position:absolute;left:0;right:0;bottom:0;height:880px;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.7) 30%,rgba(11,11,13,.55) 60%,rgba(11,11,13,.2) 100%)"></div>
  ${hearts([[120, 300, 50, .9, -15], [900, 760, 42, .85, 12], [880, 260, 34, .8, -10]])}
  ${spark(100, 150, 32)}${spark(960, 560, 26)}

@@ -78,14 +78,14 @@ function dubai() {
 }
 
 const T = {
-  photo: ({ tg, w, p, s, b }) => `${dubai()}${pol('right:70px;top:80px', 400, 640, 4)}${heart(560, 70, 60, -12)}
+  photo: ({ tg, w, p, s, b }) => `${pol('right:70px;top:80px', 400, 640, 4)}${heart(560, 70, 60, -12)}
     ${at('left:56px;width:560px;top:70px', `${tag(tg, 26)}${title(w, p, 96, 140)}${s ? sub(s) : ''}`)}
     ${b ? at('left:56px;right:56px;bottom:56px', pill(b)) : ''}`,
   side: ({ tg, w, p, s, b }) => `${photoRight(P.dress, '45% 18%', 560)}${heart(470, 930, 60, -10)}
     ${at('left:56px;width:600px;top:70px', `${tag(tg)}${title(w, p, 104, 132)}${s ? sub(s, 36) : ''}${b ? pill(b, 40) : ''}`)}`,
   gifts: ({ w, p, s, b }) => `${books(150, 50, 1.22)}${heart(70, 90, 60, -15)}${heart(960, 80, 54, 12)}
     ${at('left:56px;right:56px;top:640px', `${title(w, p, 110, 140)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
-  count: ({ n, unit, s, b, gifts, ph }) => `${gifts ? books(440, 150, 1.0) : ph === 'dress' ? photoRight(P.dress, '45% 18%', 600) : dubai() + pol('right:70px;top:110px', 400, 640, 4)}${heart(gifts ? 960 : 900, 60, 60, 12)}
+  count: ({ n, unit, s, b, gifts, ph }) => `${gifts ? books(440, 150, 1.0) : ph === 'dress' ? photoRight(P.dress, '45% 18%', 600) : pol('right:70px;top:110px', 400, 640, 4)}${heart(gifts ? 960 : 900, 60, 60, 12)}
     ${at('left:56px;top:40px;width:520px', `${tag('Обратный отсчёт')}
       <div style="font:700 ${n.length > 1 ? 470 : 560}px/0.86 Osw;margin-top:20px;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
       <div class="scr" style="font-size:170px;line-height:.9;margin-top:-30px">${unit}</div>`)}
@@ -96,7 +96,7 @@ const T = {
       <div class="scr" style="font-size:190px;line-height:1.1;margin-top:-10px">Шёпотом…</div>
       <div style="font:600 italic 64px/1.3 Mont;color:#fff;margin-top:34px;text-shadow:0 2px 14px rgba(0,0,0,.6)">${q}</div>`)}
     ${at('left:0;right:0;bottom:60px;text-align:center', `<div class="scr" style="font-size:96px">Ксюша ♡</div>`)}`,
-  live: ({ w, p, s, b }) => `${dubai()}${pol('right:70px;top:90px', 400, 640, 4)}
+  live: ({ w, p, s, b }) => `${pol('right:70px;top:90px', 400, 640, 4)}
     ${at('left:56px;top:56px', `<span style="display:inline-flex;align-items:center;gap:16px;background:#E5203A;border-radius:14px;padding:14px 30px;font:700 52px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 0 30px rgba(229,32,58,.6)"><span style="width:28px;height:28px;border-radius:50%;background:#fff"></span>LIVE</span>`)}
     ${at('left:56px;width:560px;top:190px', `${title(w, p, 130, 170)}${sub(s)}`)}${at('left:56px;right:56px;bottom:56px', pill(b))}`,
   cases: () => `${heart(960, 50, 60, 12)}
@@ -120,7 +120,7 @@ const T = {
 };
 
 const LIST = [
-  ['01_18окт_12-00_приглашение', 'photo', { tg: 'Girls night · Дубай', w: 'Давай найдём', p: 'тебе любовь!', b: '25.10 · 15:00 МСК · бесплатно' }],
+  ['01_18окт_12-00_приглашение', 'photo', { tg: 'Girls night', w: 'Давай найдём', p: 'тебе любовь!', b: '25.10 · 15:00 МСК · бесплатно' }],
   ['02_18окт_20-00_шёпотом', 'whisper', { q: 'Мест на разборы будет совсем немного… Хочу, чтобы ты была там 🤍' }],
   ['03_19окт_12-00_моя_история', 'side', { tg: 'Моя история', w: 'Я год ждала,', p: 'что он изменится', s: 'Как я ушла — расскажу на девичнике', b: '25.10 · 15:00' }],
   ['04_20окт_12-00_кейсы', 'cases', {}],
@@ -158,7 +158,7 @@ function glitter2(seed) {
   const only = process.argv[2];
   for (const [name, t, d] of LIST) {
     if (only && !name.startsWith(only)) continue;
-    const html = L.page(name, [FONTS + `<section class="slide" style="width:1080px;height:1080px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.38),rgba(240,71,154,0) 48%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.26),rgba(240,71,154,0) 44%),#0B0B0D"><div class="grid"></div>${T[t](d)}${glitter2(name.length * 7 + 3)}</section>`]);
+    const html = L.page(name, [FONTS + `<section class="slide" style="width:1080px;height:1080px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.38),rgba(240,71,154,0) 48%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.26),rgba(240,71,154,0) 44%),#0B0B0D"><div class="grid"></div><div class="petal" style="z-index:2"></div>${T[t](d)}${glitter2(name.length * 7 + 3)}</section>`]);
     const f = path.join(PREV, 'sq.html');
     fs.writeFileSync(f, html);
     await page.goto('file://' + f);

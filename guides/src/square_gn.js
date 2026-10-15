@@ -13,8 +13,8 @@ const pic = (src, css, w, h, rot, pos) => `<div style="position:absolute;${css};
 const heart = (x, y, s, r) => `<svg style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${r}deg);z-index:6" width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 2.4 4.5 6.3 4.5c2.3 0 3.9 1.3 5.7 3.4 1.8-2.1 3.4-3.4 5.7-3.4 3.9 0 5.9 4 4.3 7.2C19.5 16.4 12 21 12 21z" fill="#F0479A"/></svg>`;
 const html = `${FONTS}<section class="slide" style="width:1080px;height:1080px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.38),rgba(240,71,154,0) 48%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.26),rgba(240,71,154,0) 44%),#0B0B0D">
  <div class="grid"></div><div class="petal" style="z-index:2"></div>
- ${pic(`file://${IMG}/party.jpg`, 'left:720px;top:40px', 400, 620, 7, '50% 40%')}
  ${pic(`file://${IMG}/pajama2.jpg`, 'left:560px;top:430px', 470, 560, -5, '50% 25%')}
+ ${pic(`file://${IMG}/party.jpg`, 'left:720px;top:40px', 400, 620, 7, '50% 40%')}
  ${tape('left:900px;top:20px;transform:rotate(32deg)')}${tape('left:520px;top:420px;transform:rotate(-30deg)')}${tape('left:900px;top:960px;transform:rotate(28deg)')}
  ${heart(640, 330, 64, -12)}${heart(960, 680, 52, 14)}
  <div style="position:absolute;left:56px;top:40px;bottom:56px;width:500px;z-index:6;display:flex;flex-direction:column">

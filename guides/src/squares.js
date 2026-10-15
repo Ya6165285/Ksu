@@ -38,93 +38,95 @@ const note = (t, css) => `<div style="position:absolute;${css};z-index:7;font:40
 
 const heart = (x, y, s, r = 0, o = .9) => `<svg style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${r}deg);opacity:${o};z-index:6" width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 2.4 4.5 6.3 4.5c2.3 0 3.9 1.3 5.7 3.4 1.8-2.1 3.4-3.4 5.7-3.4 3.9 0 5.9 4 4.3 7.2C19.5 16.4 12 21 12 21z" fill="#F0479A"/></svg>`;
 const spark = (x, y, s) => `<div style="position:absolute;left:${x}px;top:${y}px;color:#fff;font-size:${s}px;z-index:6">✦</div>`;
-const bg = `<div class="grid"></div>`;
-const tag = t => `<span class="tag" style="background:rgba(11,11,13,.7)"><b>✦</b>${t}</span>`;
-const title = (w, p, size = 96) => `<div style="font:700 ${size}px/1 Osw;text-transform:uppercase;margin-top:22px"><span style="background:linear-gradient(180deg,#fff 30%,#d6d6dc);-webkit-background-clip:text;color:transparent">${w}</span>${p ? `<br><span class="scr" style="font-size:1.32em;line-height:1.05">${p}</span>` : ''}</div>`;
-const sub = t => `<div style="font:500 30px/1.35 Mont;color:#fff;margin-top:20px">${t}</div>`;
-const pill = t => `<div class="btn" style="margin-top:30px;font-size:30px;padding:16px 34px">${t}</div>`;
-const foot = `<div style="position:absolute;left:70px;right:70px;bottom:36px;display:flex;justify-content:space-between;font:600 15px Mont;letter-spacing:.24em;color:rgba(255,255,255,.4);z-index:7"><span>HEY KSUSHA <b style="color:var(--pink)">♥</b> GIRLS NIGHT</span><span></span></div>`;
+const at = (css, html) => `<div style="position:absolute;${css};z-index:5">${html}</div>`;
+const tag = (t, fs = 28) => `<span class="tag" style="background:rgba(11,11,13,.75);font-size:${fs}px;padding:14px 30px;letter-spacing:.14em"><b style="font-size:${fs + 4}px">✦</b>${t}</span>`;
+const title = (w, p, ws = 112, ps = 150) => `<div style="margin-top:18px">
+  <div style="font:700 ${ws}px/0.98 Osw;text-transform:uppercase;background:linear-gradient(180deg,#fff 30%,#dcdce2);-webkit-background-clip:text;color:transparent">${w}</div>
+  ${p ? `<div class="scr" style="font-size:${ps}px;line-height:1.02;margin-top:-6px">${p}</div>` : ''}</div>`;
+const sub = (t, fs = 38) => `<div style="font:600 ${fs}px/1.3 Mont;color:#fff;margin-top:14px;text-shadow:0 2px 12px rgba(0,0,0,.6)">${t}</div>`;
+const pill = (t, fs = 42) => `<div class="btn" style="margin-top:26px;font-size:${fs}px;padding:18px 40px;box-shadow:0 0 40px rgba(240,71,154,.55)">${t}</div>`;
 
-// building blocks
 function books(x, y, sc = 1) {
-  const card = (src, l, t, r, z) => `<img src="${src}" style="position:absolute;left:${l * sc}px;top:${t * sc}px;width:${300 * sc}px;height:${424 * sc}px;object-fit:cover;border-radius:${16 * sc}px;transform:rotate(${r}deg);z-index:${z};box-shadow:0 24px 60px rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.15)">`;
+  const card = (src, l, t, r, z) => `<img src="${src}" style="position:absolute;left:${l * sc}px;top:${t * sc}px;width:${300 * sc}px;height:${424 * sc}px;object-fit:cover;border-radius:${16 * sc}px;transform:rotate(${r}deg);z-index:${z};box-shadow:0 24px 60px rgba(0,0,0,.6);border:3px solid rgba(255,255,255,.25)">`;
   return `<div style="position:absolute;left:${x}px;top:${y}px;width:${640 * sc}px;height:${520 * sc}px;z-index:3">
    ${card(P.g2, 0, 70, -12, 1)}${card(P.g3, 340, 70, 12, 1)}${card(P.g1, 170, 20, 0, 2)}
-   <div style="position:absolute;left:${236 * sc}px;top:${-24 * sc}px;width:${170 * sc}px;height:${60 * sc}px;z-index:3;background:linear-gradient(90deg,#F0479A,#F678B4);border-radius:8px;transform:rotate(-4deg);display:flex;align-items:center;justify-content:center;font:700 ${26 * sc}px Osw;color:#fff;letter-spacing:.08em">🎁 ПОДАРКИ</div></div>`;
+   <div style="position:absolute;left:${210 * sc}px;top:${-30 * sc}px;width:${220 * sc}px;height:${72 * sc}px;z-index:3;background:linear-gradient(90deg,#F0479A,#F678B4);border-radius:10px;transform:rotate(-4deg);display:flex;align-items:center;justify-content:center;font:700 ${34 * sc}px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.4)">🎁 ПОДАРКИ</div></div>`;
 }
-function photoRight(src, pos = '50% 30%', w = 520) {
-  return `<div style="position:absolute;right:0;top:0;bottom:0;width:${w}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 22%,#000 50%)"></div>`;
-}
-function photoTop(src, pos = '50% 40%', h = 640) {
-  return `<div style="position:absolute;left:0;right:0;top:0;height:${h}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(180deg,#000 45%,rgba(0,0,0,.5) 70%,transparent 100%)"></div>`;
-}
-const at = (css, html) => `<div style="position:absolute;${css};z-index:5">${html}</div>`;
+const photoTop = (src, pos, h) => `<div style="position:absolute;left:0;right:0;top:0;height:${h}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(180deg,#000 55%,rgba(0,0,0,.45) 78%,transparent 100%)"></div>`;
+const photoRight = (src, pos, w) => `<div style="position:absolute;right:0;top:0;bottom:0;width:${w}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.6) 18%,#000 40%)"></div>`;
 
-// templates
 const T = {
-  gifts: ({ tg, w, p, s, b }) => `${bg}${books(250, 70, .9)}${heart(130, 160, 50, -15)}${heart(900, 120, 40, 12)}${spark(90, 520, 28)}${spark(960, 470, 24)}
-    ${at('left:70px;right:70px;top:560px', `${tag(tg)}${title(w, p, 80)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}${foot}`,
-  photo: ({ tg, w, p, s, b, src, pos }) => `${bg}${photoTop(src || P.dubai, pos)}${heart(940, 80, 46, 12)}${spark(80, 90, 28)}
-    ${at('left:70px;right:70px;top:540px', `${tag(tg)}${title(w, p, 90)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}${foot}`,
-  side: ({ tg, w, p, s, b, src, pos }) => `${bg}${photoRight(src || P.dress, pos)}${heart(560, 860, 44, -10)}${spark(80, 920, 24)}
-    ${at('left:70px;width:620px;top:120px', `${tag(tg)}${title(w, p, 86)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}${foot}`,
-  count: ({ n, unit, s, b, gifts }) => `${bg}${gifts ? books(560, 300, .72) : ''}${heart(470, 150, 50, -15)}${spark(940, 120, 28)}
-    ${at('left:70px;top:130px;width:560px', `${tag('Обратный отсчёт')}
-      <div style="font:700 380px/0.9 Osw;margin-top:30px;background:linear-gradient(180deg,#ff9fd0,#F0479A 60%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
-      <div class="scr" style="font-size:110px;line-height:1;margin-top:-10px">${unit}</div>
-      ${sub(s)}${b ? pill(b) : ''}`)}${foot}`,
-  whisper: ({ q }) => `${bg}
-    <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(240,71,154,.28),rgba(240,71,154,0) 55%)"></div>
-    ${heart(150, 180, 40, -15, .6)}${heart(880, 760, 52, 12, .8)}${spark(860, 170, 26)}${spark(120, 800, 22)}
-    ${at('left:90px;right:90px;top:170px;text-align:center', `<div style="font-size:150px;line-height:1">🤫</div>
-      <div class="scr" style="font-size:120px;line-height:1.1;margin-top:10px">Шёпотом…</div>
-      <div style="font:500 italic 42px/1.35 Mont;color:#fff;margin-top:40px">${q}</div>`)}${foot}`,
-  live: ({ w, p, s, b }) => `${bg}${photoTop(P.dubai, '50% 45%', 600)}
-    ${at('left:70px;top:70px', `<span style="display:inline-flex;align-items:center;gap:14px;background:#E5203A;border-radius:12px;padding:12px 24px;font:700 34px Osw;color:#fff;letter-spacing:.06em"><span style="width:20px;height:20px;border-radius:50%;background:#fff"></span>LIVE</span>`)}
-    ${at('left:70px;right:70px;top:560px', `${title(w, p, 100)}${sub(s)}${pill(b)}`)}${foot}`,
-  cases: () => `${bg}${heart(940, 90, 44, 12)}${spark(80, 90, 26)}
-    ${at('left:70px;right:70px;top:90px', `${tag('Истории моих учениц')}${title('«Со мной что-то', 'не так»', 84)}
-      <div style="display:grid;gap:16px;margin-top:36px">
-      ${[['👸🏽', 'Анна, 27', '4 года одна', 'предложение через 1,5 месяца 💍'], ['🎁', 'Лиза', 'синдром «я сама»', 'подарок 100 000 ₽ от незнакомца'], ['👰🏼', 'Илона', 'не верила в любовь', 'вышла замуж']]
-        .map(([e, n, a, z], k) => `<div class="card ${k === 1 ? 'hl' : ''}" style="display:flex;align-items:center;gap:24px;padding:22px 28px"><div style="font-size:54px">${e}</div>
-          <div><div style="font:700 34px Osw;text-transform:uppercase;color:#fff">${n}</div><div style="font:500 24px/1.3 Mont;color:#C9C9CF">${a} <span style="color:var(--pink)">→</span> <b style="color:#fff">${z}</b></div></div></div>`).join('')}
-      </div>`)}${foot}`,
-  quiz: () => `${bg}${heart(940, 90, 44, 12)}${spark(80, 940, 24)}
-    ${at('left:70px;right:70px;top:90px', `${tag('Мини-тест')}${title('Ответь честно', '3 вопроса', 84)}
-      <div style="display:grid;gap:16px;margin-top:34px">
-      ${['Ты радуешься любому вниманию, даже «крохам»?', 'Когда он не пишет, ищешь проблему в себе?', 'С «хорошими» скучно, а цепляют холодные?']
-        .map((t, k) => `<div class="card" style="display:flex;align-items:center;gap:22px;padding:22px 28px"><span class="num" style="min-width:56px;height:52px;font-size:28px">0${k + 1}</span><div style="font:500 28px/1.3 Mont;color:#fff">${t}</div></div>`).join('')}
+  photo: ({ tg, w, p, s, b }) => `${photoTop(P.dubai, '50% 42%', 640)}${heart(950, 60, 64, 12)}
+    ${at('left:56px;right:56px;top:470px', `${tag(tg)}${title(w, p)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
+  side: ({ tg, w, p, s, b }) => `${photoRight(P.dress, '45% 18%', 560)}${heart(470, 930, 60, -10)}
+    ${at('left:56px;width:600px;top:70px', `${tag(tg)}${title(w, p, 104, 132)}${s ? sub(s, 36) : ''}${b ? pill(b, 40) : ''}`)}`,
+  gifts: ({ w, p, s, b }) => `${books(150, 50, 1.22)}${heart(70, 90, 60, -15)}${heart(960, 80, 54, 12)}
+    ${at('left:56px;right:56px;top:640px', `${title(w, p, 110, 140)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
+  count: ({ n, unit, s, b, gifts, ph }) => `${gifts ? books(440, 150, 1.0) : photoRight(ph === 'dress' ? P.dress : P.dubai, ph === 'dress' ? '45% 18%' : '62% 40%', 600)}${heart(gifts ? 960 : 900, 60, 60, 12)}
+    ${at('left:56px;top:40px;width:520px', `${tag('Обратный отсчёт')}
+      <div style="font:700 ${n.length > 1 ? 470 : 560}px/0.86 Osw;margin-top:20px;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
+      <div class="scr" style="font-size:170px;line-height:.9;margin-top:-30px">${unit}</div>`)}
+    ${at('left:56px;width:' + (gifts ? 968 : 560) + 'px;bottom:56px', `${sub(s, 42)}${b ? pill(b) : ''}`)}`,
+  whisper: ({ q }) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(240,71,154,.32),rgba(240,71,154,0) 60%)"></div>
+    ${heart(80, 120, 60, -15, .8)}${heart(930, 860, 70, 12, .9)}
+    ${at('left:60px;right:60px;top:110px;text-align:center', `<div style="font-size:200px;line-height:1">🤫</div>
+      <div class="scr" style="font-size:190px;line-height:1.1;margin-top:-10px">Шёпотом…</div>
+      <div style="font:600 italic 64px/1.3 Mont;color:#fff;margin-top:34px;text-shadow:0 2px 14px rgba(0,0,0,.6)">${q}</div>`)}
+    ${at('left:0;right:0;bottom:60px;text-align:center', `<div class="scr" style="font-size:96px">Ксюша ♡</div>`)}`,
+  live: ({ w, p, s, b }) => `${photoTop(P.dubai, '50% 45%', 640)}
+    ${at('left:56px;top:56px', `<span style="display:inline-flex;align-items:center;gap:16px;background:#E5203A;border-radius:14px;padding:14px 30px;font:700 52px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 0 30px rgba(229,32,58,.6)"><span style="width:28px;height:28px;border-radius:50%;background:#fff"></span>LIVE</span>`)}
+    ${at('left:56px;right:56px;top:520px', `${title(w, p, 130, 170)}${sub(s)}${pill(b)}`)}`,
+  cases: () => `${heart(960, 50, 60, 12)}
+    ${at('left:56px;right:56px;top:50px', `${title('«Со мной что-то', 'не так»', 96, 130)}
+      <div style="display:grid;gap:24px;margin-top:24px">
+      ${[['👸🏽', 'Анна, 27', '4 года одна → предложение 💍'], ['🎁', 'Лиза', '«я сама» → подарок 100 000 ₽'], ['👰🏼', 'Илона', 'не верила в любовь → замужем']]
+        .map(([e, n, z], k) => `<div class="card ${k === 1 ? 'hl' : ''}" style="display:flex;align-items:center;gap:28px;padding:34px 34px;border-radius:30px"><div style="font-size:100px;line-height:1">${e}</div>
+          <div><div style="font:700 52px/1 Osw;text-transform:uppercase;color:#fff">${n}</div><div style="font:600 38px/1.25 Mont;color:#fff;margin-top:10px">${z}</div></div></div>`).join('')}
+      </div>${pill('Найдём твой сценарий · 25.10', 40)}`)}`,
+  quiz: () => `${heart(960, 50, 60, 12)}
+    ${at('left:56px;right:56px;top:50px', `${title('Ответь честно', '3 вопроса', 104, 130)}
+      <div style="display:grid;gap:16px;margin-top:16px">
+      ${['Радуешься даже «крохам» внимания?', 'Он не пишет — ищешь проблему в себе?', 'С «хорошими» скучно, цепляют холодные?']
+        .map((t, k) => `<div class="card" style="display:flex;align-items:center;gap:24px;padding:30px 30px;border-radius:26px"><span class="num" style="min-width:70px;height:64px;font-size:38px">0${k + 1}</span><div style="font:600 40px/1.25 Mont;color:#fff">${t}</div></div>`).join('')}
       </div>
-      <div class="result" style="margin-top:26px;padding:22px 28px"><span class="lab" style="font-size:24px">Хоть одно «да»?</span><span class="rt" style="font-size:24px">Это не невезение. Это сценарий 🤍</span></div>`)}${foot}`,
-  form: ({ tg, w, p, s, b }) => `${bg}${photoRight(P.dress, '50% 20%', 460)}${heart(520, 120, 46, -10)}${spark(560, 900, 24)}
-    ${at('left:70px;width:640px;top:110px', `${tag(tg)}${title(w, p, 84)}
-      <div style="display:grid;gap:12px;margin-top:30px">${['Где ломается твой маршрут', 'Какой сценарий ты повторяешь', 'Что делать именно тебе'].map(t => `<div style="font:500 28px Mont;color:#fff"><span style="color:var(--pink);font-weight:700">→</span>&nbsp; ${t}</div>`).join('')}</div>
-      ${s ? sub(s) : ''}${pill(b)}`)}${foot}`,
+      <div class="result" style="margin-top:26px;padding:28px 30px;border-radius:26px"><span class="rt" style="font-size:40px;font-weight:700">Хоть одно «да» — это не невезение, а сценарий 🤍</span></div>`)}`,
+  form: ({ tg, w, p, s, b }) => `${photoRight(P.dress, '45% 18%', 470)}${heart(480, 60, 60, -10)}
+    ${at('left:56px;width:660px;top:60px', `${tag(tg)}${title(w, p, 86, 130)}
+      <div style="display:grid;gap:14px;margin-top:18px">${['Где ломается маршрут', 'Какой сценарий повторяешь', 'Что делать именно тебе'].map(t => `<div style="font:600 38px/1.2 Mont;color:#fff"><span style="color:var(--pink);font-weight:700">→</span> ${t}</div>`).join('')}</div>
+      ${s ? sub(s, 34) : ''}${pill(b)}`)}`,
 };
 
 const LIST = [
-  ['01_18окт_12-00_приглашение', 'photo', { tg: 'Dubai • Girls night', w: 'Давай найдём', p: 'тебе любовь!', s: 'Закрытый девичник из Дубая', b: '25 октября · 15:00 МСК · бесплатно' }],
-  ['02_18окт_20-00_шёпотом', 'whisper', { q: 'Мест на разборы в эфире будет совсем немного…<br>Хочу, чтобы ты была там 🤍' }],
-  ['03_19окт_12-00_моя_история', 'side', { tg: 'Моя история', w: 'Я год ждала,', p: 'что он изменится', s: 'Как я ушла от мужчины, который ничего для меня не делал, — расскажу на девичнике', b: '25.10 · 15:00 МСК' }],
+  ['01_18окт_12-00_приглашение', 'photo', { tg: 'Girls night · Дубай', w: 'Давай найдём', p: 'тебе любовь!', b: '25.10 · 15:00 МСК · бесплатно' }],
+  ['02_18окт_20-00_шёпотом', 'whisper', { q: 'Мест на разборы будет совсем немного… Хочу, чтобы ты была там 🤍' }],
+  ['03_19окт_12-00_моя_история', 'side', { tg: 'Моя история', w: 'Я год ждала,', p: 'что он изменится', s: 'Как я ушла — расскажу на девичнике', b: '25.10 · 15:00' }],
   ['04_20окт_12-00_кейсы', 'cases', {}],
-  ['05_20окт_20-00_шёпотом', 'whisper', { q: 'Я волнуюсь перед эфиром, как перед первым свиданием 🙈<br>Напиши мне «я тут»' }],
+  ['05_20окт_20-00_шёпотом', 'whisper', { q: 'Волнуюсь, как перед первым свиданием 🙈 Напиши мне «я тут»' }],
   ['06_21окт_12-00_мини-тест', 'quiz', {}],
-  ['07_22окт_12-00_осталось_3_дня', 'count', { n: '3', unit: 'дня', s: 'до девичника — и 3 подарка тем, кто будет до конца', gifts: true }],
-  ['08_22окт_20-00_шёпотом', 'whisper', { q: 'Помнишь, тебе говорили «ты слишком многого хочешь»?<br>Не слишком ❤️' }],
-  ['09_23окт_12-00_осталось_2_дня', 'count', { n: '2', unit: 'дня', s: 'Пришли свою историю — разберу её в прямом эфире 🔍', gifts: true }],
-  ['10_24окт_12-00_завтра', 'photo', { tg: 'Завтра · 15:00 МСК', w: 'Уже завтра', p: 'девичник!', s: 'Я в Дубае и готовлю для вас эфир 🌴 Записи не будет', b: 'Ставь будильник на 14:55 ⏰' }],
-  ['11_24окт_21-00_шёпотом', 'whisper', { q: 'Завтра я расскажу то, о чём никогда не говорила в канале…<br>Спокойной ночи 🌙' }],
-  ['12_25окт_10-00_сегодня', 'gifts', { tg: 'Сегодня · 15:00 МСК', w: 'Сегодня', p: 'наш девичник', s: 'Наливай чай, бери блокнот. Подарки — тем, кто до конца', b: '📍 15:00 по МСК' }],
-  ['13_25окт_14-00_шёпотом', 'whisper', { q: 'Через час начинаем…<br>Я уже перед камерой и немного дрожу 🙈' }],
-  ['14_25окт_14-50_через_10_минут', 'count', { n: '10', unit: 'минут', s: 'Заходи заранее, чтобы не пропустить начало', b: 'Зайти на эфир →' }],
-  ['15_25окт_15-05_мы_в_эфире', 'live', { w: 'Мы', p: 'в эфире!', s: 'Заходи, пока не начались разборы. Подарки — только тем, кто до конца 🎁', b: 'Смотреть эфир →' }],
-  ['16_25окт_15-40_догоняй', 'live', { w: 'Идут', p: 'разборы!', s: 'Самое сильное — прямо сейчас. Ещё не поздно зайти 🔥', b: 'Смотреть эфир →' }],
-  ['17_25окт_17-00_анкета', 'form', { tg: 'Бесплатно', w: 'Персональный', p: 'разбор', s: 'Мест немного · до вторника 23:59', b: 'Заполнить анкету →' }],
-  ['18_26окт_12-00_шёпотом', 'whisper', { q: 'Одна девочка написала мне после эфира…<br>Может, следующая история — твоя? 🤍' }],
-  ['19_26окт_19-00_не_успела', 'form', { tg: 'Не успела на эфир?', w: 'Записи нет,', p: 'а разбор есть', s: 'Разберём именно твою историю — это даже ценнее эфира', b: 'Заполнить анкету →' }],
-  ['20_27окт_12-00_последний_день', 'count', { n: '1', unit: 'день', s: 'Сегодня в 23:59 закрываем анкеты на персональный разбор', b: 'Успеть →' }],
-  ['21_27окт_21-00_осталось_3_часа', 'count', { n: '3', unit: 'часа', s: 'В 23:59 анкета закроется 🤍', b: 'Заполнить анкету →' }],
+  ['07_22окт_12-00_осталось_3_дня', 'count', { n: '3', unit: 'дня', s: 'до девичника + 3 подарка 🎁', gifts: true }],
+  ['08_22окт_20-00_шёпотом', 'whisper', { q: '«Ты слишком многого хочешь»? Не слишком ❤️' }],
+  ['09_23окт_12-00_осталось_2_дня', 'count', { n: '2', unit: 'дня', s: 'Пришли историю — разберу в эфире 🔍', gifts: true }],
+  ['10_24окт_12-00_завтра', 'photo', { tg: 'Завтра · 15:00 МСК', w: 'Уже завтра', p: 'девичник!', b: 'Будильник на 14:55 ⏰' }],
+  ['11_24окт_21-00_шёпотом', 'whisper', { q: 'Завтра расскажу то, о чём никогда не говорила… 🌙' }],
+  ['12_25окт_10-00_сегодня', 'gifts', { w: 'Сегодня', p: 'наш девичник', b: '📍 15:00 по МСК' }],
+  ['13_25окт_14-00_шёпотом', 'whisper', { q: 'Через час начинаем… Я уже перед камерой 🙈' }],
+  ['14_25окт_14-50_через_10_минут', 'count', { n: '10', unit: 'минут', s: 'до начала эфира', b: 'Зайти →' }],
+  ['15_25окт_15-05_мы_в_эфире', 'live', { w: 'Мы', p: 'в эфире!', s: 'Подарки — тем, кто до конца 🎁', b: 'Смотреть эфир →' }],
+  ['16_25окт_15-40_догоняй', 'live', { w: 'Идут', p: 'разборы!', s: 'Самое сильное — сейчас 🔥', b: 'Смотреть эфир →' }],
+  ['17_25окт_17-00_анкета', 'form', { tg: 'Бесплатно', w: 'Персональный', p: 'разбор', s: 'Мест немного · до вт 23:59', b: 'Заполнить анкету →' }],
+  ['18_26окт_12-00_шёпотом', 'whisper', { q: 'Может, следующая история — твоя? 🤍' }],
+  ['19_26окт_19-00_не_успела', 'form', { tg: 'Не успела на эфир?', w: 'Записи нет,', p: 'а разбор есть', b: 'Заполнить анкету →' }],
+  ['20_27окт_12-00_последний_день', 'count', { n: '1', unit: 'день', s: 'Сегодня в 23:59 закрываем анкеты', b: 'Успеть →', ph: 'dress' }],
+  ['21_27окт_21-00_осталось_3_часа', 'count', { n: '3', unit: 'часа', s: 'В 23:59 анкета закроется 🤍', b: 'Анкета →', ph: 'dress' }],
 ];
+
+function glitter2(seed) {
+  gs = seed; let d = '';
+  for (let i = 0; i < 70; i++) { const x = gr() * 1080, y = gr() * 1080, r = gr() * 3 + .8, c = ['#ffffff', '#ff9fd0', '#F0479A', '#ffe1a8'][Math.floor(gr() * 4)]; d += `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity="${.4 + gr() * .55}"/>`; }
+  const edge = () => { const side = Math.floor(gr() * 4), t = gr() * 1080, m = 20 + gr() * 50; return [[t, m], [1080 - m, t], [t, 1080 - m], [m, t]][side]; };
+  for (let i = 0; i < 8; i++) { const [x, y] = edge(), s = 14 + gr() * 22; d += `<path d="M ${x} ${y - s} Q ${x} ${y} ${x + s} ${y} Q ${x} ${y} ${x} ${y + s} Q ${x} ${y} ${x - s} ${y} Q ${x} ${y} ${x} ${y - s} Z" fill="#fff" style="filter:drop-shadow(0 0 8px #ff9fd0)"/>`; }
+  return `<svg width="1080" height="1080" style="position:absolute;left:0;top:0;z-index:4;pointer-events:none">${d}</svg>`;
+}
 
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
@@ -133,13 +135,12 @@ const LIST = [
   const only = process.argv[2];
   for (const [name, t, d] of LIST) {
     if (only && !name.startsWith(only)) continue;
-    const html = L.page(name, [FONTS + `<section class="slide" style="width:1080px;height:1080px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.3),rgba(240,71,154,0) 45%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.22),rgba(240,71,154,0) 42%),linear-gradient(180deg,#120a12,#1a0b17)">${T[t](d)}${glitter(110, name.length * 7 + 3)}${note('girls night ♡', ['side', 'form'].includes(t) ? 'left:470px;bottom:70px' : 'right:70px;bottom:62px')}</section>`]);
+    const html = L.page(name, [FONTS + `<section class="slide" style="width:1080px;height:1080px;padding:0;background:radial-gradient(circle at 100% 0%,rgba(240,71,154,.32),rgba(240,71,154,0) 45%),radial-gradient(circle at 0% 100%,rgba(240,71,154,.24),rgba(240,71,154,0) 42%),linear-gradient(180deg,#140a14,#1d0b19)"><div class="grid"></div>${T[t](d)}${glitter2(name.length * 7 + 3)}</section>`]);
     const f = path.join(PREV, 'sq.html');
     fs.writeFileSync(f, html);
     await page.goto('file://' + f);
     await page.evaluate(() => document.fonts.ready); await page.waitForTimeout(200);
-    const el = await page.$('section');
-    await el.screenshot({ path: path.join(OUT, name + '.jpg'), type: 'jpeg', quality: 90 });
+    await (await page.$('section')).screenshot({ path: path.join(OUT, name + '.jpg'), type: 'jpeg', quality: 90 });
   }
   await b.close();
 })();

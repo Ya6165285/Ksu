@@ -110,9 +110,8 @@ const T = {
       <div style="display:flex;align-items:flex-end;gap:10px;margin-top:10px">
        <div style="font:700 ${n.length > 1 ? 400 : 460}px/0.84 Osw;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div></div>
       <div class="scr" style="font-size:190px;line-height:.95;margin-top:-20px">${unit}</div>
-      <div style="flex:1"></div>
-      <div style="font:700 60px/1.15 Mont;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7)">${s}</div>
-      ${b ? `<div style="align-self:flex-start">${pill(b, 48)}</div>` : ''}`)}`,
+      <div style="font:700 60px/1.15 Mont;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7);margin-top:6px">${s}</div>
+      ${b ? `<div style="align-self:flex-start;margin-top:10px">${pill(b, 48)}</div>` : ''}`)}`,
   whisper: ({ q, h = 'По секрету…' }) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(240,71,154,.30),rgba(240,71,154,0) 60%)"></div>
     ${heart(80, 120, 60, -15, .8)}${heart(930, 860, 70, 12, .9)}
     ${at('left:60px;right:60px;top:0;bottom:150px;text-align:center;display:flex;flex-direction:column;justify-content:center', `<div class="scr" style="font-size:150px;line-height:1.15;white-space:nowrap">${h}</div>

@@ -105,11 +105,14 @@ const T = {
     ${at('left:56px;width:600px;top:70px', `${tag(tg)}${title(w, p, 104, 132)}${s ? sub(s, 42) : ''}${b ? pill(b, 42) : ''}`)}`,
   gifts: ({ w, p, s, b }) => `${books(75, 70, 1.0)}${heart(40, 40, 56, -15)}${heart(990, 40, 50, 12)}
     ${at('left:56px;right:56px;top:600px', `${title(w, p, 120, 150)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
-  count: ({ n, unit, s, b, gifts, ph }) => gifts ? countG({ n, unit, s }) : `${ ph === 'dress' ? photoRight(P.dress, '45% 18%', 600) : polC('right:70px;top:110px', 400, 640, 4)}${heart(gifts ? 960 : 900, 60, 60, 12)}
-    ${at('left:56px;top:40px;width:520px', `${tag('Обратный отсчёт')}
-      <div style="font:700 ${n.length > 1 ? 470 : 560}px/0.86 Osw;margin-top:20px;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
-      <div class="scr" style="font-size:170px;line-height:.9;margin-top:-30px">${unit}</div>`)}
-    ${at('left:56px;width:' + (gifts ? 968 : 560) + 'px;bottom:56px', `${sub(s, 42)}${b ? pill(b) : ''}`)}`,
+  count: ({ n, unit, s, b, gifts, ph }) => gifts ? countG({ n, unit, s }) : `${ph === 'dress' ? photoRight(P.dress, '45% 18%', 560) : polC('right:56px;top:150px', 420, 680, 4)}${heart(940, 50, 64, 12)}
+    ${at('left:56px;top:36px;bottom:56px;width:' + (ph === 'dress' ? 560 : 520) + 'px;display:flex;flex-direction:column', `${tag('Обратный отсчёт')}
+      <div style="display:flex;align-items:flex-end;gap:10px;margin-top:10px">
+       <div style="font:700 ${n.length > 1 ? 400 : 460}px/0.84 Osw;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div></div>
+      <div class="scr" style="font-size:190px;line-height:.95;margin-top:-20px">${unit}</div>
+      <div style="flex:1"></div>
+      <div style="font:700 60px/1.15 Mont;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7)">${s}</div>
+      ${b ? `<div style="align-self:flex-start">${pill(b, 48)}</div>` : ''}`)}`,
   whisper: ({ q, h = 'По секрету…' }) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(240,71,154,.30),rgba(240,71,154,0) 60%)"></div>
     ${heart(80, 120, 60, -15, .8)}${heart(930, 860, 70, 12, .9)}
     ${at('left:60px;right:60px;top:0;bottom:150px;text-align:center;display:flex;flex-direction:column;justify-content:center', `<div class="scr" style="font-size:150px;line-height:1.15;white-space:nowrap">${h}</div>
@@ -152,14 +155,14 @@ const LIST = [
   ['11_24окт_21-00_только_тебе', 'whisper', { q: 'Завтра расскажу то, о чём никогда не говорила… 🌙' , h: 'Только тебе…' }],
   ['12_25окт_10-00_сегодня', 'gifts', { w: 'Сегодня', p: 'наш девичник', b: '📍 15:00 по МСК' }],
   ['13_25окт_14-00_уже_скоро', 'whisper', { q: 'Через час начинаем… Я уже перед камерой 🙈' , h: 'Уже скоро…' }],
-  ['14_25окт_14-50_через_10_минут', 'count', { n: '10', unit: 'минут', s: 'до начала эфира', b: 'Зайти →' }],
+  ['14_25окт_14-50_через_10_минут', 'count', { n: '10', unit: 'минут', s: 'до начала эфира!', b: 'Зайти на эфир →' }],
   ['15_25окт_15-05_мы_в_эфире', 'live', { w: 'Мы', p: 'в эфире!', s: 'Подарки — тем, кто до конца 🎁', b: 'Смотреть эфир →' }],
   ['16_25окт_15-40_догоняй', 'live', { w: 'Идут', p: 'разборы!', s: 'Самое сильное — сейчас 🔥', b: 'Смотреть эфир →' }],
   ['17_25окт_17-00_анкета', 'form', { tg: 'Бесплатно', w: 'Персональный', p: 'разбор', s: 'Мест немного · до вт 23:59', b: 'Заполнить анкету →' }],
   ['18_26окт_12-00_между_нами', 'whisper', { q: 'Может, следующая история — твоя? 🤍' , h: 'Между нами…' }],
   ['19_26окт_19-00_не_успела', 'form', { tg: 'Не успела на эфир?', w: 'Записи нет,', p: 'а разбор есть', b: 'Заполнить анкету →' }],
-  ['20_27окт_12-00_последний_день', 'count', { n: '1', unit: 'день', s: 'Сегодня в 23:59 закрываем анкеты', b: 'Успеть →', ph: 'dress' }],
-  ['21_27окт_21-00_осталось_3_часа', 'count', { n: '3', unit: 'часа', s: 'В 23:59 анкета закроется 🤍', b: 'Анкета →', ph: 'dress' }],
+  ['20_27окт_12-00_последний_день', 'count', { n: '1', unit: 'день', s: 'анкеты закрываем в 23:59', b: 'Успеть →', ph: 'dress' }],
+  ['21_27окт_21-00_осталось_3_часа', 'count', { n: '3', unit: 'часа', s: 'и анкета закроется 🤍', b: 'Заполнить →', ph: 'dress' }],
 ];
 
 function glitter2(seed) {

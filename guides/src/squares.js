@@ -46,11 +46,22 @@ const title = (w, p, ws = 112, ps = 150) => `<div style="margin-top:18px">
 const sub = (t, fs = 44) => `<div style="font:600 ${fs}px/1.3 Mont;color:#fff;margin-top:14px;text-shadow:0 2px 12px rgba(0,0,0,.6)">${t}</div>`;
 const pill = (t, fs = 42) => `<div class="btn" style="margin-top:26px;font-size:${fs}px;padding:18px 40px;box-shadow:0 0 40px rgba(240,71,154,.55)">${t}</div>`;
 
+// gift cards designed for readability: photo + big label + big title
 function books(x, y, sc = 1) {
-  const card = (src, l, t, r, z) => `<img src="${src}" style="position:absolute;left:${l * sc}px;top:${t * sc}px;width:${290 * sc}px;height:${410 * sc}px;object-fit:cover;border-radius:${16 * sc}px;transform:rotate(${r}deg);z-index:${z};box-shadow:0 20px 50px rgba(0,0,0,.6);border:3px solid rgba(255,255,255,.3)">`;
-  return `<div style="position:absolute;left:${x}px;top:${y}px;width:${930 * sc}px;height:${470 * sc}px;z-index:3">
-   ${card(P.g1, 0, 40, -6, 1)}${card(P.g2, 320, 20, 0, 2)}${card(P.g3, 640, 40, 6, 1)}
-   <div style="position:absolute;left:${355 * sc}px;top:${-28 * sc}px;width:${220 * sc}px;height:${72 * sc}px;z-index:3;background:linear-gradient(90deg,#F0479A,#F678B4);border-radius:10px;transform:rotate(-4deg);display:flex;align-items:center;justify-content:center;font:700 ${34 * sc}px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.4)">🎁 ПОДАРКИ</div></div>`;
+  const G = [
+    ['Тест', 'Почему за тобой', 'не ухаживают?', 'Найди свою невидимую ошибку', `<img src="${P.dress}" style="width:100%;height:100%;object-fit:cover;object-position:50% 15%">`],
+    ['Гайд', 'Скажи ему', 'это', 'Фразы, после которых он ухаживает', `<div style="${L.crop('p-000.jpg', 1060, 30, 700, 1060, 290 * sc, Math.round(290 * sc * 1060 / 700))}"></div>`],
+    ['Гайд', 'Красоты', 'недостаточно', 'За что мужчина выбирает тебя', `<div style="${L.crop('p-001.jpg', 1330, 190, 540, 760, 290 * sc, Math.round(290 * sc * 760 / 540))}"></div>`],
+  ];
+  const card = ([lab, a, b, d, ph], k) => `<div style="position:absolute;left:${k * 320 * sc}px;top:${(k === 1 ? 0 : 24) * sc}px;width:${290 * sc}px;height:${430 * sc}px;border-radius:${22 * sc}px;overflow:hidden;transform:rotate(${[-4, 0, 4][k]}deg);background:#141417;border:3px solid ${k === 1 ? '#F0479A' : 'rgba(255,255,255,.35)'};box-shadow:0 20px 50px rgba(0,0,0,.6)">
+    <div style="height:${170 * sc}px;overflow:hidden">${ph}</div>
+    <div style="padding:${14 * sc}px ${16 * sc}px">
+      <span style="display:inline-block;background:#F0479A;color:#fff;font:700 ${22 * sc}px Osw;letter-spacing:.08em;text-transform:uppercase;border-radius:8px;padding:${3 * sc}px ${12 * sc}px">${lab}</span>
+      <div style="font:700 ${40 * sc}px/1.02 Osw;text-transform:uppercase;color:#fff;margin-top:${10 * sc}px">${a}</div>
+      <div style="font:700 ${(b.length > 10 ? 33 : 40) * sc}px/1.02 Osw;text-transform:uppercase;color:#F0479A">${b}</div>
+      <div style="font:600 ${21 * sc}px/1.25 Mont;color:#E6E6EA;margin-top:${8 * sc}px">${d}</div></div></div>`;
+  return `<div style="position:absolute;left:${x}px;top:${y}px;width:${930 * sc}px;height:${470 * sc}px;z-index:3">${G.map(card).join('')}
+   <div style="position:absolute;left:${355 * sc}px;top:${-34 * sc}px;width:${220 * sc}px;height:${68 * sc}px;z-index:3;background:linear-gradient(90deg,#F0479A,#F678B4);border-radius:10px;transform:rotate(-4deg);display:flex;align-items:center;justify-content:center;font:700 ${34 * sc}px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.4)">🎁 ПОДАРКИ</div></div>`;
 }
 const photoTop = (src, pos, h) => `<div style="position:absolute;left:0;right:0;top:0;height:${h}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(180deg,#000 55%,rgba(0,0,0,.45) 78%,transparent 100%)"></div>`;
 const photoRight = (src, pos, w) => `<div style="position:absolute;right:0;top:0;bottom:0;width:${w}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.6) 18%,#000 40%)"></div>`;
@@ -99,9 +110,9 @@ const T = {
       <div style="font:700 ${n.length > 1 ? 470 : 560}px/0.86 Osw;margin-top:20px;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
       <div class="scr" style="font-size:170px;line-height:.9;margin-top:-30px">${unit}</div>`)}
     ${at('left:56px;width:' + (gifts ? 968 : 560) + 'px;bottom:56px', `${sub(s, 42)}${b ? pill(b) : ''}`)}`,
-  whisper: ({ q }) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(240,71,154,.30),rgba(240,71,154,0) 60%)"></div>
+  whisper: ({ q, h = 'По секрету…' }) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(240,71,154,.30),rgba(240,71,154,0) 60%)"></div>
     ${heart(80, 120, 60, -15, .8)}${heart(930, 860, 70, 12, .9)}
-    ${at('left:60px;right:60px;top:0;bottom:150px;text-align:center;display:flex;flex-direction:column;justify-content:center', `<div class="scr" style="font-size:150px;line-height:1.15;white-space:nowrap">По секрету…</div>
+    ${at('left:60px;right:60px;top:0;bottom:150px;text-align:center;display:flex;flex-direction:column;justify-content:center', `<div class="scr" style="font-size:150px;line-height:1.15;white-space:nowrap">${h}</div>
       <div style="font:600 italic 70px/1.28 Mont;color:#fff;margin-top:30px;text-shadow:0 2px 14px rgba(0,0,0,.6)">${q}</div>`)}
     ${at('left:0;right:0;bottom:60px;text-align:center', `<div class="scr" style="font-size:96px">Ксюша ♡</div>`)}`,
   live: ({ w, p, s, b }) => `${pol('right:70px;top:90px', 400, 640, 4)}
@@ -132,20 +143,20 @@ const LIST = [
   ['02_18окт_20-00_по_секрету', 'whisper', { q: 'Мест на разборы будет совсем немного… Хочу, чтобы ты была там 🤍' }],
   ['03_19окт_12-00_моя_история', 'side', { tg: 'Моя история', w: 'Я год ждала,', p: 'что он изменится', s: 'Как я ушла — расскажу на девичнике', b: '25.10 · 15:00' }],
   ['04_20окт_12-00_кейсы', 'cases', {}],
-  ['05_20окт_20-00_по_секрету', 'whisper', { q: 'Волнуюсь, как перед первым свиданием 🙈 Напиши мне «я тут»' }],
+  ['05_20окт_20-00_признаюсь', 'whisper', { q: 'Волнуюсь перед эфиром, как перед первым свиданием 🙈 Напиши мне «я тут»' , h: 'Признаюсь…' }],
   ['06_21окт_12-00_мини-тест', 'quiz', {}],
   ['07_22окт_12-00_осталось_3_дня', 'count', { n: '3', unit: 'дня', s: 'до девичника + 3 подарка 🎁', gifts: true }],
-  ['08_22окт_20-00_по_секрету', 'whisper', { q: '«Ты слишком многого хочешь»? Не слишком ❤️' }],
+  ['08_22окт_20-00_запомни', 'whisper', { q: '«Ты слишком многого хочешь»? Не слишком ❤️' , h: 'Запомни…' }],
   ['09_23окт_12-00_осталось_2_дня', 'count', { n: '2', unit: 'дня', s: 'Пришли историю — разберу в эфире 🔍', gifts: true }],
   ['10_24окт_12-00_завтра', 'photo', { tg: 'Завтра · 15:00 МСК', w: 'Уже завтра', p: 'девичник!', b: 'Будильник на 14:55 ⏰' }],
-  ['11_24окт_21-00_по_секрету', 'whisper', { q: 'Завтра расскажу то, о чём никогда не говорила… 🌙' }],
+  ['11_24окт_21-00_только_тебе', 'whisper', { q: 'Завтра расскажу то, о чём никогда не говорила… 🌙' , h: 'Только тебе…' }],
   ['12_25окт_10-00_сегодня', 'gifts', { w: 'Сегодня', p: 'наш девичник', b: '📍 15:00 по МСК' }],
-  ['13_25окт_14-00_по_секрету', 'whisper', { q: 'Через час начинаем… Я уже перед камерой 🙈' }],
+  ['13_25окт_14-00_уже_скоро', 'whisper', { q: 'Через час начинаем… Я уже перед камерой 🙈' , h: 'Уже скоро…' }],
   ['14_25окт_14-50_через_10_минут', 'count', { n: '10', unit: 'минут', s: 'до начала эфира', b: 'Зайти →' }],
   ['15_25окт_15-05_мы_в_эфире', 'live', { w: 'Мы', p: 'в эфире!', s: 'Подарки — тем, кто до конца 🎁', b: 'Смотреть эфир →' }],
   ['16_25окт_15-40_догоняй', 'live', { w: 'Идут', p: 'разборы!', s: 'Самое сильное — сейчас 🔥', b: 'Смотреть эфир →' }],
   ['17_25окт_17-00_анкета', 'form', { tg: 'Бесплатно', w: 'Персональный', p: 'разбор', s: 'Мест немного · до вт 23:59', b: 'Заполнить анкету →' }],
-  ['18_26окт_12-00_по_секрету', 'whisper', { q: 'Может, следующая история — твоя? 🤍' }],
+  ['18_26окт_12-00_между_нами', 'whisper', { q: 'Может, следующая история — твоя? 🤍' , h: 'Между нами…' }],
   ['19_26окт_19-00_не_успела', 'form', { tg: 'Не успела на эфир?', w: 'Записи нет,', p: 'а разбор есть', b: 'Заполнить анкету →' }],
   ['20_27окт_12-00_последний_день', 'count', { n: '1', unit: 'день', s: 'Сегодня в 23:59 закрываем анкеты', b: 'Успеть →', ph: 'dress' }],
   ['21_27окт_21-00_осталось_3_часа', 'count', { n: '3', unit: 'часа', s: 'В 23:59 анкета закроется 🤍', b: 'Анкета →', ph: 'dress' }],

@@ -39,18 +39,18 @@ const note = (t, css) => `<div style="position:absolute;${css};z-index:7;font:40
 const heart = (x, y, s, r = 0, o = .9) => `<svg style="position:absolute;left:${x}px;top:${y}px;transform:rotate(${r}deg);opacity:${o};z-index:6" width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.5 2.4 4.5 6.3 4.5c2.3 0 3.9 1.3 5.7 3.4 1.8-2.1 3.4-3.4 5.7-3.4 3.9 0 5.9 4 4.3 7.2C19.5 16.4 12 21 12 21z" fill="#F0479A"/></svg>`;
 const spark = (x, y, s) => `<div style="position:absolute;left:${x}px;top:${y}px;color:#fff;font-size:${s}px;z-index:6">✦</div>`;
 const at = (css, html) => `<div style="position:absolute;${css};z-index:5">${html}</div>`;
-const tag = (t, fs = 28) => `<span class="tag" style="background:rgba(11,11,13,.75);font-size:${fs}px;padding:14px 30px;letter-spacing:.14em"><b style="font-size:${fs + 4}px">✦</b>${t}</span>`;
+const tag = (t, fs = 32) => `<span class="tag" style="background:rgba(11,11,13,.75);font-size:${fs}px;padding:14px 30px;letter-spacing:.14em"><b style="font-size:${fs + 4}px">✦</b>${t}</span>`;
 const title = (w, p, ws = 112, ps = 150) => `<div style="margin-top:18px">
   <div style="font:700 ${ws}px/0.98 Osw;text-transform:uppercase;background:linear-gradient(180deg,#fff 30%,#dcdce2);-webkit-background-clip:text;color:transparent">${w}</div>
   ${p ? `<div class="scr" style="font-size:${ps}px;line-height:1.02;margin-top:-6px">${p}</div>` : ''}</div>`;
-const sub = (t, fs = 38) => `<div style="font:600 ${fs}px/1.3 Mont;color:#fff;margin-top:14px;text-shadow:0 2px 12px rgba(0,0,0,.6)">${t}</div>`;
+const sub = (t, fs = 44) => `<div style="font:600 ${fs}px/1.3 Mont;color:#fff;margin-top:14px;text-shadow:0 2px 12px rgba(0,0,0,.6)">${t}</div>`;
 const pill = (t, fs = 42) => `<div class="btn" style="margin-top:26px;font-size:${fs}px;padding:18px 40px;box-shadow:0 0 40px rgba(240,71,154,.55)">${t}</div>`;
 
 function books(x, y, sc = 1) {
-  const card = (src, l, t, r, z) => `<img src="${src}" style="position:absolute;left:${l * sc}px;top:${t * sc}px;width:${300 * sc}px;height:${424 * sc}px;object-fit:cover;border-radius:${16 * sc}px;transform:rotate(${r}deg);z-index:${z};box-shadow:0 24px 60px rgba(0,0,0,.6);border:3px solid rgba(255,255,255,.25)">`;
-  return `<div style="position:absolute;left:${x}px;top:${y}px;width:${640 * sc}px;height:${520 * sc}px;z-index:3">
-   ${card(P.g2, 0, 70, -12, 1)}${card(P.g3, 340, 70, 12, 1)}${card(P.g1, 170, 20, 0, 2)}
-   <div style="position:absolute;left:${210 * sc}px;top:${-30 * sc}px;width:${220 * sc}px;height:${72 * sc}px;z-index:3;background:linear-gradient(90deg,#F0479A,#F678B4);border-radius:10px;transform:rotate(-4deg);display:flex;align-items:center;justify-content:center;font:700 ${34 * sc}px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.4)">🎁 ПОДАРКИ</div></div>`;
+  const card = (src, l, t, r, z) => `<img src="${src}" style="position:absolute;left:${l * sc}px;top:${t * sc}px;width:${290 * sc}px;height:${410 * sc}px;object-fit:cover;border-radius:${16 * sc}px;transform:rotate(${r}deg);z-index:${z};box-shadow:0 20px 50px rgba(0,0,0,.6);border:3px solid rgba(255,255,255,.3)">`;
+  return `<div style="position:absolute;left:${x}px;top:${y}px;width:${930 * sc}px;height:${470 * sc}px;z-index:3">
+   ${card(P.g1, 0, 40, -6, 1)}${card(P.g2, 320, 20, 0, 2)}${card(P.g3, 640, 40, 6, 1)}
+   <div style="position:absolute;left:${355 * sc}px;top:${-28 * sc}px;width:${220 * sc}px;height:${72 * sc}px;z-index:3;background:linear-gradient(90deg,#F0479A,#F678B4);border-radius:10px;transform:rotate(-4deg);display:flex;align-items:center;justify-content:center;font:700 ${34 * sc}px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.4)">🎁 ПОДАРКИ</div></div>`;
 }
 const photoTop = (src, pos, h) => `<div style="position:absolute;left:0;right:0;top:0;height:${h}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(180deg,#000 55%,rgba(0,0,0,.45) 78%,transparent 100%)"></div>`;
 const photoRight = (src, pos, w) => `<div style="position:absolute;right:0;top:0;bottom:0;width:${w}px;z-index:1"><img src="${src}" style="width:100%;height:100%;object-fit:cover;object-position:${pos};-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.6) 18%,#000 40%)"></div>`;
@@ -77,24 +77,32 @@ function dubai() {
   return `<svg width="${W}" height="${H}" style="position:absolute;left:0;top:0;z-index:1">${d}</svg>`;
 }
 
+const polC = (css, w, h, rot = 4) => `<div style="position:absolute;${css};transform:rotate(${rot}deg);z-index:3">
+  <div style="position:absolute;right:-46px;top:-16px;width:170px;height:48px;background:linear-gradient(90deg,#F0479A,#F678B4);transform:rotate(32deg);z-index:2"></div>
+  <div style="position:absolute;left:-50px;bottom:-14px;width:170px;height:48px;background:linear-gradient(90deg,#F0479A,#F678B4);transform:rotate(32deg);z-index:2"></div>
+  <div style="width:${w}px;height:${h}px;border-radius:28px;overflow:hidden;border:5px solid rgba(255,255,255,.92);box-shadow:0 26px 70px rgba(0,0,0,.6),0 0 50px rgba(240,71,154,.35)"><div style="${L.crop('p-000.jpg', 1060, 30, 700, 1060, w, Math.round(w * 1060 / 700))}"></div></div></div>`;
+const countG = ({ n, unit, s }) => `${books(75, 430, 1.0)}${at('left:56px;right:56px;bottom:50px', pill('Зайти в канал →'))}${heart(960, 60, 60, 12)}
+    ${at('left:56px;top:40px', `${tag('Обратный отсчёт')}<div style="display:flex;align-items:flex-end;gap:24px;margin-top:6px">
+      <div style="font:700 340px/0.86 Osw;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
+      <div><div class="scr" style="font-size:170px;line-height:.9">${unit}</div><div style="font:600 42px/1.25 Mont;color:#fff;margin-top:8px;max-width:520px">${s}</div></div></div>`)}`;
+
 const T = {
   photo: ({ tg, w, p, s, b }) => `${pol('right:70px;top:80px', 400, 640, 4)}${heart(560, 70, 60, -12)}
     ${at('left:56px;width:560px;top:70px', `${tag(tg, 26)}${title(w, p, 96, 140)}${s ? sub(s) : ''}`)}
     ${b ? at('left:56px;right:56px;bottom:56px', pill(b)) : ''}`,
   side: ({ tg, w, p, s, b }) => `${photoRight(P.dress, '45% 18%', 560)}${heart(470, 930, 60, -10)}
-    ${at('left:56px;width:600px;top:70px', `${tag(tg)}${title(w, p, 104, 132)}${s ? sub(s, 36) : ''}${b ? pill(b, 40) : ''}`)}`,
-  gifts: ({ w, p, s, b }) => `${books(150, 50, 1.22)}${heart(70, 90, 60, -15)}${heart(960, 80, 54, 12)}
-    ${at('left:56px;right:56px;top:640px', `${title(w, p, 110, 140)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
-  count: ({ n, unit, s, b, gifts, ph }) => `${gifts ? books(440, 150, 1.0) : ph === 'dress' ? photoRight(P.dress, '45% 18%', 600) : pol('right:70px;top:110px', 400, 640, 4)}${heart(gifts ? 960 : 900, 60, 60, 12)}
+    ${at('left:56px;width:600px;top:70px', `${tag(tg)}${title(w, p, 104, 132)}${s ? sub(s, 42) : ''}${b ? pill(b, 42) : ''}`)}`,
+  gifts: ({ w, p, s, b }) => `${books(75, 70, 1.0)}${heart(40, 40, 56, -15)}${heart(990, 40, 50, 12)}
+    ${at('left:56px;right:56px;top:600px', `${title(w, p, 120, 150)}${s ? sub(s) : ''}${b ? pill(b) : ''}`)}`,
+  count: ({ n, unit, s, b, gifts, ph }) => gifts ? countG({ n, unit, s }) : `${ ph === 'dress' ? photoRight(P.dress, '45% 18%', 600) : polC('right:70px;top:110px', 400, 640, 4)}${heart(gifts ? 960 : 900, 60, 60, 12)}
     ${at('left:56px;top:40px;width:520px', `${tag('Обратный отсчёт')}
       <div style="font:700 ${n.length > 1 ? 470 : 560}px/0.86 Osw;margin-top:20px;background:linear-gradient(180deg,#ffb3db,#F0479A 55%,#c92a78);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 30px rgba(240,71,154,.55))">${n}</div>
       <div class="scr" style="font-size:170px;line-height:.9;margin-top:-30px">${unit}</div>`)}
     ${at('left:56px;width:' + (gifts ? 968 : 560) + 'px;bottom:56px', `${sub(s, 42)}${b ? pill(b) : ''}`)}`,
   whisper: ({ q }) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(240,71,154,.30),rgba(240,71,154,0) 60%)"></div>
     ${heart(80, 120, 60, -15, .8)}${heart(930, 860, 70, 12, .9)}
-    ${at('left:60px;right:60px;top:110px;text-align:center', `<div style="font-size:200px;line-height:1">🤫</div>
-      <div class="scr" style="font-size:190px;line-height:1.1;margin-top:-10px">Шёпотом…</div>
-      <div style="font:600 italic 64px/1.3 Mont;color:#fff;margin-top:34px;text-shadow:0 2px 14px rgba(0,0,0,.6)">${q}</div>`)}
+    ${at('left:60px;right:60px;top:0;bottom:150px;text-align:center;display:flex;flex-direction:column;justify-content:center', `<div class="scr" style="font-size:150px;line-height:1.15;white-space:nowrap">По секрету…</div>
+      <div style="font:600 italic 70px/1.28 Mont;color:#fff;margin-top:30px;text-shadow:0 2px 14px rgba(0,0,0,.6)">${q}</div>`)}
     ${at('left:0;right:0;bottom:60px;text-align:center', `<div class="scr" style="font-size:96px">Ксюша ♡</div>`)}`,
   live: ({ w, p, s, b }) => `${pol('right:70px;top:90px', 400, 640, 4)}
     ${at('left:56px;top:56px', `<span style="display:inline-flex;align-items:center;gap:16px;background:#E5203A;border-radius:14px;padding:14px 30px;font:700 52px Osw;color:#fff;letter-spacing:.06em;box-shadow:0 0 30px rgba(229,32,58,.6)"><span style="width:28px;height:28px;border-radius:50%;background:#fff"></span>LIVE</span>`)}
@@ -115,29 +123,29 @@ const T = {
       <div class="result" style="margin-top:26px;padding:28px 30px;border-radius:26px"><span class="rt" style="font-size:40px;font-weight:700">Хоть одно «да» — это не невезение, а сценарий 🤍</span></div>`)}`,
   form: ({ tg, w, p, s, b }) => `${photoRight(P.dress, '45% 18%', 470)}${heart(480, 60, 60, -10)}
     ${at('left:56px;width:660px;top:60px', `${tag(tg)}${title(w, p, 86, 130)}
-      <div style="display:grid;gap:14px;margin-top:18px">${['Где ломается маршрут', 'Какой сценарий повторяешь', 'Что делать именно тебе'].map(t => `<div style="font:600 38px/1.2 Mont;color:#fff"><span style="color:var(--pink);font-weight:700">→</span> ${t}</div>`).join('')}</div>
-      ${s ? sub(s, 34) : ''}${pill(b)}`)}`,
+      <div style="display:grid;gap:14px;margin-top:18px">${['Где ломается маршрут', 'Какой сценарий повторяешь', 'Что делать именно тебе'].map(t => `<div style="font:600 42px/1.2 Mont;color:#fff"><span style="color:var(--pink);font-weight:700">→</span> ${t}</div>`).join('')}</div>
+      ${s ? sub(s, 40) : ''}${pill(b)}`)}`,
 };
 
 const LIST = [
   ['01_18окт_12-00_приглашение', 'photo', { tg: 'Girls night', w: 'Давай найдём', p: 'тебе любовь!', b: '25.10 · 15:00 МСК · бесплатно' }],
-  ['02_18окт_20-00_шёпотом', 'whisper', { q: 'Мест на разборы будет совсем немного… Хочу, чтобы ты была там 🤍' }],
+  ['02_18окт_20-00_по_секрету', 'whisper', { q: 'Мест на разборы будет совсем немного… Хочу, чтобы ты была там 🤍' }],
   ['03_19окт_12-00_моя_история', 'side', { tg: 'Моя история', w: 'Я год ждала,', p: 'что он изменится', s: 'Как я ушла — расскажу на девичнике', b: '25.10 · 15:00' }],
   ['04_20окт_12-00_кейсы', 'cases', {}],
-  ['05_20окт_20-00_шёпотом', 'whisper', { q: 'Волнуюсь, как перед первым свиданием 🙈 Напиши мне «я тут»' }],
+  ['05_20окт_20-00_по_секрету', 'whisper', { q: 'Волнуюсь, как перед первым свиданием 🙈 Напиши мне «я тут»' }],
   ['06_21окт_12-00_мини-тест', 'quiz', {}],
   ['07_22окт_12-00_осталось_3_дня', 'count', { n: '3', unit: 'дня', s: 'до девичника + 3 подарка 🎁', gifts: true }],
-  ['08_22окт_20-00_шёпотом', 'whisper', { q: '«Ты слишком многого хочешь»? Не слишком ❤️' }],
+  ['08_22окт_20-00_по_секрету', 'whisper', { q: '«Ты слишком многого хочешь»? Не слишком ❤️' }],
   ['09_23окт_12-00_осталось_2_дня', 'count', { n: '2', unit: 'дня', s: 'Пришли историю — разберу в эфире 🔍', gifts: true }],
   ['10_24окт_12-00_завтра', 'photo', { tg: 'Завтра · 15:00 МСК', w: 'Уже завтра', p: 'девичник!', b: 'Будильник на 14:55 ⏰' }],
-  ['11_24окт_21-00_шёпотом', 'whisper', { q: 'Завтра расскажу то, о чём никогда не говорила… 🌙' }],
+  ['11_24окт_21-00_по_секрету', 'whisper', { q: 'Завтра расскажу то, о чём никогда не говорила… 🌙' }],
   ['12_25окт_10-00_сегодня', 'gifts', { w: 'Сегодня', p: 'наш девичник', b: '📍 15:00 по МСК' }],
-  ['13_25окт_14-00_шёпотом', 'whisper', { q: 'Через час начинаем… Я уже перед камерой 🙈' }],
+  ['13_25окт_14-00_по_секрету', 'whisper', { q: 'Через час начинаем… Я уже перед камерой 🙈' }],
   ['14_25окт_14-50_через_10_минут', 'count', { n: '10', unit: 'минут', s: 'до начала эфира', b: 'Зайти →' }],
   ['15_25окт_15-05_мы_в_эфире', 'live', { w: 'Мы', p: 'в эфире!', s: 'Подарки — тем, кто до конца 🎁', b: 'Смотреть эфир →' }],
   ['16_25окт_15-40_догоняй', 'live', { w: 'Идут', p: 'разборы!', s: 'Самое сильное — сейчас 🔥', b: 'Смотреть эфир →' }],
   ['17_25окт_17-00_анкета', 'form', { tg: 'Бесплатно', w: 'Персональный', p: 'разбор', s: 'Мест немного · до вт 23:59', b: 'Заполнить анкету →' }],
-  ['18_26окт_12-00_шёпотом', 'whisper', { q: 'Может, следующая история — твоя? 🤍' }],
+  ['18_26окт_12-00_по_секрету', 'whisper', { q: 'Может, следующая история — твоя? 🤍' }],
   ['19_26окт_19-00_не_успела', 'form', { tg: 'Не успела на эфир?', w: 'Записи нет,', p: 'а разбор есть', b: 'Заполнить анкету →' }],
   ['20_27окт_12-00_последний_день', 'count', { n: '1', unit: 'день', s: 'Сегодня в 23:59 закрываем анкеты', b: 'Успеть →', ph: 'dress' }],
   ['21_27окт_21-00_осталось_3_часа', 'count', { n: '3', unit: 'часа', s: 'В 23:59 анкета закроется 🤍', b: 'Анкета →', ph: 'dress' }],

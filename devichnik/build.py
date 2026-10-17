@@ -122,10 +122,11 @@ sfx = os.path.join(WK, "sfx.wav"); sf.write(sfx, track, 48000)
 inputs += ["-i", sfx]
 subprocess.run([sys.executable, os.path.join(B, "music_dyn.py"), os.path.join(WK, "music.wav"), f"{TOT + 0.5:.2f}"], check=True)
 inputs += ["-i", os.path.join(WK, "music.wav")]
-fc.append(f"[0:a]aresample=48000,apad=whole_dur={TOT:.3f},asplit=2[va][vkey]")
-fc.append(f"[{k + 1}:a]aresample=48000,volume=0.06[mus]")
-fc.append(f"[mus][vkey]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=350[mduck]")
-fc.append(f"[va][{k}:a][mduck]amix=inputs=3:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.95,apad=whole_dur={TOT:.3f}[aout]")
+# voice is normalised on its own; music is added afterwards at a fixed low level so loudnorm can't lift it
+fc.append(f"[0:a]aresample=48000,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,apad=whole_dur={TOT:.3f},asplit=2[va][vkey]")
+fc.append(f"[{k + 1}:a]aresample=48000,volume=0.05[mus]")
+fc.append(f"[mus][vkey]sidechaincompress=threshold=0.02:ratio=4:attack=15:release=400[mduck]")
+fc.append(f"[va][{k}:a][mduck]amix=inputs=3:normalize=0:duration=first,alimiter=limit=0.95,apad=whole_dur={TOT:.3f}[aout]")
 out = os.path.join(B, "devichnik.mp4")
 subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", "[vout]", "-map", "[aout]", "-t", f"{TOT:.3f}",
                 "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], check=True, stdin=subprocess.DEVNULL)

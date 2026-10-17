@@ -29,8 +29,7 @@ ins = [("subs.png", T(15), E_(24) - T(15) + 0.2, 1290),
        ("bride.png", T(188), 2.3, 1290), ("table.png", T(188) + 0.35, 1.95, 1290),
        ("t1.png", T(195), 2.4, 1290), ("t2.png", T(211), 2.6, 1290),
        ("devichnik.png", T(224), 2.6, 1290),
-       ("couple.png", T(262), 2.2, 1290),
-       ("highlight.png", T(276), total - T(276) + HOLD, 1230)]
+       ("highlight.png", T(224) + 2.7, total - T(224) - 2.7 + HOLD, 1230)]
 # pairs sit side by side
 XPOS = {"bride.png": 320, "table.png": 760}
 montage = (T(143), E_(150) + 0.25)
@@ -79,7 +78,7 @@ for a, b in [(0, montage[0]), (montage[1], total + HOLD)]:
         txt = r"{\fnMontserrat ExtraBold\fs%.0f\fscx106\fsp0}" % TFS + line
         ev.append(f"Dialogue: 1,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(543,{y + 5})\\c&H000000&\\alpha&H40&\\blur7\\shad0}}{txt}")
         ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y})\\shad0\\c{col}&}}{txt}")
-ET = T(276) + 0.2
+ET = T(224) + 2.9
 for k2, line in enumerate(["Подробности и ссылка на чат —", r"в актуальном {\c" + PINK + r"&}«Девичник»"]):
     yy = 1560 + k2 * 66
     tx = r"{\fnMontserrat ExtraBold\fs84}" + line
@@ -131,8 +130,8 @@ subprocess.run([sys.executable, os.path.join(B, "music_dyn.py"), os.path.join(WK
 inputs += ["-i", os.path.join(WK, "music.wav")]
 # voice is normalised on its own; music is added afterwards at a fixed low level so loudnorm can't lift it
 fc.append(f"[0:a]aresample=48000,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,apad=whole_dur={TOT:.3f},asplit=2[va][vkey]")
-fc.append(f"[{k + 1}:a]aresample=48000,volume=0.13[mus]")
-fc.append(f"[mus][vkey]sidechaincompress=threshold=0.02:ratio=4:attack=15:release=400[mduck]")
+fc.append(f"[{k + 1}:a]aresample=48000,volume=0.26[mus]")
+fc.append(f"[mus][vkey]sidechaincompress=threshold=0.03:ratio=2.5:attack=20:release=400[mduck]")
 fc.append(f"[va][{k}:a][mduck]amix=inputs=3:normalize=0:duration=first,alimiter=limit=0.95,apad=whole_dur={TOT:.3f}[aout]")
 out = os.path.join(B, "devichnik.mp4")
 subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", "[vout]", "-map", "[aout]", "-t", f"{TOT:.3f}",

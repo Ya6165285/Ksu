@@ -39,7 +39,7 @@ function item(it) {
 function html(s) {
   const groups = s.groups.map(g => `<div class=grp style="top:${g.top}px;${g.w ? `width:${g.w}px;left:${(1080 - g.w) / 2}px` : ''}">${g.items.map(item).join('')}</div>`).join('');
   return `<!doctype html><html><head><meta charset=utf-8><style>
-${[700, 800, 900].map(font).join('\n')}
+${[400, 700, 800, 900].map(font).join('\n')}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family:I,'Noto Color Emoji',sans-serif}
 .bg{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;object-position:${s.pos || 'center'};filter:${s.filter || 'none'}}
@@ -59,7 +59,7 @@ body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family:I,'N
 .txt{font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5)}
 .sm{font-weight:700;color:#fff;line-height:1.3;text-shadow:0 2px 12px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5)}
 .txt .acc,.sm .acc{color:#ff8fcf}
-.note{background:#fff;color:#151515;border-radius:30px;padding:40px 44px;text-align:left;font-weight:600;line-height:1.45;width:900px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.note{background:#fff;color:#151515;border-radius:30px;padding:40px 44px;text-align:left;font-weight:400;line-height:1.45;width:900px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
 .note b{font-weight:800}
 .note .acc{font-weight:800}
 .lblw{display:inline-block}

@@ -68,17 +68,17 @@ for n, i in enumerate(keep):
     st = "Acc" if i in ACC else "Word"
     ev.append(f"Dialogue: 2,{ts(s)},{ts(e)},{st},,0,0,0,,{{\\pos(540,{SY})}}{POP}{w}")
 # hook: two lines, one pink accent, hidden during the photo montage
-title = [r"{\c&H00FFFFFF&}ОДНА ТЕМА — И МОЙ YOUTUBE", r"{\c" + PINK + r"&}ВЗОРВАЛСЯ ЗА МЕСЯЦ{\c&H00FFFFFF&}:"]
+TL = ["ОДНА ТЕМА —", "И МОЙ YOUTUBE", "ВЗОРВАЛСЯ ЗА МЕСЯЦ:"]
 from PIL import ImageFont
 _f = ImageFont.truetype(subprocess.run(["fc-match", "-f", "%{file}", "Montserrat:style=ExtraBold"], capture_output=True, text=True).stdout, 100)
-TFS = min(68, 100 * 960 / (max(_f.getlength(x) for x in ["ОДНА ТЕМА — И МОЙ YOUTUBE", "ВЗОРВАЛСЯ ЗА МЕСЯЦ:"]) * 1.03 + 30))
+TFS = min(130, 100 * 980 / (0.6407 * max(_f.getlength(x) for x in TL) * 1.06))   # libass draws Montserrat ~0.64 of PIL size
 for a, b in [(0, montage[0]), (montage[1], total + HOLD)]:
-    for k, s in enumerate(title):
-        y = 250 + k * int(TFS * 1.15)
-        txt = r"{\fnMontserrat ExtraBold\fs%.0f\fscx103\fsp0.7}" % TFS + s
-        sh = txt.replace(r"{\c" + PINK + "&}", "").replace(r"{\c&H00FFFFFF&}", "")
-        ev.append(f"Dialogue: 1,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(544,{y + 6})\\c&H000000&\\alpha&H50&\\blur9\\shad0}}{sh}")
-        ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y})\\shad0\\bord4\\3c&H000000&}}{txt}")
+    for k, line in enumerate(TL):
+        y = 200 + k * int(TFS * 0.76)
+        col = PINK if k == 2 else "&H00FFFFFF"
+        txt = r"{\fnMontserrat ExtraBold\fs%.0f\fscx106\fsp0}" % TFS + line
+        ev.append(f"Dialogue: 1,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(543,{y + 5})\\c&H000000&\\alpha&H40&\\blur7\\shad0}}{txt}")
+        ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y})\\shad0\\c{col}&}}{txt}")
 os.makedirs(WK, exist_ok=True)
 ass = os.path.join(WK, "subs.ass"); open(ass, "w").write(hdr + "\n".join(ev) + "\n")
 
@@ -123,7 +123,7 @@ inputs += ["-i", sfx]
 subprocess.run([sys.executable, os.path.join(B, "music_dyn.py"), os.path.join(WK, "music.wav"), f"{TOT + 0.5:.2f}"], check=True)
 inputs += ["-i", os.path.join(WK, "music.wav")]
 fc.append(f"[0:a]aresample=48000,apad=whole_dur={TOT:.3f},asplit=2[va][vkey]")
-fc.append(f"[{k + 1}:a]aresample=48000,volume=0.16[mus]")
+fc.append(f"[{k + 1}:a]aresample=48000,volume=0.06[mus]")
 fc.append(f"[mus][vkey]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=350[mduck]")
 fc.append(f"[va][{k}:a][mduck]amix=inputs=3:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.95,apad=whole_dur={TOT:.3f}[aout]")
 out = os.path.join(B, "devichnik.mp4")

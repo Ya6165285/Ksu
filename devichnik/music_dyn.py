@@ -2,7 +2,7 @@
 offbeat hats, plucky supersaw chords with sidechain pump, offbeat bass. Am-F-C-G."""
 import sys, numpy as np, soundfile as sf
 from scipy.signal import lfilter, butter
-sr = 48000; bpm = 122; beat = 60 / bpm; bar = 4 * beat; T = float(sys.argv[2]) if len(sys.argv) > 2 else 75
+sr = 48000; bpm = 108; beat = 60 / bpm; bar = 4 * beat; T = float(sys.argv[2]) if len(sys.argv) > 2 else 75
 N = int(T * sr); L = np.zeros(N); R = np.zeros(N); rng = np.random.default_rng(3)
 midi = lambda m: 440 * 2 ** ((m - 69) / 12)
 def add(sig, t0, pan=0.0, g=1.0):
@@ -50,12 +50,12 @@ for b in range(nb):
     t0 = b * bar; ch = prog[b % 4]; intro = b < 2
     for q in range(4):
         tq = t0 + q * beat
-        add(kick(), tq, 0, 0.0 if intro and q % 2 else 0.9)
+        add(kick(), tq, 0, 0.0 if intro or q % 2 else 0.6)
         i = int(tq * sr); k = np.arange(min(int(beat * sr), N - i)) / sr if i < N else np.array([])
-        if len(k): pump[i:i + len(k)] = np.minimum(pump[i:i + len(k)], 0.35 + 0.65 * (1 - np.exp(-k * 14)))
-        if q in (1, 3) and not intro: add(clap(), tq, 0.05, 0.55)
-        add(hat(True), tq + beat / 2, 0.35, 0.5)
-        for s16 in (0.25, 0.75): add(hat(), tq + s16 * beat, -0.3, 0.35 if not intro else 0.2)
+        if len(k): pump[i:i + len(k)] = np.minimum(pump[i:i + len(k)], 0.7 + 0.3 * (1 - np.exp(-k * 10)))
+        if q == 2 and not intro: add(clap(), tq, 0.05, 0.4)
+        add(hat(True), tq + beat / 2, 0.35, 0.3)
+        pass
         # plucks on the offbeats and the "and of 4"
         add(pluck([midi(m + 12) for m in ch], beat * 0.6), tq + beat / 2, -0.15, 0.32)
         if q == 3: add(pluck([midi(m + 12) for m in ch], beat * 0.4), tq + 0.75 * beat, 0.2, 0.22)

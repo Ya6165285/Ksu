@@ -68,11 +68,14 @@ for n, i in enumerate(keep):
     st = "Acc" if i in ACC else "Word"
     ev.append(f"Dialogue: 2,{ts(s)},{ts(e)},{st},,0,0,0,,{{\\pos(540,{SY})}}{POP}{w}")
 # hook: two lines, one pink accent, hidden during the photo montage
-title = [r"{\c&H00FFFFFF&}СОБИРАЮ ДЕВОЧЕК НА", r"{\c" + PINK + r"&}ПРИВАТНЫЙ ДЕВИЧНИК{\c&H00FFFFFF&}:"]
+title = [r"{\c&H00FFFFFF&}ОДНА ТЕМА — И МОЙ YOUTUBE", r"{\c" + PINK + r"&}ВЗОРВАЛСЯ ЗА МЕСЯЦ{\c&H00FFFFFF&}:"]
+from PIL import ImageFont
+_f = ImageFont.truetype(subprocess.run(["fc-match", "-f", "%{file}", "Montserrat:style=ExtraBold"], capture_output=True, text=True).stdout, 100)
+TFS = min(68, 100 * 960 / (max(_f.getlength(x) for x in ["ОДНА ТЕМА — И МОЙ YOUTUBE", "ВЗОРВАЛСЯ ЗА МЕСЯЦ:"]) * 1.03 + 30))
 for a, b in [(0, montage[0]), (montage[1], total + HOLD)]:
     for k, s in enumerate(title):
-        y = 250 + k * 78
-        txt = r"{\fnMontserrat ExtraBold\fs68\fscx103\fsp0.7}" + s
+        y = 250 + k * int(TFS * 1.15)
+        txt = r"{\fnMontserrat ExtraBold\fs%.0f\fscx103\fsp0.7}" % TFS + s
         sh = txt.replace(r"{\c" + PINK + "&}", "").replace(r"{\c&H00FFFFFF&}", "")
         ev.append(f"Dialogue: 1,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(544,{y + 6})\\c&H000000&\\alpha&H50&\\blur9\\shad0}}{sh}")
         ev.append(f"Dialogue: 2,{ts(a)},{ts(b)},Title,,0,0,0,,{{\\pos(540,{y})\\shad0\\bord4\\3c&H000000&}}{txt}")
@@ -117,8 +120,12 @@ for t in [x[1] for x in ins] + [montage[0]]:
     i = int(t * 48000); track[i:i + len(pop)] += pop[:len(track) - i] * 0.45
 sfx = os.path.join(WK, "sfx.wav"); sf.write(sfx, track, 48000)
 inputs += ["-i", sfx]
-fc.append(f"[0:a]aresample=48000,apad=whole_dur={TOT:.3f}[va]")
-fc.append(f"[va][{k}:a]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.95,apad=whole_dur={TOT:.3f}[aout]")
+subprocess.run([sys.executable, os.path.join(B, "music_dyn.py"), os.path.join(WK, "music.wav"), f"{TOT + 0.5:.2f}"], check=True)
+inputs += ["-i", os.path.join(WK, "music.wav")]
+fc.append(f"[0:a]aresample=48000,apad=whole_dur={TOT:.3f},asplit=2[va][vkey]")
+fc.append(f"[{k + 1}:a]aresample=48000,volume=0.16[mus]")
+fc.append(f"[mus][vkey]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=350[mduck]")
+fc.append(f"[va][{k}:a][mduck]amix=inputs=3:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.95,apad=whole_dur={TOT:.3f}[aout]")
 out = os.path.join(B, "devichnik.mp4")
 subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fc), "-map", "[vout]", "-map", "[aout]", "-t", f"{TOT:.3f}",
                 "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], check=True, stdin=subprocess.DEVNULL)

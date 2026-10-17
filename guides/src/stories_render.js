@@ -18,13 +18,19 @@ const B = (t, fs = 170) => ({ k: 'big', t, fs });
 const E = (t, fs = 110) => ({ k: 'emoji', t, fs });
 const I = (src, w = 900, rot = 0) => ({ k: 'img', src, w, rot });
 const GAP = (h = 24) => ({ k: 'gap', h });
+const T = (t, fs = 76) => ({ k: 'txt', t, fs });
+const SM = (t, fs = 40) => ({ k: 'sm', t, fs });
+const N = (t, fs = 40) => ({ k: 'note', t, fs });
 const p = s => `<span class=acc>${s}</span>`;
 
-const stories = require('./stories.js')({ P, W, D, B, E, I, GAP, p });
+const stories = require(process.env.ST || './stories.js')({ P, W, D, B, E, I, GAP, p, T, SM, N });
 
 function item(it) {
   if (it.k === 'gap') return `<div style="height:${it.h}px"></div>`;
   if (it.k === 'img') return `<img class=shot src="file://${C}${it.src}" style="width:${it.w}px;transform:rotate(${it.rot}deg)">`;
+  if (it.k === 'txt') return `<div class=txt style="font-size:${it.fs}px">${it.t}</div>`;
+  if (it.k === 'sm') return `<div class=sm style="font-size:${it.fs}px">${it.t}</div>`;
+  if (it.k === 'note') return `<div class=note style="font-size:${it.fs}px">${it.t}</div>`;
   if (it.k === 'emoji') return `<div class=emoji style="font-size:${it.fs}px">${it.t}</div>`;
   if (it.k === 'big') return `<div class=big style="font-size:${it.fs}px">${it.t}</div>`;
   return `<div class="ln"><span class="pl ${it.k}" style="font-size:${it.fs}px">${it.t}</span></div>`;
@@ -37,7 +43,7 @@ ${[700, 800, 900].map(font).join('\n')}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family:I,'Noto Color Emoji',sans-serif}
 .bg{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;object-position:${s.pos || 'center'};filter:${s.filter || 'none'}}
-.shade{position:absolute;inset:0;background:${s.shade || 'none'}}
+.shade{position:absolute;inset:0;background:${s.shade || 'linear-gradient(rgba(0,0,0,.38) 0%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 52%,rgba(0,0,0,.5) 100%)'}}
 .grp{position:absolute;left:60px;width:960px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
 .ln{line-height:1.42;max-width:100%}
 .pl{font-weight:800;padding:.1em .38em;border-radius:.28em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
@@ -50,6 +56,13 @@ body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family:I,'N
 .big{font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em;text-shadow:0 0 2px #EC6FB8,0 6px 0 #EC6FB8,0 10px 40px rgba(0,0,0,.45)}
 .big .acc{color:${PINK};text-shadow:0 4px 30px rgba(255,255,255,.25)}
 .emoji{line-height:1}
+.txt{font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5)}
+.sm{font-weight:700;color:#fff;line-height:1.3;text-shadow:0 2px 12px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5)}
+.txt .acc,.sm .acc{color:#ff8fcf}
+.note{background:#fff;color:#151515;border-radius:30px;padding:40px 44px;text-align:left;font-weight:600;line-height:1.45;width:900px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.note b{font-weight:800}
+.note .acc{font-weight:800}
+.lblw{display:inline-block}
 .shot{border-radius:28px;box-shadow:0 18px 50px rgba(0,0,0,.35);display:block}
 </style></head><body><img class=bg src="file://${C}${s.bg}"><div class=shade></div>${groups}</body></html>`;
 }

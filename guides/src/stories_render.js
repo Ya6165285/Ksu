@@ -21,15 +21,17 @@ const GAP = (h = 24) => ({ k: 'gap', h });
 const T = (t, fs = 76) => ({ k: 'txt', t, fs });
 const SM = (t, fs = 40) => ({ k: 'sm', t, fs });
 const N = (t, fs = 40) => ({ k: 'note', t, fs });
+const M = (t, rot = 0, fs = 42) => ({ k: 'msg', t, rot, fs });
 const p = s => `<span class=acc>${s}</span>`;
 
-const stories = require(process.env.ST || './stories.js')({ P, W, D, B, E, I, GAP, p, T, SM, N });
+const stories = require(process.env.ST || './stories.js')({ M, P, W, D, B, E, I, GAP, p, T, SM, N });
 
 function item(it) {
   if (it.k === 'gap') return `<div style="height:${it.h}px"></div>`;
   if (it.k === 'img') return `<img class=shot src="file://${C}${it.src}" style="width:${it.w}px;transform:rotate(${it.rot}deg)">`;
   if (it.k === 'txt') return `<div class=txt style="font-size:${it.fs}px">${it.t}</div>`;
   if (it.k === 'sm') return `<div class=sm style="font-size:${it.fs}px">${it.t}</div>`;
+  if (it.k === 'msg') return `<div class=msg style="font-size:${it.fs}px;transform:rotate(${it.rot}deg)">${it.t}</div>`;
   if (it.k === 'note') return `<div class=note style="font-size:${it.fs}px">${it.t}</div>`;
   if (it.k === 'emoji') return `<div class=emoji style="font-size:${it.fs}px">${it.t}</div>`;
   if (it.k === 'big') return `<div class=big style="font-size:${it.fs}px">${it.t}</div>`;
@@ -60,6 +62,8 @@ body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family:I,'N
 .sm{font-weight:700;color:#fff;line-height:1.3;text-shadow:0 2px 12px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5)}
 .txt .acc,.sm .acc{color:#ff8fcf}
 .note{background:#fff;color:#151515;border-radius:30px;padding:40px 44px;text-align:left;font-weight:400;line-height:1.45;width:900px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.msg{background:#fff;color:#151515;border-radius:34px 34px 34px 8px;padding:26px 36px;text-align:left;font-weight:400;line-height:1.35;max-width:880px;align-self:flex-start;margin:6px 20px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.msg:nth-child(even){align-self:flex-end;border-radius:34px 34px 8px 34px}
 .note b{font-weight:800}
 .note .acc{font-weight:800}
 .lblw{display:inline-block}

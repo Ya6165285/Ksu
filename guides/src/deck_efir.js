@@ -58,6 +58,10 @@ const photo = (f, style, w, h, rot = 3, pos) => lib.framed(style, img(f, w, h, p
 const slides = [];
 function S_(inner, seed = 0) { slides.push((i, n) => `<section class="slide">${lib.deco(seed)}${inner}${lib.foot('ДАВАЙ НАЙДЁМ ТЕБЕ ЛЮБОВЬ', i, n)}</section>`); }
 const head = (tag, h, cls = '') => `${T(tag)}<div class="h ${cls}" style="margin-top:30px">${h}</div>`;
+const R = f => slides.push(() => `<section class="slide" style="padding:0;background:url(file://${IMG}/${f}) center/cover no-repeat"></section>`);
+const SCR = `<div style="position:absolute;right:120px;top:96px;z-index:5" class="pill"><b style="font-size:26px">📸</b>скринь этот слайд</div>`;
+const gifts = (h) => ['gift1-01.jpg','gift2-01.jpg','gift3-01.jpg'].map((f,i)=>`<div style="transform:rotate(${[-3,2,-2][i]}deg);border-radius:18px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.1)"><img src="file://${IMG}/${f}" style="display:block;height:${h}px"></div>`).join('');
+const qr = (f, w, cap) => `<div><div style="background:#fff;border-radius:28px;padding:18px;width:${w}px;box-shadow:0 20px 60px rgba(240,71,154,.35)"><img src="file://${IMG}/${f}" style="display:block;width:100%"></div><div style="font:600 24px Mont;color:#fff;margin-top:16px;text-align:center">${cap}</div></div>`;
 const chat = t => `<div class="chat">💬 ${t}</div>`;
 
 // ===== БЛОК 1. ОТКРЫТИЕ =====
@@ -66,9 +70,10 @@ S_(`${photo('v-000.jpg', 'right:150px;top:110px', 560, 760, 4, '50% 20%')}
 <div class="h xl" style="margin-top:34px"><span class="w">Давай найдём</span><br><span class="p">тебе любовь!</span></div>
 <div class="sub" style="margin-top:30px">Прямой эфир из Дубая · записи не будет</div></div>`, 0);
 
-S_(`<div class="z">${head('Правила вечера', '<span class="w">3 правила,</span> <span class="p">чтобы это сработало</span>', 'm')}</div>
-<div class="g3 z" style="margin-top:70px">
-${[['01', 'Записи не будет', 'Это только для тех, кто здесь'], ['02', 'Пиши в чат', 'Я вижу каждое сообщение'], ['03', 'Досиди до конца', 'В конце — кодовое слово и 3 подарка']].map(([n, h, t]) => `<div class="card c" style="height:300px"><span class="num">${n}</span><h4 style="margin-top:26px">${h}</h4><div class="txt">${t}</div></div>`).join('')}
+S_(`<div class="z">${head('Правила вечера', '<span class="w">3 правила,</span><br><span class="p">чтобы это сработало</span>', 's')}</div>
+<div class="z" style="position:absolute;right:120px;top:150px;display:flex;gap:26px">${gifts(340)}</div>
+<div class="g3 z" style="margin-top:340px">
+${[['01', 'Записи не будет', 'Это только для тех, кто здесь'], ['02', 'Пиши в чат', 'Я вижу каждое сообщение'], ['03', 'Досиди до конца', 'Кодовое слово — и эти 3 подарка твои']].map(([n, h, t]) => `<div class="card c" style="height:250px"><span class="num">${n}</span><h4 style="margin-top:22px">${h}</h4><div class="txt">${t}</div></div>`).join('')}
 </div>`, 1);
 
 S_(`<div class="z" style="margin-top:80px">${head('Знакомимся', '<span class="w">Напиши в чат</span>', 'm')}
@@ -76,9 +81,9 @@ S_(`<div class="z" style="margin-top:80px">${head('Знакомимся', '<span
 ${[['❤️', 'я сейчас одна'], ['💔', 'я в отношениях, но что-то не так'], ['🤍', 'хочу понять себя']].map(([e, t]) => `<div class="card" style="display:flex;gap:30px;align-items:center;font:500 40px Mont;color:#fff"><span style="font-size:52px">${e}</span>${t}</div>`).join('')}
 </div></div>`, 2);
 
-S_(`<div class="z">${head('Сегодня ты узнаешь', '<span class="w">Что будет</span> <span class="p">сегодня</span>', 'm')}</div>
+S_(`<div class="z">${head('Сегодня ты узнаешь', '<span class="w">Сегодня</span> <span class="p">ты узнаешь</span>', 'm')}</div>
 <div class="g2 z" style="margin-top:36px;gap:16px">
-${['Почему внешность почти ничего не решает', 'Почему тебя цепляют «не те», а с надёжным «скучно»', 'Какой у тебя тип привязанности и кого он выбирает за тебя', 'Формула гармоничных отношений: 7 вещей, которым нас никто не учил', 'Игра «Ред-флаг или грин-флаг»: в половине ситуаций ты ошибёшься', 'Разбор 5 ваших историй в прямом эфире', 'Твой маршрут к отношениям мечты и подарки']
+${['Почему внешность ничего не решает и почему ты уже достойна самого лучшего мужчины', 'Почему тебя тянет к «не тем» и как перестать выбирать по старому сценарию', 'Свой тип привязанности и какой мужчина подходит именно тебе', 'Формулу отношений, в которых мужчина ухаживает, вкладывается и выбирает тебя', 'Как с первых встреч отличить «своего» мужчину от «не того»', 'Что нужно, чтобы встретить своего мужчину и не потерять его', 'Разбор 5 историй вживую и 3 подарка тем, кто досидит до конца']
   .map((t, i) => `<div class="card" style="display:flex;gap:22px;align-items:center;padding:16px 26px"><span class="num">0${i + 1}</span><span style="font:500 22px/1.3 Mont;color:#fff">${t}</span></div>`).join('')}
 </div>`, 0);
 
@@ -104,19 +109,19 @@ S_(`<div class="z">${T('Я до · я после')}</div>
 </div>
 <div class="z big" style="margin-top:50px;font-size:46px">Внешность та же. <span class="p">Изменилось, что я считала нормой.</span></div>`, 1);
 
-const kase = (name, res, before, after, ph) => S_(`${ph ? photo(ph, 'right:150px;top:150px', 460, 620, 3) : ''}
+const kase = (name, res, before, after, ph) => S_(`${!ph ? '' : ph.startsWith('raw:') ? `<img src="file://${IMG}/${ph.slice(4)}" style="position:absolute;right:60px;top:0;height:1080px;z-index:2">` : photo(ph, 'right:150px;top:150px', 460, 620, 3, '50% 50%')}
 <div class="z" style="width:${ph ? 1050 : 1600}px">${T('Результаты учениц')}
 <div class="h m" style="margin-top:30px"><span class="w">${name}</span></div>
 <div class="sub" style="color:var(--pink);font-weight:600;margin-top:10px">${res}</div>
 <div class="card" style="margin-top:40px"><div class="lbl" style="color:#8E8E96">ДО</div><div class="txt" style="font-size:30px">${before}</div></div>
 <div style="margin-top:24px">${lib.result('После', after)}</div></div>`, 2);
-kase('Илона', 'Вышла замуж', 'Жила с синдромом «я сама». Не принимала заботу, не верила, что рядом может быть мужчина, на которого можно опереться.', 'Научилась принимать заботу, мужчины начали красиво ухаживать. Встретила того самого и вышла замуж. ▶ видео-отзыв');
-kase('Анна, 27', 'Предложение через 1,5 месяца', '4 года одна. Череда женатых и «не готовых».', 'Через 1,5 месяца работы встретила мужчину, который сделал ей предложение 💍');
-kase('Лиза', 'Подарок 100 000 ₽', 'Не чувствовала своей ценности, синдром «я сама», мужчина её обесценивал.', 'Раскрыла свою ценность, и незнакомый мужчина подарил ей 100 000 ₽, просто чтобы порадовать. ▶ видео-отзыв');
+kase('Илона', 'Вышла замуж', 'Жила с синдромом «я сама». Не принимала заботу, не верила, что рядом может быть мужчина, на которого можно опереться.', 'Научилась принимать заботу, мужчины начали красиво ухаживать. Встретила того самого и вышла замуж. ▶ видео-отзыв', 'raw:ilona_crop.jpg');
+kase('Анна, 27', 'Предложение через 1,5 месяца', '4 года одна. Череда женатых и «не готовых».', 'Через 1,5 месяца работы встретила мужчину, который сделал ей предложение 💍', 'u32.jpg');
+kase('Лиза', 'Подарок 100 000 ₽', 'Не чувствовала своей ценности, синдром «я сама», мужчина её обесценивал.', 'Раскрыла свою ценность, и незнакомый мужчина подарил ей 100 000 ₽, просто чтобы порадовать. ▶ видео-отзыв', 'u33.jpg');
 
-S_(`<div class="z" style="margin-top:170px;text-align:center">${T('Система')}
-<div class="h xl" style="margin-top:30px"><span class="p">1 000+</span> <span class="w">учениц</span></div>
-<div class="big" style="margin-top:40px">1 успех — везение. <span class="p">1 000 — система.</span></div></div>`, 0);
+S_(`${photo('u35.jpg', 'right:130px;top:170px', 860, 560, 3, '50% 30%')}<div class="z" style="margin-top:200px;width:820px">${T('Система')}
+<div class="h xl" style="margin-top:30px"><span class="p">1 000+</span><br><span class="w">учениц</span></div>
+<div class="big" style="margin-top:40px">1 успех — везение.<br><span class="p">1 000 — система.</span></div></div>`, 0);
 
 // ===== БЛОК 3. КРАСОТА =====
 S_(`${lib.framed('left:1060px;top:120px', img('u30.jpg', 330, 430, '50% 30%'), -4)}<div class="cap" style="left:1110px;top:600px">тогда</div>
@@ -162,28 +167,34 @@ S_(`<div class="z">${head('Причина 4 · самоценность', '<span
 <div class="z" style="margin-top:50px;width:1400px">${ul(['Соглашаешься на меньшее: «ну он же неплохой»', 'Вкладываешься больше него, чтобы не бросили', 'Оправдываешься там, где не виновата', 'Не замечаешь достойных: «такой на меня не посмотрит»'])}
 <div class="big" style="margin-top:40px;font-size:44px">Не веришь, что достойна, — <span class="p">рядом будет тот, кто ниже уровнем.</span></div></div>`, 0);
 
+S_(`${SCR}<div class="z" style="margin-top:180px;text-align:center">${T('Запомни')}
+<div class="h xl" style="margin-top:30px"><span class="w">Химия</span> <span class="p">≠</span> <span class="w">совместимость</span></div>
+<div style="margin-top:60px;display:flex;justify-content:center">${lib.chain(['чувства', 'факты', 'время']).replace(/→/g,'+')}</div>
+<div class="sub" style="margin-top:40px">Бабочки в животе — это не умение любить</div></div>`, 1);
 // ===== БЛОК 5. БОЛЬ =====
 S_(`<div class="z">${head('Если ничего не менять', '<span class="w">Проходит ещё год.</span> <span class="p">Та же точка</span>', 's')}</div>
 <div class="g2 z" style="margin-top:46px">${['Первые недели идеальный, потом резко меняется', 'Годами не можешь никого найти', 'Отношения рушатся через 3–6 месяцев в одной точке', 'В отношениях, но одиноко: всё тащишь сама', 'Молчишь, копишь и взрываешься', 'Тебе 30, а ты всё ещё «ждёшь своего»'].map(t => `<div class="card" style="font:500 29px/1.35 Mont;color:#fff">${t}</div>`).join('')}</div>
 <div class="z" style="margin-top:40px">${lib.chain(['Новый мужчина', 'старые страхи', 'старые реакции', 'тот же финал'])}</div>`, 1);
 
-S_(`<div class="z">${head('Узнала себя?', '<span class="w">Напиши в чат</span> <span class="p">номера</span>', 's')}</div>
-<div class="g3 z" style="margin-top:40px;gap:18px">${['Боюсь, что так и не встречу своего', '«Нормальных мужчин не осталось»', 'Попадаются холодные и несерьёзные', 'Сначала идеальный, потом меняется', 'Достойна большего, но беру крохи', 'Боюсь, что он найдёт лучше меня', '«Что изменить, чтобы он выбрал?»', 'Устала от «я всё сама»', 'Хочу семью, но не знаю, где встретить'].map((t, i) => `<div class="card" style="display:flex;gap:18px;align-items:center;padding:22px 26px"><span class="num">0${i + 1}</span><span style="font:500 26px/1.3 Mont;color:#fff">${t}</span></div>`).join('')}</div>`, 2);
+R('route3-03.jpg');
+R('route20-20.jpg');
 
 // ===== БЛОК 6. ФОРМУЛА =====
-S_(`<div class="z" style="margin-top:80px">${head('Главный перелом', '<span class="w">Встретить «правильного» —</span><br><span class="p">недостаточно</span>', 'm')}
-<div class="g3" style="margin-top:60px;width:1500px">${['Ты его распознаешь?', 'Не спутаешь качели с любовью?', 'Заметишь флаги сквозь химию?', 'Скажешь о своих желаниях?', 'Не растворишься в нём?', 'Пройдёте конфликты без разрушения?'].map(t => `<div class="card" style="font:600 30px Mont;color:#fff"><span style="color:var(--pink)">?</span> ${t}</div>`).join('')}</div></div>`, 0);
+R('route5-05.jpg');
 
 const F7 = [['Самоценность', 'Ты — Ламборгини, а не скидка', 'Ушёл — «я ничто»'], ['Сценарий и прошлое', 'Прошлое не выбирает за тебя', 'Лица разные, история одна'], ['Состояние и норма', 'Энергия выбора, а не нужды', 'Соглашаешься на меньшее'], ['Потребности', 'Его и твои', '«Догадайся сам» → обиды'], ['Коммуникация и конфликты', 'Говоришь — тебя слышат', 'Молчу → коплю → взрываюсь'], ['Выбор мужчины', 'Совместимость, а не химия', 'Годами оправдываешь не того'], ['Пара и финансы', 'Принимаешь заботу', '«Почему я всё тащу сама?»']];
-S_(`<div class="z">${head('Формула', '<span class="w">Формула гармоничных</span> <span class="p">отношений</span>', 's')}</div>
+S_(`${SCR}<div class="z">${head('Формула', '<span class="w">Формула гармоничных</span> <span class="p">отношений</span>', 's')}</div>
 <div class="z" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px">${F7.map(([h, y, n], i) => `<div class="card c c4" style="padding:22px 24px"><span class="num">0${i + 1}</span><h4 style="margin-top:14px">${h}</h4><div class="txt" style="color:#fff">${y}</div><div style="font:500 15px Mont;color:#8E8E96;margin-top:8px">Без этого: ${n}</div></div>`).join('')}
 <div class="card hl" style="display:flex;align-items:center;font:700 44px/1.15 Osw;text-transform:uppercase;color:#fff">Выпало одно звено — рвётся<br>вся цепочка</div></div>`, 1);
 
-S_(`<div class="z" style="margin-top:160px;text-align:center">${T('Хорошая новость')}
+R('route21-21.jpg');
+R('route19-19.jpg');
+S_(`${photo('u36.jpg', 'right:170px;top:90px', 440, 860, 3, '50% 50%')}<div class="z" style="margin-top:170px;width:1150px">${T('Хорошая новость')}
 <div class="h m" style="margin-top:30px"><span class="w">Нас учили учиться и работать.</span><br><span class="p">Но кто учил выбирать мужчину?</span></div>
-<div class="big" style="margin-top:50px;font-size:48px">Это навык. Ему можно научиться, <span class="p">как водить машину.</span></div></div>`, 2);
+<div class="big" style="margin-top:50px;font-size:48px">Это навык. Ему можно научиться,<br><span class="p">как водить машину.</span></div></div>`, 2);
 
 kase('Александра, 31', 'Из «запасного варианта» в любимую', '3 года была «запасным вариантом».', 'Вышла из этих отношений, стала уверенной в себе, и рядом появились мужчины, которые роскошно за ней ухаживают.');
+R('route22-22.jpg');
 kase('Ещё одна ученица', 'Замужем', 'Пришла через 3 месяца после болезненного расставания: «нормальных мужчин больше нет».', 'Сейчас замужем за мужчиной, которого встретила во время программы.');
 
 S_(`<div class="z" style="display:flex;gap:80px;align-items:flex-start">
@@ -191,7 +202,7 @@ S_(`<div class="z" style="display:flex;gap:80px;align-items:flex-start">
 <div class="h m" style="margin-top:30px"><span class="w">Бесплатный разбор</span><br><span class="p">твоего маршрута</span></div>
 <div style="margin-top:36px;display:grid;gap:14px">${['В каком звене ломается твоя цепочка', 'Какой сценарий ты повторяешь', 'Что мешает встретить или построить отношения', 'Пошаговый маршрут именно для тебя'].map(t => `<div class="card" style="display:flex;gap:18px;align-items:center;font:500 28px Mont;color:#fff;padding:18px 26px"><span style="color:var(--pink);font:700 30px Mont">→</span>${t}</div>`).join('')}</div>
 <div class="sub" style="margin-top:30px">Обычно моя консультация — <s style="color:var(--mut)">50 000 ₽</s>. <em>Для вас — бесплатно.</em></div></div>
-<div style="width:420px;margin-top:120px;text-align:center"><div class="qr" style="width:420px;height:420px">QR-код<br>на анкету</div><div style="margin-top:26px">${lib.result('10', 'мест')}</div></div></div>`, 0);
+<div style="width:420px;margin-top:60px">${qr('qr_form.png', 420, 'Анкета на разбор · 10 мест')}<div style="margin-top:28px;font:500 24px/1.4 Mont;color:#E4E4E7;text-align:center">Вопросы по разбору — пиши мне в Telegram<br><b style="color:var(--pink);font-size:30px">@iamheyksusha</b></div></div></div>`, 0);
 
 // ===== БЛОК 7. ИГРА =====
 S_(`<div class="z" style="margin-top:130px;text-align:center">${T('Игра')}
@@ -209,9 +220,13 @@ const sit = (n, t) => S_(`<div class="z" style="margin-top:120px;width:1550px">$
  '4 месяца вместе. «Хочу серьёзных отношений». А на «кто мы друг другу?» — «Зачем ярлыки? Нам же хорошо»',
  '«С бывшей не сложилось: слишком требовательная, хотела, чтобы я писал каждый день. А женщинам вообще только деньги нужны»',
  'Сказал, что вечером дома. Ночью ты видишь его в сторис в баре. Он: «Ты что, следишь за мной? У тебя паранойя»'].forEach((t, i) => sit(i + 1, t));
-S_(`<div class="z" style="margin-top:100px">${head('Вывод', '<span class="w">3 правила,</span> <span class="p">которые спасут тебе годы</span>', 'm')}
+S_(`${SCR}<div class="z" style="margin-top:100px">${head('Вывод', '<span class="w">3 правила,</span> <span class="p">которые спасут тебе годы</span>', 'm')}
 <div style="margin-top:60px;display:grid;gap:24px;width:1400px">${['Смотри на действия, а не на слова', 'Если рядом с ним хочется оправдываться — это сигнал', 'Твоё «нет» — законченное предложение'].map((t, i) => `<div class="card" style="display:flex;gap:26px;align-items:center;font:600 38px Mont;color:#fff"><span class="num">0${i + 1}</span>${t}</div>`).join('')}</div></div>`, 2);
 
+S_(`${SCR}<div class="z" style="margin-top:170px;text-align:center">${T('Проверка мужчины')}
+<div class="h m" style="margin-top:30px"><span class="w">Кто перед тобой?</span></div>
+<div style="margin-top:70px;display:flex;justify-content:center;transform:scale(2);transform-origin:center top">${lib.chain(['слова', 'время', 'поступки', 'реакция на «нет»']).replace(/→/g,'+')}</div>
+<div class="big" style="margin-top:170px;font-size:46px">Не первые недели, <span class="p">а поведение во времени</span></div></div>`, 0);
 // ===== БЛОК 8. РАЗБОРЫ =====
 S_(`${photo('stage.jpg', 'right:160px;top:130px', 520, 700, 3, '60% 40%')}
 <div class="z" style="width:1000px;margin-top:150px">${T('Прямой эфир')}
@@ -220,16 +235,23 @@ S_(`${photo('stage.jpg', 'right:160px;top:130px', 520, 700, 3, '60% 40%')}
 <div style="margin-top:50px">${chat('Узнала себя? Ставь ❤️')}</div></div>`, 0);
 
 // ===== БЛОК 9. ПРОГРАММА =====
-S_(`<div class="z">${T('Программа')}<div class="h s" style="margin-top:20px"><span class="w">Девушка</span> <span class="p">на миллион</span></div><div class="sub" style="margin-top:10px">Маршрут к отношениям мечты · старт в начале декабря</div></div>
+S_(`${lib.framed('right:150px;top:40px', img('u34.jpg', 330, 220, '50% 30%'), 3)}<div class="z">${T('Программа')}<div class="h s" style="margin-top:20px"><span class="w">Девушка</span> <span class="p">на миллион</span></div><div class="sub" style="margin-top:10px">Маршрут к отношениям мечты · старт в начале декабря</div></div>
 <div class="z" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px">${[['Самоценность и опора', 'Перестаёшь доказывать, что достойна любви'], ['Психика и сценарии', 'Переписываешь сценарий «не тех»'], ['Состояние и уровень жизни', 'Твоя норма — без «соглашаюсь на меньшее»'], ['Понимание отношений', 'Что важно ему и что важно тебе'], ['Коммуникация и границы', 'Тебя слышат, ссоры сближают'], ['Привлечение мужчины', 'Знакомства, переписка, флаги, свидания'], ['Отношения в паре', 'Не теряешь себя, финансы без «я сама»']].map(([h, t], i) => `<div class="card c c4" style="padding:18px 22px"><span class="num">0${i + 1}</span><h4 style="margin-top:10px">${h}</h4><div class="txt">${t}</div></div>`).join('')}
 <div class="card hl c4" style="display:flex;flex-direction:column;justify-content:center"><div class="lbl">Для тебя, если</div><div class="txt" style="color:#fff">устала ждать «своего» · одиноко в отношениях · берёшь минимум</div></div></div>`, 1);
 
-S_(`<div class="z" style="display:flex;gap:80px;align-items:center;margin-top:60px">
+S_(`<div class="z" style="display:flex;gap:70px;align-items:center;margin-top:20px">
 <div style="flex:1">${T('Подарки')}
-<div class="h m" style="margin-top:30px"><span class="w">Кодовое слово:</span><br><span class="p">ЛЮБОВЬ</span></div>
-<div class="sub" style="margin-top:30px">Напиши его в личку <b>@iamheyksusha</b> — мы пришлём 3 подарка</div>
-<div style="margin-top:40px;display:grid;gap:16px">${['Тест «Почему за тобой не ухаживают?»', 'Гайд «Скажи ему это»', 'Гайд «Красоты недостаточно»'].map(t => `<div class="card" style="font:500 30px Mont;color:#fff">🎁 ${t}</div>`).join('')}</div></div>
-<div style="width:440px;text-align:center"><div class="qr" style="width:440px;height:440px">QR-код<br>на анкету</div><div class="sub" style="margin-top:20px;font-size:28px">Анкета на разбор · до вторника, 23:59 · 10 мест</div></div></div>`, 2);
+<div class="h m" style="margin-top:26px"><span class="w">Кодовое слово:</span> <span class="p">ЛЮБОВЬ</span></div>
+<div class="sub" style="margin-top:20px">Напиши мне в Telegram <b>@iamheyksusha</b> слово <em>ЛЮБОВЬ</em> — и забирай 3 подарка</div>
+<div style="margin-top:50px;display:flex;gap:26px">${gifts(390)}</div></div>
+<div style="width:360px">${qr('qr_tg.png', 360, '@iamheyksusha')}</div></div>`, 2);
+
+S_(`<div class="z" style="display:flex;gap:90px;align-items:center;margin-top:60px">
+<div style="flex:1">${T('Последний шаг')}
+<div class="h m" style="margin-top:30px"><span class="w">Анкета на бесплатный</span><br><span class="p">разбор маршрута</span></div>
+<div class="sub" style="margin-top:30px">Только <b>10 мест</b> · принимаем до вторника, 23:59</div>
+<div class="sub" style="margin-top:20px">Вопросы — пиши мне в Telegram <em>@iamheyksusha</em></div></div>
+<div style="display:flex;gap:40px">${qr('qr_form.png', 380, 'Анкета')}<div>${qr('qr_tg.png', 300, 'Telegram')}</div></div></div>`, 0);
 
 S_(`${photo('u31.jpg', 'right:170px;top:120px', 520, 720, 4, '50% 25%')}
 <div class="z" style="width:1000px;margin-top:180px">${T('С любовью, Ксюша')}

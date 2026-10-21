@@ -63,6 +63,10 @@ REELS = [
       raw=[(231.3, 278.8), (288.5, 303.3)], raw_box=[[231.3, 278.8, 0, 1920], [288.5, 303.3, 532, 856]],
       phr=[(("а кто у нас вообще говорит", 219), ("гармоничные отношения", 307)),
            (("мы можем сделать вывод то что все таки мужчины", 309), ("о какой тут долгосрочной связи может идти речь", 329))]),
+ dict(id="k16", title=["Красота имеет значение", "*при одном условии*"],
+      montage=dict(frm=("моя жизнь", 14.2), to=("она выглядит", 17.0), images=[f"/tmp/claude-0/-home-user-Ksu/03c5ee2b-73ae-52f6-90d7-fac0ce26511e/scratchpad/v4/ov/life{n}.jpg" for n in range(6)]),
+      phr=[(("меня зовут ксюша", 12.2), ("хотя я действительно себя такой считаю", 21)),
+           (("многие думают то что если ты красивая", 47), ("это очень быстро закончится", 73))]),
  dict(id="k13", title=["Как выбирать мужчину", "*по-новому*"],
       phr=[(("старый сценарий вы ориентировались на химию", 1363), ("не приходится соревноваться за любовь", 1385))]),
 ]
@@ -99,6 +103,9 @@ def main(sel):
                     words=os.path.join(BASE, "work", "words_fix.json"), work=os.path.join(BASE, "build", r["id"]),
                     title=r["title"], ranges=ranges, drop=drop, lesson_cover="/home/user/Ksu/reels1/assets/lesson_cover.jpg",
                     cta=r.get("cta", {}), raw_box=r.get("raw_box", []))
+        if r.get("montage"):
+            mo = r["montage"]
+            spec["montage"] = dict(from_word=find(*mo["frm"])[0], to_word=find(*mo["to"])[0], images=mo["images"])
         json.dump(spec, open(os.path.join(BASE, "specs", r["id"] + ".json"), "w"), ensure_ascii=False, indent=1)
         print(r["id"], f"{total + 1.5:.1f}s", "|", " ".join(words[i]["w"] for i in keep)[:160], "...", " ".join(words[i]["w"] for i in keep)[-80:])
 

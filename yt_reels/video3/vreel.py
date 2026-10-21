@@ -136,7 +136,18 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     ass = os.path.join(wk, "subs.ass"); open(ass, "w").write(hdr + "\n".join(ev) + "\n")
     # ---- compose: darken bottom + lesson cover during CTA ----
     inputs = ["-i", head, "-loop", "1", "-framerate", "30", "-t", f"{TOT - cta0:.2f}", "-i", spec["lesson_cover"]]
-    fc = [f"[0:v]split=2[v0][vb]",
+    mont = spec.get("montage")
+    pre = []; base = "0:v"
+    if mont:
+        m0 = outw[mont["from_word"]][0]; m1 = outw[mont["to_word"]][0]
+        seg = (m1 - m0) / len(mont["images"])
+        for j, f in enumerate(mont["images"]):
+            inputs += ["-loop", "1", "-framerate", "30", "-t", f"{seg + 0.05:.3f}", "-i", f]
+            k = 2 + j; t0 = m0 + j * seg
+            pre.append(f"[{k}:v]scale={W}:{H},format=yuv420p,setpts=PTS-STARTPTS+{t0:.3f}/TB[l{j}]")
+            pre.append(f"[{base}][l{j}]overlay=0:0:eof_action=pass:enable='between(t,{t0:.3f},{t0 + seg:.3f})'[m{j}]")
+            base = f"m{j}"
+    fc = pre + [f"[{base}]split=2[v0][vb]",
           f"[vb]drawbox=x=0:y=0:w={W}:h={H}:color=black@0.45:t=fill[vd]",
           f"[v0][vd]overlay=0:0:enable='gte(t,{cta0:.3f})'[v1]",
           f"[1:v]scale=860:-2,format=rgba,fade=t=in:st=0:d=0.25:alpha=1,setpts=PTS-STARTPTS+{cta0:.3f}/TB[cov]",

@@ -133,16 +133,16 @@ ${lib.framed('left:1430px;top:200px', img('u31.jpg', 330, 430, '50% 25%'), 4)}<d
 <div class="sub" style="margin-top:24px">Красота имеет смысл, только если к ней есть <em>знания о себе, о мужчинах и об отношениях.</em></div></div>`, 1);
 
 // ===== БЛОК 4 =====
-S_(`<div class="z" style="margin-top:90px">${head('Знакомо?', '<span class="w">Три мысли,</span> <span class="p">которые держат тебя одной</span>', 's')}
-<div style="margin-top:60px;display:grid;gap:24px;width:1300px">${['«Нормальных мужчин не осталось»', '«Мне просто не везёт»', '«Наверное, со мной что-то не так»'].map(t => `<div class="phrase" style="font-size:40px">${t}</div>`).join('')}</div></div>`, 2);
+S_(`${photo('walk.jpg', 'right:170px;top:110px', 460, 820, 3, '50% 45%')}<div class="z" style="margin-top:90px;width:1150px">${head('Знакомо?', '<span class="w">Три мысли,</span><br><span class="p">которые держат тебя одной</span>', 's')}
+<div style="margin-top:60px;display:grid;gap:24px;width:1100px">${['«Нормальных мужчин не осталось»', '«Мне просто не везёт»', '«Наверное, со мной что-то не так»'].map(t => `<div class="phrase" style="font-size:40px">${t}</div>`).join('')}</div></div>`, 2);
 
 S_(`<div class="z">${head('Причина 1 · сценарий', '<span class="w">Мы повторяем то,</span><br><span class="p">что когда-то было знакомо</span>', 's')}</div>
 <div class="g3 z" style="margin-top:70px">${[['«Меня бросят»', 'Цепляешься и боишься, что уйдёт'], ['«Со мной что-то не так»', 'Ищешь причину в себе'], ['«Мои чувства неважны»', 'Молчишь о желаниях']].map(([h, t], i) => `<div class="card c" style="height:280px"><span class="num">0${i + 1}</span><h4 style="margin-top:24px">${h}</h4><div class="txt">${t}</div></div>`).join('')}</div>`, 0);
 
-S_(`<div class="z" style="margin-top:110px;width:1500px">${T('Причина 2 · качели')}
-<div class="h" style="margin-top:30px"><span class="w">Искра ≠ любовь.</span><br><span class="p">Часто искра = тревога</span></div>
-<div class="sub" style="margin-top:40px;width:1200px">То пишет, то пропадает — и мозг принимает качели за химию. А с надёжным «скучно».</div>
-<div class="big" style="margin-top:50px;font-size:52px">Тебя тянет не к лучшему. <span class="p">Тебя тянет к знакомому.</span></div></div>`, 1);
+S_(`${photo('face.jpg', 'right:160px;top:170px', 560, 640, -3, '55% 40%')}<div class="z" style="margin-top:110px;width:1150px">${T('Причина 2 · качели')}
+<div class="h m" style="margin-top:30px"><span class="w">Искра ≠ любовь.</span><br><span class="p">Часто искра = тревога</span></div>
+<div class="sub" style="margin-top:40px;width:1100px">То пишет, то пропадает — и мозг принимает качели за химию. А с надёжным «скучно».</div>
+<div class="big" style="margin-top:50px;font-size:52px">Тебя тянет не к лучшему.<br><span class="p">Тебя тянет к знакомому.</span></div></div>`, 1);
 
 S_(`<div class="z">${head('Причина 3 · тип привязанности', '<span class="w">Мини-тест.</span> <span class="p">Запомни свою букву</span>', 's')}
 <div class="q" style="margin-top:40px;font-size:44px">После хорошего свидания он не пишет 5 часов. Что ты делаешь?</div>
@@ -164,9 +164,9 @@ S_(`<div class="z" style="margin-top:120px;text-align:center">${T('Главны�
 <div class="card hl" style="margin:60px auto 0;width:1400px;text-align:left;padding:46px 56px"><div class="qt" style="font-size:48px">Я ХОЧУ мужчину, который <span class="p">________</span>,<br>а ВЫБИРАЮ тех, кто <span class="p">________</span></div></div>
 <div style="margin-top:50px">${chat('Напиши в чат')}</div></div>`, 2);
 
-S_(`<div class="z">${head('Причина 4 · самоценность', '<span class="w">Мужчина рядом — отражение того,</span><br><span class="p">сколько ты себе разрешаешь</span>', 's')}</div>
-<div class="z" style="margin-top:50px;width:1400px">${ul(['Соглашаешься на меньшее: «ну он же неплохой»', 'Вкладываешься больше него, чтобы не бросили', 'Оправдываешься там, где не виновата', 'Не замечаешь достойных: «такой на меня не посмотрит»'])}
-<div class="big" style="margin-top:40px;font-size:44px">Не веришь, что достойна, — <span class="p">рядом будет тот, кто ниже уровнем.</span></div></div>`, 0);
+S_(`${photo('mirror.jpg', 'right:160px;top:120px', 430, 780, 3, '50% 30%')}<div class="z" style="width:1200px">${head('Причина 4 · самоценность', '<span class="w">Мужчина рядом —</span><br><span class="w">отражение того,</span> <span class="p">сколько<br>ты себе разрешаешь</span>', 's')}</div>
+<div class="z" style="margin-top:40px;width:1150px">${ul(['Соглашаешься на меньшее: «ну он же неплохой»', 'Вкладываешься больше него, чтобы не бросили', 'Оправдываешься там, где не виновата', 'Не замечаешь достойных: «такой на меня не посмотрит»'])}
+<div class="big" style="margin-top:30px;font-size:42px">Не веришь, что достойна, —<br><span class="p">рядом будет тот, кто ниже уровнем.</span></div></div>`, 0);
 
 S_(`${SCR}<div class="z" style="margin-top:180px;text-align:center">${T('Запомни')}
 <div class="h xl" style="margin-top:30px"><span class="w">Химия</span> <span class="p">≠</span> <span class="w">совместимость</span></div>
@@ -194,7 +194,6 @@ S_(`${photo('u36.jpg', 'right:170px;top:90px', 440, 860, 3, '50% 50%')}<div clas
 <div class="h m" style="margin-top:30px"><span class="w">Нас учили учиться и работать.</span><br><span class="p">Но кто учил выбирать мужчину?</span></div>
 <div class="big" style="margin-top:50px;font-size:48px">Это навык. Ему можно научиться,<br><span class="p">как водить машину.</span></div></div>`, 2);
 
-kase('Александра, 31', 'Из «запасного варианта» в любимую', '3 года была «запасным вариантом».', 'Вышла из этих отношений, стала уверенной в себе, и рядом появились мужчины, которые роскошно за ней ухаживают.');
 R('route22-22.jpg');
 S_(`${lib.framed('left:1170px;top:120px', img('u37.jpg', 320, 420, '50% 55%'), -4)}${lib.framed('left:1520px;top:200px', img('u38.jpg', 260, 560, '50% 60%'), 4)}
 <div class="z rsm" style="width:1000px">${T('Результаты учениц')}

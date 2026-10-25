@@ -48,6 +48,7 @@ const css = lib.css + `
 .card h4{font-size:40px !important}
 .foot{font-size:16px}
 .h .w{background:none !important;color:#fff !important;-webkit-text-fill-color:#fff}
+.rsm .result .rt{font-size:28px !important}.rsm .txt{font-size:27px !important}
 .cap{position:absolute;z-index:6;font:700 26px Osw;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0E0E11;border:1.5px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 22px}
 `;
 
@@ -195,7 +196,12 @@ S_(`${photo('u36.jpg', 'right:170px;top:90px', 440, 860, 3, '50% 50%')}<div clas
 
 kase('Александра, 31', 'Из «запасного варианта» в любимую', '3 года была «запасным вариантом».', 'Вышла из этих отношений, стала уверенной в себе, и рядом появились мужчины, которые роскошно за ней ухаживают.');
 R('route22-22.jpg');
-kase('Ещё одна ученица', 'Замужем', 'Пришла через 3 месяца после болезненного расставания: «нормальных мужчин больше нет».', 'Сейчас замужем за мужчиной, которого встретила во время программы.');
+S_(`${lib.framed('left:1170px;top:120px', img('u37.jpg', 320, 420, '50% 55%'), -4)}${lib.framed('left:1520px;top:200px', img('u38.jpg', 260, 560, '50% 60%'), 4)}
+<div class="z rsm" style="width:1000px">${T('Результаты учениц')}
+<div class="h m" style="margin-top:24px"><span class="w">Виолетта, 24</span></div>
+<div class="sub" style="color:var(--pink);font-weight:600;margin-top:10px">Встретила своего мужчину</div>
+<div class="card" style="margin-top:36px"><div class="lbl" style="color:#8E8E96">ДО</div><div class="txt">Внешность хорошая, но нет самоценности. Тянуло к холодным, не понимала, что делает не так.</div></div>
+<div style="margin-top:22px">${lib.result('После', 'Поняла систему, прокачала магнетичность, осознала свою ценность — и на это состояние притянулся её мужчина')}</div></div>`, 1);
 
 S_(`<div class="z" style="display:flex;gap:80px;align-items:flex-start">
 <div style="flex:1">${T('Только 10 мест')}
@@ -208,7 +214,7 @@ S_(`<div class="z" style="display:flex;gap:80px;align-items:flex-start">
 S_(`<div class="z" style="margin-top:130px;text-align:center">${T('Игра')}
 <div class="h xl" style="margin-top:30px"><span class="p">Ред-флаг</span> <span class="w">или грин-флаг?</span></div>
 <div class="vote" style="justify-content:center;margin-top:60px"><span>🚩 беги</span><span>💚 всё хорошо</span><span>🟡 присмотрись</span></div></div>`, 1);
-const sit = (n, t) => S_(`<div class="z" style="margin-top:120px;width:1550px">${T('Ситуация ' + n + ' из 8')}
+const sit = (n, t) => S_(`<div class="z" style="margin-top:120px;width:1550px">${T('Ситуация ' + n + ' из 6')}
 <div class="qt" style="margin-top:50px;font-size:50px">${t}</div>
 <div class="vote" style="margin-top:70px"><span>🚩</span><span>💚</span><span>🟡</span></div></div>
 <div class="wm" style="font-size:420px">${n}</div>`, n % 3);
@@ -217,9 +223,7 @@ const sit = (n, t) => S_(`<div class="z" style="margin-top:120px;width:1550px">$
  'Ты собираешься к подруге. Он: «Ты в этом пойдёшь? Слишком вызывающе. Я же о тебе забочусь»',
  'Тебя повысили. Он: «Ну, повезло. Посмотрим, надолго ли» — и переводит разговор на себя',
  'Третье свидание. «Пригласишь на кофе?» — «Не сегодня». — «Да ладно, ты мне не доверяешь?»',
- '4 месяца вместе. «Хочу серьёзных отношений». А на «кто мы друг другу?» — «Зачем ярлыки? Нам же хорошо»',
- '«С бывшей не сложилось: слишком требовательная, хотела, чтобы я писал каждый день. А женщинам вообще только деньги нужны»',
- 'Сказал, что вечером дома. Ночью ты видишь его в сторис в баре. Он: «Ты что, следишь за мной? У тебя паранойя»'].forEach((t, i) => sit(i + 1, t));
+ '«С бывшей не сложилось: слишком требовательная, хотела, чтобы я писал каждый день. А женщинам вообще только деньги нужны»'].forEach((t, i) => sit(i + 1, t));
 S_(`${SCR}<div class="z" style="margin-top:100px">${head('Вывод', '<span class="w">3 правила,</span> <span class="p">которые спасут тебе годы</span>', 'm')}
 <div style="margin-top:60px;display:grid;gap:24px;width:1400px">${['Смотри на действия, а не на слова', 'Если рядом с ним хочется оправдываться — это сигнал', 'Твоё «нет» — законченное предложение'].map((t, i) => `<div class="card" style="display:flex;gap:26px;align-items:center;font:600 38px Mont;color:#fff"><span class="num">0${i + 1}</span>${t}</div>`).join('')}</div></div>`, 2);
 

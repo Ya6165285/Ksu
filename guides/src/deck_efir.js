@@ -70,11 +70,11 @@ S_(`${photo('v-000.jpg', 'right:150px;top:110px', 560, 760, 4, '50% 20%')}
 <div class="h xl" style="margin-top:34px"><span class="w">Давай найдём</span><br><span class="p">тебе любовь!</span></div>
 <div class="sub" style="margin-top:30px">Прямой эфир из Дубая · записи не будет</div></div>`, 0);
 
-S_(`<div class="z">${head('Правила вечера', '<span class="w">3 правила,</span><br><span class="p">чтобы это сработало</span>', 's')}</div>
-<div class="z" style="position:absolute;right:120px;top:150px;display:flex;gap:26px">${gifts(340)}</div>
-<div class="g3 z" style="margin-top:340px">
-${[['01', 'Записи не будет', 'Это только для тех, кто здесь'], ['02', 'Пиши в чат', 'Я вижу каждое сообщение'], ['03', 'Досиди до конца', 'Кодовое слово — и эти 3 подарка твои']].map(([n, h, t]) => `<div class="card c" style="height:250px"><span class="num">${n}</span><h4 style="margin-top:22px">${h}</h4><div class="txt">${t}</div></div>`).join('')}
-</div>`, 1);
+S_(`<div class="z" style="margin-top:60px">${head('Правила вечера', '<span class="w">3 правила,</span> <span class="p">чтобы это сработало</span>', 'm')}</div>
+<div class="g3 z" style="margin-top:80px">${[['01', 'Записи не будет', 'Это только для тех, кто здесь'], ['02', 'Пиши в чат', 'Я вижу каждое сообщение'], ['03', 'Досиди до конца', 'Кодовое слово — и 3 подарка твои']].map(([n, h, t]) => `<div class="card c" style="height:330px"><span class="num">${n}</span><h4 style="margin-top:28px">${h}</h4><div class="txt">${t}</div></div>`).join('')}</div>`, 1);
+
+S_(`<div class="z" style="text-align:center;margin-top:-30px">${T('Подарки тем, кто досидит до конца')}</div>
+<div class="z" style="display:flex;gap:40px;justify-content:center;margin-top:40px">${gifts(780)}</div>`, 2);
 
 S_(`<div class="z" style="margin-top:80px">${head('Знакомимся', '<span class="w">Напиши в чат</span>', 'm')}
 <div style="margin-top:60px;display:grid;gap:22px;width:1100px">
@@ -202,7 +202,7 @@ S_(`<div class="z" style="display:flex;gap:80px;align-items:flex-start">
 <div class="h m" style="margin-top:30px"><span class="w">Бесплатный разбор</span><br><span class="p">твоего маршрута</span></div>
 <div style="margin-top:36px;display:grid;gap:14px">${['В каком звене ломается твоя цепочка', 'Какой сценарий ты повторяешь', 'Что мешает встретить или построить отношения', 'Пошаговый маршрут именно для тебя'].map(t => `<div class="card" style="display:flex;gap:18px;align-items:center;font:500 28px Mont;color:#fff;padding:18px 26px"><span style="color:var(--pink);font:700 30px Mont">→</span>${t}</div>`).join('')}</div>
 <div class="sub" style="margin-top:30px">Обычно моя консультация — <s style="color:var(--mut)">50 000 ₽</s>. <em>Для вас — бесплатно.</em></div></div>
-<div style="width:420px;margin-top:60px">${qr('qr_form.png', 420, 'Анкета на разбор · 10 мест')}<div style="margin-top:28px;font:500 24px/1.4 Mont;color:#E4E4E7;text-align:center">Вопросы по разбору — пиши мне в Telegram<br><b style="color:var(--pink);font-size:30px">@iamheyksusha</b></div></div></div>`, 0);
+<div style="width:460px;margin-top:20px;text-align:center">${qr('qr_tg.png', 420, 'Telegram')}<div style="font:700 60px Osw;color:var(--pink);margin-top:10px">@iamheyksusha</div><div style="font:600 30px/1.35 Mont;color:#fff;margin-top:14px">Напиши мне слово<br><span style="font:700 52px Osw;color:#fff;background:linear-gradient(100deg,#F25AA6,#E0357F);border-radius:14px;padding:4px 20px;display:inline-block;margin-top:10px">РАЗБОР</span></div></div></div>`, 0);
 
 // ===== БЛОК 7. ИГРА =====
 S_(`<div class="z" style="margin-top:130px;text-align:center">${T('Игра')}
@@ -242,16 +242,18 @@ S_(`${lib.framed('right:150px;top:40px', img('u34.jpg', 330, 220, '50% 30%'), 3)
 S_(`<div class="z" style="display:flex;gap:70px;align-items:center;margin-top:20px">
 <div style="flex:1">${T('Подарки')}
 <div class="h m" style="margin-top:26px"><span class="w">Кодовое слово:</span> <span class="p">ЛЮБОВЬ</span></div>
-<div class="sub" style="margin-top:20px">Напиши мне в Telegram <b>@iamheyksusha</b> слово <em>ЛЮБОВЬ</em> — и забирай 3 подарка</div>
-<div style="margin-top:50px;display:flex;gap:26px">${gifts(390)}</div></div>
-<div style="width:360px">${qr('qr_tg.png', 360, '@iamheyksusha')}</div></div>`, 2);
+<div class="sub" style="margin-top:20px">Напиши мне в Telegram слово <em>ЛЮБОВЬ</em> — и забирай 3 подарка</div><div style="font:700 64px Osw;color:var(--pink);margin-top:14px">@iamheyksusha</div>
+<div style="margin-top:36px;display:flex;gap:26px">${gifts(400)}</div></div>
+<div style="width:440px">${qr('qr_tg.png', 440, 'Наведи камеру — и пиши')}</div></div>`, 2);
 
-S_(`<div class="z" style="display:flex;gap:90px;align-items:center;margin-top:60px">
-<div style="flex:1">${T('Последний шаг')}
-<div class="h m" style="margin-top:30px"><span class="w">Анкета на бесплатный</span><br><span class="p">разбор маршрута</span></div>
-<div class="sub" style="margin-top:30px">Только <b>10 мест</b> · принимаем до вторника, 23:59</div>
-<div class="sub" style="margin-top:20px">Вопросы — пиши мне в Telegram <em>@iamheyksusha</em></div></div>
-<div style="display:flex;gap:40px">${qr('qr_form.png', 380, 'Анкета')}<div>${qr('qr_tg.png', 300, 'Telegram')}</div></div></div>`, 0);
+S_(`<div class="z" style="display:flex;gap:90px;align-items:center;margin-top:30px">
+<div style="flex:1">${T('Всё — в одном месте')}
+<div class="h m" style="margin-top:26px"><span class="w">Пиши мне</span> <span class="p">в Telegram</span></div>
+<div style="font:700 120px/1 Osw;color:var(--pink);margin-top:20px">@iamheyksusha</div>
+<div style="margin-top:44px;display:grid;gap:18px">
+<div class="card" style="display:flex;gap:24px;align-items:center"><span style="font:700 46px Osw;color:#fff;background:linear-gradient(100deg,#F25AA6,#E0357F);border-radius:14px;padding:4px 18px">ЛЮБОВЬ</span><span style="font:500 32px Mont;color:#fff">→ забрать 3 подарка</span></div>
+<div class="card" style="display:flex;gap:24px;align-items:center"><span style="font:700 46px Osw;color:#fff;background:linear-gradient(100deg,#F25AA6,#E0357F);border-radius:14px;padding:4px 18px">РАЗБОР</span><span style="font:500 32px Mont;color:#fff">→ бесплатный разбор маршрута · 10 мест</span></div></div></div>
+<div>${qr('qr_tg.png', 520, 'Наведи камеру')}</div></div>`, 0);
 
 S_(`${photo('u31.jpg', 'right:170px;top:120px', 520, 720, 4, '50% 25%')}
 <div class="z" style="width:1000px;margin-top:180px">${T('С любовью, Ксюша')}

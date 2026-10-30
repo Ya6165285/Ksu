@@ -12,12 +12,14 @@ HOOK_WORDS = set(range(0, 10))                   # the opening phrase lives in t
 DISP = {"дубае": "Дубае", "ищите": "ищете", "хэллоуина": "Хэллоуина"}
 KEY = {"хэллоуина", "костюмах", "фильма", "вкусно", "кальян", "диджей", "невероятная", "комьюнити", "рождения", "шоу",
        "восьми", "эмоций", "сохраняйте"}
-TITLE = ["Кажется, мы нашли", "самое атмосферное", "место в Дубае", "на *Хэллоуин*"]
+TITLE = ["Самое атмосферное", "место на *Хэллоуин*"]; HOOK_T = 5.0
+LOCATION = "MYATA PLATINUM DUBAI"
+BRK_AFTER, BRK, BRK_SHOT = 88, 3.0, ("0481", 14.0)   # voice pauses after "поздравили": the real applause plays
 # word index -> (clip, source second)
-SHOTS = [(0, "0470", 0.0), (5, "2980", 5.0), (10, "0440", 12.3), (16, "0430", 1.0), (19, "0475", 0.0),
+SHOTS = [(0, "0470", 2.5), (10, "2980", 5.0), (13, "0440", 12.3), (16, "0430", 1.0), (19, "0475", 0.0),
          (22, "0470", 12.0), (29, "0433", 6.0), (34, "0436", 1.0), (38, "0441", 1.5), (40, "0470", 31.4),
-         (45, "0440", 0.0), (60, "0474", 3.0), (64, "0475", 3.0), (67, "0437", 0.0), (74, "0480", 11.5),
-         (83, "0480", 5.5), (89, "0481", 13.5), (97, "0480", 15.0), (101, "0470", 20.0), (108, "0432", 1.5),
+         (45, "0440", 0.0), (60, "0474", 3.0), (64, "0475", 3.0), (67, "0437", 0.0), (74, "0481", 0.0),
+         (83, "0480", 5.5), ("brk", *BRK_SHOT), (89, "0480", 9.0), (97, "0480", 15.0), (101, "0470", 20.0), (108, "0432", 1.5),
          (114, "0481", 20.0), (119, "0470", 24.3)]
 PRE, POST, MAXGAP, HOLD = 0.12, 0.16, 0.30, 1.6
 
@@ -40,16 +42,19 @@ outw = {}; t = 0.0
 for (a, b), r in zip(segs, runs):
     for i in r: outw[i] = (words[i]["s"] - a + t, words[i]["e"] - a + t)
     t += b - a
+    if r[-1] == BRK_AFTER: brk0 = t; t += BRK
 VT = t; TOT = VT + HOLD
 voice = os.path.join(WK, "voice_clean.wav")
 fc = []; lab = []
 for k, (a, b) in enumerate(segs):
     fc.append(f"[0:a]atrim={a:.3f}:{b:.3f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={b - a - 0.03:.3f}:d=0.03[s{k}]"); lab.append(f"[s{k}]")
-fc.append("".join(lab) + f"concat=n={len(segs)}:v=0:a=1[o]")
+    if runs[k][-1] == BRK_AFTER:
+        fc.append(f"anullsrc=r=48000:cl=mono,atrim=0:{BRK}[gap]"); lab.append("[gap]")
+fc.append("".join(lab) + f"concat=n={len(lab)}:v=0:a=1[o]")
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(WK, "voice48.wav"), "-filter_complex", ";".join(fc), "-map", "[o]", voice], check=True)
 
 # ---- video shots ----
-starts = [0.0] + [outw[w][0] - 0.05 for w, _, _ in SHOTS[1:]] + [TOT]
+starts = [0.0] + [brk0 if w == "brk" else outw[w][0] - 0.05 for w, _, _ in SHOTS[1:]] + [TOT]
 lst = os.path.join(WK, "v", "list.txt")
 with open(lst, "w") as L:
     for n, (w, clip, s0) in enumerate(SHOTS):
@@ -65,6 +70,7 @@ with open(lst, "w") as L:
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s0:.3f}", "-i", src, "-t", f"{d * sp:.3f}", "-an", "-vf", vf, "-t", f"{d:.3f}",
                         "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-pix_fmt", "yuv420p", f], check=True, stdin=subprocess.DEVNULL)
         L.write(f"file 'c{n:02d}.mp4'\n")
+        if w == "brk": brk_src = (src, s0, d)
 head = os.path.join(WK, "head.mp4")
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", head], check=True)
 
@@ -97,8 +103,14 @@ for k, l in enumerate(lines):
         if p: s += (r"{\c" + PINK + "&}" + p[1:-1].upper()) if p.startswith("*") else (r"{\c&H00FFFFFF&}" + p.upper())
     t = r"{\fnMontserrat ExtraBold\fs%.0f\fscx103\fsp0.7}" % tfs + s
     y = 240 + k * LH; sh = re.sub(r"\\c&H[0-9A-F]+&", "", t)
-    ev.append(f"Dialogue: 1,{ts(0)},{ts(TOT)},T,,0,0,0,,{{\\pos(543,{y + 5})\\fad(200,0)\\c&H000000&\\alpha&H28&\\blur7\\shad0}}{sh}")
-    ev.append(f"Dialogue: 2,{ts(0)},{ts(TOT)},T,,0,0,0,,{{\\pos(540,{y})\\fad(200,0)\\shad0}}{t}")
+    ev.append(f"Dialogue: 1,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(543,{y + 5})\\fad(200,0)\\c&H000000&\\alpha&H28&\\blur7\\shad0}}{sh}")
+    ev.append(f"Dialogue: 2,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(540,{y})\\fad(200,300)\\shad0}}{t}")
+# small location tag over the closing words
+l0 = outw[119][0]
+for lay, tag in ((1, r"\c&H000000&\alpha&H40&\blur6"), (2, "")):
+    dy = 4 if lay == 1 else 0; col = "" if lay == 1 else r"{\c" + PINK + "&}"
+    ev.append(f"Dialogue: {lay},{ts(l0)},{ts(TOT)},T,,0,0,0,,{{\\pos({540 + dy // 2},{1660 + dy})\\fad(250,0)\\shad0{tag}\\fnMontserrat SemiBold\\fs40\\fsp1}}{col}локация")
+    ev.append(f"Dialogue: {lay},{ts(l0)},{ts(TOT)},T,,0,0,0,,{{\\pos({540 + dy // 2},{1716 + dy})\\fad(250,0)\\shad0{tag}\\fnMontserrat ExtraBold\\fs52\\fsp2}}{LOCATION}")
 POP = r"{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}"
 sub = [i for i in keep if i not in HOOK_WORDS]
 for n, i in enumerate(sub):
@@ -110,12 +122,14 @@ ass = os.path.join(WK, "subs.ass"); open(ass, "w").write(hdr + "\n".join(ev) + "
 
 # ---- music + mix ----
 subprocess.run([sys.executable, os.path.join(ENG, "music_hw.py"), os.path.join(WK, "music.wav"), f"{TOT + 0.5:.2f}"], check=True)
-fc = [f"[0:v]ass={ass},format=yuv420p,fade=t=out:st={TOT - 0.5:.3f}:d=0.5[vout]",
+b0 = brk0; b1 = brk0 + BRK
+fc = [f"[3:a]aresample=48000,pan=mono|c0=0.5*c0+0.5*c1,loudnorm=I=-16:TP=-2,aresample=48000,afade=t=in:d=0.25,afade=t=out:st={BRK - 0.35:.3f}:d=0.35,adelay={int(b0 * 1000)},apad=whole_dur={TOT:.3f}[crowd]",
+      f"[0:v]ass={ass},format=yuv420p,fade=t=out:st={TOT - 0.5:.3f}:d=0.5[vout]",
       f"[1:a]aresample=48000,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,apad=whole_dur={TOT:.3f},asplit=2[va][vkey]",
-      f"[2:a]aresample=48000,volume=0.26[mus]",
+      f"[2:a]aresample=48000,volume=0.26,volume='if(between(t,{b0 - 0.1:.3f},{b1:.3f}),0.35,1)':eval=frame[mus]",
       f"[mus][vkey]sidechaincompress=threshold=0.03:ratio=2.5:attack=20:release=400[mduck]",
-      f"[va][mduck]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.95,afade=t=out:st={TOT - 1.2:.3f}:d=1.2[aout]"]
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", head, "-i", voice, "-i", os.path.join(WK, "music.wav"), "-filter_complex", ";".join(fc),
+      f"[va][mduck][crowd]amix=inputs=3:normalize=0:duration=first,alimiter=limit=0.95,afade=t=out:st={TOT - 1.2:.3f}:d=1.2[aout]"]
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", head, "-i", voice, "-i", os.path.join(WK, "music.wav"), "-ss", f"{brk_src[1]:.3f}", "-t", f"{BRK:.3f}", "-i", brk_src[0], "-filter_complex", ";".join(fc),
                 "-map", "[vout]", "-map", "[aout]", "-t", f"{TOT:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
                 "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", OUT], check=True, stdin=subprocess.DEVNULL)
 print(f"done {OUT} {TOT:.1f}s (voice {VT:.1f}s)")

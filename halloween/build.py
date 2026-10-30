@@ -80,7 +80,7 @@ from PIL import ImageFont
 fnt = ImageFont.truetype(subprocess.run(["fc-match", "-f", "%{file}", "Montserrat:style=ExtraBold"], capture_output=True, text=True).stdout, 100)
 lines = list(TITLE); lines[-1] = lines[-1] + ":"
 plain = [re.sub(r"\*", "", l).upper() for l in lines]
-tfs = min(110, 100 * 960 / (0.6407 * max(fnt.getlength(p) * 1.03 for p in plain)))
+tfs = min(110, 100 * 820 / (0.6407 * max(fnt.getlength(p) * 1.03 for p in plain)))
 hdr = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: {W}
@@ -108,8 +108,8 @@ for k, l in enumerate(lines):
     ev.append(f"Dialogue: 2,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(540,{y})\\fad(200,300)\\shad0}}{t}")
 # small lowercase line under the hook
 ys = 240 + len(lines) * LH - int(tfs * 0.05)
-ev.append(f"Dialogue: 1,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(542,{ys + 4})\\fad(200,300)\\c&H000000&\\alpha&H40&\\blur6\\shad0\\fnMontserrat SemiBold\\fs80\\fsp1}}{SUBHOOK}")
-ev.append(f"Dialogue: 2,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(540,{ys})\\fad(200,300)\\shad0\\fnMontserrat SemiBold\\fs80\\fsp1}}{SUBHOOK}")
+ev.append(f"Dialogue: 1,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(542,{ys + 4})\\fad(200,300)\\c&H000000&\\alpha&H40&\\blur6\\shad0\\fnMontserrat SemiBold\\fs70\\fsp1}}{SUBHOOK}")
+ev.append(f"Dialogue: 2,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(540,{ys})\\fad(200,300)\\shad0\\fnMontserrat SemiBold\\fs70\\fsp1}}{SUBHOOK}")
 # small location tag over the closing words
 l0 = outw[119][0]
 for lay, tag in ((1, r"\c&H000000&\alpha&H40&\blur6"), (2, "")):

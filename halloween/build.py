@@ -14,6 +14,7 @@ KEY = {"хэллоуина", "костюмах", "фильма", "вкусно",
        "восьми", "эмоций", "сохраняйте"}
 TITLE = ["Самое атмосферное", "место на *Хэллоуин*"]; HOOK_T = 5.0
 LOCATION = "MYATA PLATINUM DUBAI"
+SUBHOOK = "в Дубае"
 BRK_AFTER, BRK, BRK_SHOT = 88, 3.0, ("0481", 14.0)   # voice pauses after "поздравили": the real applause plays
 # word index -> (clip, source second)
 SHOTS = [(0, "0470", 2.5), (10, "2980", 5.0), (13, "0440", 12.3), (16, "0430", 1.0), (19, "0475", 0.0),
@@ -105,6 +106,10 @@ for k, l in enumerate(lines):
     y = 240 + k * LH; sh = re.sub(r"\\c&H[0-9A-F]+&", "", t)
     ev.append(f"Dialogue: 1,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(543,{y + 5})\\fad(200,0)\\c&H000000&\\alpha&H28&\\blur7\\shad0}}{sh}")
     ev.append(f"Dialogue: 2,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(540,{y})\\fad(200,300)\\shad0}}{t}")
+# small lowercase line under the hook
+ys = 240 + len(lines) * LH - int(tfs * 0.05)
+ev.append(f"Dialogue: 1,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(542,{ys + 4})\\fad(200,300)\\c&H000000&\\alpha&H40&\\blur6\\shad0\\fnMontserrat SemiBold\\fs80\\fsp1}}{SUBHOOK}")
+ev.append(f"Dialogue: 2,{ts(0)},{ts(HOOK_T)},T,,0,0,0,,{{\\pos(540,{ys})\\fad(200,300)\\shad0\\fnMontserrat SemiBold\\fs80\\fsp1}}{SUBHOOK}")
 # small location tag over the closing words
 l0 = outw[119][0]
 for lay, tag in ((1, r"\c&H000000&\alpha&H40&\blur6"), (2, "")):

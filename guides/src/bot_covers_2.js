@@ -72,6 +72,18 @@ const covers = {
  <div class="abs it" style="left:562px;top:460px;font-size:40px;line-height:1.15">наводим порядок<br>в личной жизни<br>прямо сейчас</div>
  <div class="abs red" style="left:560px;top:660px;font-size:62px">подарки — тем,<br>кто до конца ♡</div>
  <div class="abs" style="left:0;right:0;bottom:60px;text-align:center"><span class=pill>Заходи, пока не начались разборы</span></div>`),
+'05_по_секрету': P(`
+ <div class="abs" style="left:0;right:0;top:120px;text-align:center"><span class=tag>🤫 Секрет</span></div>
+ <div class="abs red" style="left:0;right:0;top:230px;text-align:center;font-size:110px;transform:rotate(-4deg)">По секрету…</div>
+ <div class="abs gold" style="left:80px;right:80px;top:430px;text-align:center;font-size:78px;line-height:1.02">Я ещё никогда<br>этого не говорила</div>
+ <div class="abs it" style="left:120px;right:120px;top:660px;text-align:center;font-size:42px;line-height:1.2">В конце эфира — то, чего не было на девичнике.<br>Только для тех, кто будет онлайн</div>
+ <div class="abs" style="left:0;right:0;bottom:90px;text-align:center"><span class=pill>Воскресенье, 13:00 по МСК</span></div>`),
+'06_сегодня_секрет': P(`
+ <div class="abs" style="left:0;right:0;top:110px;text-align:center"><span class=tag>Сегодня · 13:00 по МСК</span></div>
+ <div class="abs gold" style="left:70px;right:70px;top:230px;text-align:center;font-size:84px;line-height:1.02">Сегодня ты услышишь<br>то, о чём подруги<br>тебе не скажут</div>
+ <div class="abs red" style="left:0;right:0;top:600px;text-align:center;font-size:76px">…и мама тоже ♡</div>
+ <div class="abs it" style="left:120px;right:120px;top:750px;text-align:center;font-size:42px;line-height:1.2">Генеральная уборка в личной жизни.<br>Записи не будет</div>
+ <div class="abs" style="left:0;right:0;bottom:80px;text-align:center"><span class=pill2>Наливай чай, бери блокнот</span></div>`),
 };
 (async () => {
   const b = await chromium.launch(); const pg = await b.newPage({ viewport: { width: 1080, height: 1080 } });

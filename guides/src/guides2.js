@@ -26,10 +26,10 @@ html{background:#140e0a}
 body{margin:0;color:#efe3cf;font-family:Mont,sans-serif;font-size:25px;line-height:1.6}
 .cover{position:relative;width:${W}px;height:${H}px;overflow:hidden;page-break-after:always;background:#140e0a}
 .cover .bg{position:absolute;inset:0;background:url(file://${IMG}/bgblur.jpg) center/cover;filter:brightness(.5)}
-.cover .ph{position:absolute;right:56px;top:300px;width:520px;height:1180px;border-radius:30px;overflow:hidden;border:4px solid rgba(217,183,126,.75);box-shadow:0 30px 80px rgba(0,0,0,.6);transform:rotate(2deg)}
+.cover .ph{position:relative;flex:1;min-height:0;width:960px;margin-top:10px;border-radius:30px;overflow:hidden;border:4px solid rgba(217,183,126,.75);box-shadow:0 30px 80px rgba(0,0,0,.6);transform:rotate(-1deg)}
 .cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .tag{display:inline-block;border:2px solid #d9b77e;border-radius:50px;padding:10px 34px;font-family:Corm;font-weight:600;font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:#f3e6d0}
-.gold{font-family:Corm;font-weight:700;text-transform:uppercase;line-height:.95;color:#f1d9ae;text-shadow:0 4px 20px rgba(0,0,0,.5)}
+.gold{text-wrap:balance;font-family:Corm;font-weight:700;text-transform:uppercase;line-height:.95;color:#f1d9ae;text-shadow:0 4px 20px rgba(0,0,0,.5)}
 .red{font-family:Cav;font-weight:700;color:#e0242b;line-height:1}
 .abs{position:absolute}
 .pill{display:inline-block;border-radius:60px;padding:18px 46px;font-family:Corm;font-weight:700;font-size:36px;letter-spacing:.06em;text-transform:uppercase;color:#1a0f08;background:linear-gradient(180deg,#fff0d4,#d9b77e)}
@@ -51,9 +51,9 @@ hr{border:0;height:0;margin:30px 0}
 // split into guides
 const parts = SRC.split(/\n# ГАЙД \d\. /).slice(1);
 const META = [
-  { photo: 's_mirror.jpg', pos: '28% 30%', red: '20 вопросов,<br>которые покажут,<br>твой ли это мужчина', pics: { 'БЛОК 2.': 'p_man.jpg', 'БЛОК 4.': 's_walk.jpg' } },
-  { photo: 's_flowers.jpg', pos: '45% 40%', red: 'готовые сообщения,<br>чтобы он сам захотел<br>тебя радовать ♡', pics: { 'Готовые сообщения': 'p_bags.jpg', 'Когда он сделал': 's_blueflowers.jpg', 'Синдром': 'p_roses_gifts.jpg' } },
-  { photo: 'p_full.jpg', pos: '50% 0', red: '15 сигналов,<br>что ты соглашаешься<br>на меньшее', pics: { '15 сигналов': 's_pajama.jpg' } },
+  { photo: 'n_marble.jpg', pos: '50% 18%', red: '20 вопросов, которые покажут, твой ли это мужчина', pics: { 'БЛОК 2.': 'p_man.jpg' } },
+  { photo: 'n_selfie.jpg', pos: '50% 30%', red: 'готовые сообщения, чтобы он сам захотел тебя радовать ♡', pics: { 'Готовые сообщения': 'n_gifts.jpg', 'Когда он сделал': 'n_balloons.jpg', 'Синдром': 'p_bags.jpg' } },
+  { photo: 'n_yacht.jpg', pos: '50% 35%', red: '15 сигналов, что ты соглашаешься на меньшее', pics: { '15 сигналов': 'n_roses.jpg' } },
 ];
 function body(md, meta) {
   md = md.replace(/^.*\n### .*\n/, ''); // drop title + subtitle lines (on cover)
@@ -78,12 +78,12 @@ function body(md, meta) {
     const m = META[i];
     const words = title.split(' ');
     const cover = `<div class="cover"><div class="bg"></div>
-      <div class="ph"><img src="file://${IMG}/${m.photo}" style="object-position:${m.pos}"></div>
-      <div class="abs" style="left:90px;top:110px"><span class="tag">Подарок с эфира · гайд ${i + 1}</span></div>
-      <div class="abs" style="left:84px;top:230px;width:570px;display:flex;flex-direction:column;gap:60px">
-        <div class="gold" style="font-size:${Math.max(...title.split(/\s+/).map(w => w.length)) >= 10 ? 72 : (title.length > 26 ? 76 : 86)}px">${title}</div>
-        <div class="red" style="font-size:60px;transform:rotate(-4deg);transform-origin:left">${m.red}</div></div>
-      <div class="abs" style="left:0;right:0;bottom:120px;text-align:center"><span class="pill">Ксюша · @iamheyksusha</span></div></div>`;
+      <div class="abs" style="left:80px;right:80px;top:80px;bottom:175px;display:flex;flex-direction:column;align-items:center;gap:34px;text-align:center">
+        <span class="tag">Подарок с эфира · гайд ${i + 1}</span>
+        <div class="gold" style="font-size:${title.length > 22 ? 98 : 112}px">${title}</div>
+        <div class="red" style="font-size:58px;max-width:860px;text-wrap:balance;transform:rotate(-2deg)">${m.red}</div>
+        <div class="ph"><img src="file://${IMG}/${m.photo}" style="object-position:${m.pos}"></div></div>
+      <div class="abs" style="left:0;right:0;bottom:70px;text-align:center"><span class="pill">Ксюша · @iamheyksusha</span></div></div>`;
     const html = `<!doctype html><html><head><meta charset=utf-8><style>${css}</style></head><body><div class="fixbg"></div>${cover}<table class="flow"><thead><tr><td><div style="height:100px"></div></td></tr></thead><tbody><tr><td>${body(part, m)}</td></tr></tbody><tfoot><tr><td><div style="height:110px"></div></td></tr></tfoot></table></body></html>`;
     const tmp = path.join(OUT, `_g${i + 1}.html`); fs.writeFileSync(tmp, html);
     await pg.goto('file://' + tmp); await pg.evaluate(() => document.fonts.ready); await pg.waitForTimeout(300);

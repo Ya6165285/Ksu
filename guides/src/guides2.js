@@ -25,11 +25,11 @@ table.flow{border-collapse:collapse;width:100%}table.flow td{padding:0 120px}
 html{background:#140e0a}
 body{margin:0;color:#efe3cf;font-family:Mont,sans-serif;font-size:25px;line-height:1.6}
 .cover{position:relative;width:${W}px;height:${H}px;overflow:hidden;page-break-after:always;background:#140e0a}
-.cover .bg{position:absolute;inset:0;background:url(file://${IMG}/bgblur.jpg) center/cover;filter:brightness(.5)}
-.cover .ph{position:relative;flex:1;min-height:0;width:960px;margin-top:10px;border-radius:30px;overflow:hidden;border:4px solid rgba(217,183,126,.75);box-shadow:0 30px 80px rgba(0,0,0,.6);transform:rotate(-1deg)}
+.cover .bg{position:absolute;inset:0;background:url(file://${IMG}/bgblur_dark.jpg) center/cover}
+.cover .ph{position:relative;flex:1;min-height:0;width:960px;margin-top:10px;border-radius:30px;overflow:hidden;border:4px solid #c9a46a;transform:none}
 .cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .tag{display:inline-block;border:2px solid #d9b77e;border-radius:50px;padding:10px 34px;font-family:Corm;font-weight:600;font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:#f3e6d0}
-.gold{text-wrap:balance;font-family:Corm;font-weight:700;text-transform:uppercase;line-height:.95;color:#f1d9ae;text-shadow:0 4px 20px rgba(0,0,0,.5)}
+.gold{text-wrap:balance;font-family:Corm;font-weight:700;text-transform:uppercase;line-height:.95;color:#f1d9ae}
 .red{font-family:Cav;font-weight:700;color:#e0242b;line-height:1}
 .abs{position:absolute}
 .pill{display:inline-block;border-radius:60px;padding:18px 46px;font-family:Corm;font-weight:700;font-size:36px;letter-spacing:.06em;text-transform:uppercase;color:#1a0f08;background:linear-gradient(180deg,#fff0d4,#d9b77e)}
@@ -45,7 +45,7 @@ hr{border:0;height:0;margin:30px 0}
 .q{background:rgba(255,255,255,.04);border:1.5px solid rgba(217,183,126,.35);border-radius:22px;padding:26px 32px 12px;margin:0 0 26px;page-break-inside:avoid}
 .q>p:first-child strong{font-family:Corm;font-weight:700;font-size:38px;line-height:1.15;color:#f6dcae}
 .pic{margin:24px 0 30px;page-break-inside:avoid;text-align:center}
-.pic img{max-width:78%;max-height:720px;border-radius:24px;border:3px solid rgba(217,183,126,.6);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.pic img{max-width:78%;max-height:720px;border-radius:24px;border:3px solid #b8955e}
 .final{font-family:Cav;font-weight:700;font-size:58px;color:#e0242b;text-align:center;margin:40px 0;line-height:1.1}
 `;
 // split into guides
@@ -53,7 +53,7 @@ const parts = SRC.split(/\n# ГАЙД \d\. /).slice(1);
 const META = [
   { photo: 'n_marble.jpg', pos: '50% 18%', red: '20 вопросов, которые покажут, твой ли это мужчина', pics: { 'БЛОК 2.': 'p_man.jpg' } },
   { photo: 'n_selfie.jpg', pos: '50% 30%', red: 'готовые сообщения, чтобы он сам захотел тебя радовать ♡', pics: { 'Готовые сообщения': 'n_gifts.jpg', 'Когда он сделал': 'n_balloons.jpg', 'Синдром': 'p_bags.jpg' } },
-  { photo: 'n_yacht.jpg', pos: '50% 35%', red: '15 сигналов, что ты соглашаешься на меньшее', pics: { '15 сигналов': 'n_roses.jpg' } },
+  { photo: 'n_yacht.jpg', pos: '50% 20%', red: '15 сигналов, что ты соглашаешься на меньшее', pics: { '15 сигналов': 'n_roses.jpg' } },
 ];
 function body(md, meta) {
   md = md.replace(/^.*\n### .*\n/, ''); // drop title + subtitle lines (on cover)

@@ -57,23 +57,44 @@ const covers = {
 '01_приглашение': P(`
  <div class="abs" style="left:0;right:0;top:46px;text-align:center"><span class=tag>Женская встреча · Воскресенье, 13:00 МСК</span></div>
  <div class="abs gold" style="left:0;right:0;top:118px;text-align:center;font-size:84px;white-space:nowrap">Генеральная уборка</div>
- <div class="abs it" style="left:0;right:0;top:215px;text-align:center;font-size:42px">в личной жизни перед 2027 годом</div>
- <div class="abs red" style="left:0;right:0;top:300px;text-align:center;font-size:66px;white-space:nowrap;transform:rotate(-2deg)">3 подарка — тем, кто будет до конца ♡</div>
-<div class="abs" style="left:48px;top:430px;width:310px;height:540px;transform:rotate(-3deg);border-radius:18px;overflow:hidden;border:3px solid #d9b77e;background:#140e0a">
-  <img src="file://${D}/n_marble.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%">
-  <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,10,.95) 0%,rgba(20,14,10,.75) 30%,rgba(20,14,10,0) 55%)"></div>
-  <div style="position:absolute;left:0;right:0;top:16px;text-align:center"><span style="display:inline-block;border:1.5px solid #d9b77e;border-radius:30px;padding:3px 14px;font-family:Corm;font-weight:600;font-size:17px;letter-spacing:.12em;color:#f3e6d0;text-transform:uppercase;background:rgba(20,14,10,.6)">Гайд 1</span></div>
-  <div style="position:absolute;left:14px;right:14px;bottom:22px;text-align:center;font-family:Corm;font-weight:700;font-size:36px;line-height:.98;text-transform:uppercase;color:#f6dcae">Спроси это, прежде чем влюбиться</div>
-</div><div class="abs" style="left:385px;top:430px;width:310px;height:540px;transform:rotate(0deg);border-radius:18px;overflow:hidden;border:3px solid #d9b77e;background:#140e0a">
-  <img src="file://${D}/n_selfie.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%">
-  <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,10,.95) 0%,rgba(20,14,10,.75) 30%,rgba(20,14,10,0) 55%)"></div>
-  <div style="position:absolute;left:0;right:0;top:16px;text-align:center"><span style="display:inline-block;border:1.5px solid #d9b77e;border-radius:30px;padding:3px 14px;font-family:Corm;font-weight:600;font-size:17px;letter-spacing:.12em;color:#f3e6d0;text-transform:uppercase;background:rgba(20,14,10,.6)">Гайд 2</span></div>
-  <div style="position:absolute;left:14px;right:14px;bottom:22px;text-align:center;font-family:Corm;font-weight:700;font-size:36px;line-height:.98;text-transform:uppercase;color:#f6dcae">Как просить, не выпрашивая</div>
-</div><div class="abs" style="left:722px;top:430px;width:310px;height:540px;transform:rotate(3deg);border-radius:18px;overflow:hidden;border:3px solid #d9b77e;background:#140e0a">
-  <img src="file://${D}/n_yacht.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%">
-  <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,10,.95) 0%,rgba(20,14,10,.75) 30%,rgba(20,14,10,0) 55%)"></div>
-  <div style="position:absolute;left:0;right:0;top:16px;text-align:center"><span style="display:inline-block;border:1.5px solid #d9b77e;border-radius:30px;padding:3px 14px;font-family:Corm;font-weight:600;font-size:17px;letter-spacing:.12em;color:#f3e6d0;text-transform:uppercase;background:rgba(20,14,10,.6)">Гайд 3</span></div>
-  <div style="position:absolute;left:14px;right:14px;bottom:22px;text-align:center;font-family:Corm;font-weight:700;font-size:36px;line-height:.98;text-transform:uppercase;color:#f6dcae">Ты не любишь, ты терпишь</div>
+ <div class="abs it" style="left:0;right:0;top:205px;text-align:center;font-size:52px">в личной жизни перед 2027 годом</div>
+ <div class="abs red" style="left:0;right:0;top:296px;text-align:center;font-size:66px;white-space:nowrap;transform:rotate(-2deg)">3 подарка — тем, кто будет до конца ♡</div>
+<div class="abs" style="left:52px;top:440px;width:300px;height:520px;transform:rotate(-4deg)">
+  <div style="position:absolute;left:10px;top:10px;width:300px;height:520px;border-radius:6px 16px 16px 6px;background:repeating-linear-gradient(90deg,#f4ede0 0 3px,#d8cfbf 3px 4px);box-shadow:0 24px 40px rgba(0,0,0,.6)"></div>
+  <div style="position:absolute;left:5px;top:5px;width:300px;height:520px;border-radius:6px 16px 16px 6px;background:#efe6d6"></div>
+  <div style="position:absolute;inset:0;border-radius:6px 16px 16px 6px;overflow:hidden;background:#140e0a;box-shadow:inset 0 0 0 2px rgba(217,183,126,.8)">
+    <img src="file://${D}/n_marble.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,10,.95) 0%,rgba(20,14,10,.75) 30%,rgba(20,14,10,0) 55%)"></div>
+    <div style="position:absolute;left:0;top:0;bottom:0;width:22px;background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(255,255,255,.18) 60%,rgba(0,0,0,.25))"></div>
+    <div style="position:absolute;left:26px;top:18px"><span style="display:inline-block;border:1.5px solid #d9b77e;border-radius:30px;padding:3px 14px;font-family:Corm;font-weight:600;font-size:17px;letter-spacing:.12em;color:#f3e6d0;text-transform:uppercase;background:rgba(20,14,10,.6)">Гайд 1</span></div>
+    <div style="position:absolute;left:30px;right:14px;bottom:24px;text-align:center;font-family:Corm;font-weight:700;font-size:36px;line-height:.98;text-transform:uppercase;color:#f6dcae">Спроси это, прежде чем влюбиться</div>
+    <div style="position:absolute;right:-60px;top:46px;width:260px;height:30px;transform:rotate(45deg);background:linear-gradient(180deg,#e0414f,#9d1020 55%,#e0414f);box-shadow:0 3px 8px rgba(0,0,0,.4)"></div>
+  </div>
+  <svg style="position:absolute;right:-26px;top:-34px;width:120px;height:90px;z-index:6;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))" viewBox="0 0 144 84"><defs><linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0414f"/><stop offset="1" stop-color="#9d1020"/></linearGradient></defs><path d="M72 64 C42 8,4 12,10 46 C14 68,50 68,72 64Z" fill="url(#b1)"/><path d="M72 64 C102 8,140 12,134 46 C130 68,94 68,72 64Z" fill="url(#b1)"/><path d="M64 64 L44 84 M80 64 L100 84" stroke="#9d1020" stroke-width="13" stroke-linecap="round"/><rect x="59" y="51" width="26" height="24" rx="7" fill="#9d1020"/></svg>
+</div><div class="abs" style="left:390px;top:440px;width:300px;height:520px;transform:rotate(0deg)">
+  <div style="position:absolute;left:10px;top:10px;width:300px;height:520px;border-radius:6px 16px 16px 6px;background:repeating-linear-gradient(90deg,#f4ede0 0 3px,#d8cfbf 3px 4px);box-shadow:0 24px 40px rgba(0,0,0,.6)"></div>
+  <div style="position:absolute;left:5px;top:5px;width:300px;height:520px;border-radius:6px 16px 16px 6px;background:#efe6d6"></div>
+  <div style="position:absolute;inset:0;border-radius:6px 16px 16px 6px;overflow:hidden;background:#140e0a;box-shadow:inset 0 0 0 2px rgba(217,183,126,.8)">
+    <img src="file://${D}/n_selfie.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,10,.95) 0%,rgba(20,14,10,.75) 30%,rgba(20,14,10,0) 55%)"></div>
+    <div style="position:absolute;left:0;top:0;bottom:0;width:22px;background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(255,255,255,.18) 60%,rgba(0,0,0,.25))"></div>
+    <div style="position:absolute;left:26px;top:18px"><span style="display:inline-block;border:1.5px solid #d9b77e;border-radius:30px;padding:3px 14px;font-family:Corm;font-weight:600;font-size:17px;letter-spacing:.12em;color:#f3e6d0;text-transform:uppercase;background:rgba(20,14,10,.6)">Гайд 2</span></div>
+    <div style="position:absolute;left:30px;right:14px;bottom:24px;text-align:center;font-family:Corm;font-weight:700;font-size:36px;line-height:.98;text-transform:uppercase;color:#f6dcae">Как просить, не выпрашивая</div>
+    <div style="position:absolute;right:-60px;top:46px;width:260px;height:30px;transform:rotate(45deg);background:linear-gradient(180deg,#f3d996,#b8893c 55%,#f3d996);box-shadow:0 3px 8px rgba(0,0,0,.4)"></div>
+  </div>
+  <svg style="position:absolute;right:-26px;top:-34px;width:120px;height:90px;z-index:6;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))" viewBox="0 0 144 84"><defs><linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d996"/><stop offset="1" stop-color="#b8893c"/></linearGradient></defs><path d="M72 64 C42 8,4 12,10 46 C14 68,50 68,72 64Z" fill="url(#b2)"/><path d="M72 64 C102 8,140 12,134 46 C130 68,94 68,72 64Z" fill="url(#b2)"/><path d="M64 64 L44 84 M80 64 L100 84" stroke="#b8893c" stroke-width="13" stroke-linecap="round"/><rect x="59" y="51" width="26" height="24" rx="7" fill="#b8893c"/></svg>
+</div><div class="abs" style="left:728px;top:440px;width:300px;height:520px;transform:rotate(4deg)">
+  <div style="position:absolute;left:10px;top:10px;width:300px;height:520px;border-radius:6px 16px 16px 6px;background:repeating-linear-gradient(90deg,#f4ede0 0 3px,#d8cfbf 3px 4px);box-shadow:0 24px 40px rgba(0,0,0,.6)"></div>
+  <div style="position:absolute;left:5px;top:5px;width:300px;height:520px;border-radius:6px 16px 16px 6px;background:#efe6d6"></div>
+  <div style="position:absolute;inset:0;border-radius:6px 16px 16px 6px;overflow:hidden;background:#140e0a;box-shadow:inset 0 0 0 2px rgba(217,183,126,.8)">
+    <img src="file://${D}/n_yacht.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,10,.95) 0%,rgba(20,14,10,.75) 30%,rgba(20,14,10,0) 55%)"></div>
+    <div style="position:absolute;left:0;top:0;bottom:0;width:22px;background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(255,255,255,.18) 60%,rgba(0,0,0,.25))"></div>
+    <div style="position:absolute;left:26px;top:18px"><span style="display:inline-block;border:1.5px solid #d9b77e;border-radius:30px;padding:3px 14px;font-family:Corm;font-weight:600;font-size:17px;letter-spacing:.12em;color:#f3e6d0;text-transform:uppercase;background:rgba(20,14,10,.6)">Гайд 3</span></div>
+    <div style="position:absolute;left:30px;right:14px;bottom:24px;text-align:center;font-family:Corm;font-weight:700;font-size:36px;line-height:.98;text-transform:uppercase;color:#f6dcae">Ты не любишь, ты терпишь</div>
+    <div style="position:absolute;right:-60px;top:46px;width:260px;height:30px;transform:rotate(45deg);background:linear-gradient(180deg,#e0414f,#9d1020 55%,#e0414f);box-shadow:0 3px 8px rgba(0,0,0,.4)"></div>
+  </div>
+  <svg style="position:absolute;right:-26px;top:-34px;width:120px;height:90px;z-index:6;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))" viewBox="0 0 144 84"><defs><linearGradient id="b3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0414f"/><stop offset="1" stop-color="#9d1020"/></linearGradient></defs><path d="M72 64 C42 8,4 12,10 46 C14 68,50 68,72 64Z" fill="url(#b3)"/><path d="M72 64 C102 8,140 12,134 46 C130 68,94 68,72 64Z" fill="url(#b3)"/><path d="M64 64 L44 84 M80 64 L100 84" stroke="#9d1020" stroke-width="13" stroke-linecap="round"/><rect x="59" y="51" width="26" height="24" rx="7" fill="#9d1020"/></svg>
 </div>`),
 '02_красный_флаг': P(`
  <div class="photo" style="right:70px;top:90px;width:360px;height:360px;border-color:rgba(216,22,28,.6)"><img src="file://${D}/man.jpg" style="filter:brightness(.9)"></div>

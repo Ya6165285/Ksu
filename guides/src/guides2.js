@@ -51,9 +51,9 @@ hr{border:0;height:0;margin:30px 0}
 // split into guides
 const parts = SRC.split(/\n# ГАЙД \d\. /).slice(1);
 const META = [
-  { photo: 'p_full.jpg', red: '20 вопросов,<br>которые покажут,<br>твой ли это мужчина', pics: { 'БЛОК 2.': 'p_man.jpg', 'БЛОК 4.': 'p_face.jpg' } },
-  { photo: 'p_face.jpg', red: 'готовые сообщения,<br>чтобы он сам захотел<br>тебя радовать ♡', pics: { 'Готовые сообщения': 'p_bags.jpg', 'Когда он сделал': 'p_roses_gifts.jpg' } },
-  { photo: 'p_full.jpg', red: '15 сигналов,<br>что ты соглашаешься<br>на меньшее', pics: { '15 сигналов': 'p_roses_gifts.jpg' } },
+  { photo: 's_mirror.jpg', pos: '28% 30%', red: '20 вопросов,<br>которые покажут,<br>твой ли это мужчина', pics: { 'БЛОК 2.': 'p_man.jpg', 'БЛОК 4.': 's_walk.jpg' } },
+  { photo: 's_flowers.jpg', pos: '45% 40%', red: 'готовые сообщения,<br>чтобы он сам захотел<br>тебя радовать ♡', pics: { 'Готовые сообщения': 'p_bags.jpg', 'Когда он сделал': 's_blueflowers.jpg', 'Синдром': 'p_roses_gifts.jpg' } },
+  { photo: 'p_full.jpg', pos: '50% 0', red: '15 сигналов,<br>что ты соглашаешься<br>на меньшее', pics: { '15 сигналов': 's_pajama.jpg' } },
 ];
 function body(md, meta) {
   md = md.replace(/^.*\n### .*\n/, ''); // drop title + subtitle lines (on cover)
@@ -78,7 +78,7 @@ function body(md, meta) {
     const m = META[i];
     const words = title.split(' ');
     const cover = `<div class="cover"><div class="bg"></div>
-      <div class="ph"><img src="file://${IMG}/${m.photo}"></div>
+      <div class="ph"><img src="file://${IMG}/${m.photo}" style="object-position:${m.pos}"></div>
       <div class="abs" style="left:90px;top:110px"><span class="tag">Подарок с эфира · гайд ${i + 1}</span></div>
       <div class="abs" style="left:84px;top:230px;width:570px;display:flex;flex-direction:column;gap:60px">
         <div class="gold" style="font-size:${Math.max(...title.split(/\s+/).map(w => w.length)) >= 10 ? 72 : (title.length > 26 ? 76 : 86)}px">${title}</div>

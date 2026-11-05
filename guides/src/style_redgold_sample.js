@@ -8,6 +8,8 @@ ${ff('Mont','montserrat/files/montserrat-cyrillic-500-normal.woff2','font-weight
 ${ff('Mont','montserrat/files/montserrat-cyrillic-600-normal.woff2','font-weight:600;')}
 ${ff('Mont','montserrat/files/montserrat-cyrillic-700-normal.woff2','font-weight:700;')}
 ${ff('Mont','montserrat/files/montserrat-latin-600-normal.woff2','font-weight:600;unicode-range:U+0000-00FF,U+2000-206F;')}
+${ff('Cav','caveat/files/caveat-cyrillic-700-normal.woff2','font-weight:700;')}
+.hw{position:absolute;font-family:Cav;font-weight:700;color:#e2242b;line-height:1;transform:rotate(-4deg)}
 :root{--pink:#e8c886;--pink2:#c9a46a;--red:#d91f2a}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#efe3cf;font-family:Mont;background:#120c08}
@@ -35,19 +37,19 @@ const S={
  <div class="gridc" style="top:390px;grid-template-columns:1fr 1fr">
  <div class="c"><div class="k">Самооценка</div><div class="t">«Какая я»</div><div class="d">Красивая, умная, успешная.<br>Зависит от чужого мнения.<br>Сегодня высокая — завтра упала.</div></div>
  <div class="c hl"><div class="k">Самоценность</div><div class="t">«Я ценна, потому что я есть»</div><div class="d" style="color:#eee">Не зависит ни от внешности,<br>ни от денег, ни от мужчины рядом.</div></div></div>
- <div class="result">Можно быть красивой — и всё равно терпеть</div>`,'Остановка 1'),
+ <div class="result">Можно быть красивой — и всё равно терпеть</div><div class="hw" style="right:150px;top:300px;font-size:54px">вот где разница ↓</div>`,'Остановка 1'),
 'b':P(`<div class="tag">Остановка 1 · Самоценность</div><div class="h">6 признаков <span class="p">низкой самоценности</span></div>
  <div class="gridc" style="top:350px;grid-template-columns:1fr 1fr 1fr">
  ${[['01','Радуешься «крохам»'],['02','Стыдно просить'],['03','Боишься, что найдёт лучше'],['04','Доказываешь, что хорошая'],['05','Его настроение важнее твоего'],['06','Выбираешь его — против себя']].map(([n,t])=>`<div class="c"><span class="num">${n}</span><div class="t">${t}</div></div>`).join('')}</div>
- <div class="result">Сколько про тебя? Напиши цифру в чат</div>`,'Остановка 1'),
+ <div class="result">Сколько про тебя? Напиши цифру в чат</div><div class="hw" style="right:150px;top:278px;font-size:46px">у меня было 5 из 6 ♡</div>`,'Остановка 1'),
 'c':P(`<div class="tag">Остановка 2 · Привычка терпеть</div><div class="h">Формула <span class="p">границы</span></div>
  <div class="gridc" style="top:340px;grid-template-columns:repeat(4,1fr)">
  ${[['1','Когда ты…','что он делает'],['2','Я чувствую…','твоё чувство'],['3','Мне важно…','твоя потребность'],['4','Давай…','как по-другому']].map(([n,t,d],i)=>`<div class="c ${i==3?'hl':''}"><span class="num">${n}</span><div class="t">${t}</div><div class="d">${d}</div></div>`).join('')}</div>
- <div class="c" style="position:absolute;left:120px;right:120px;top:660px;border-left:5px solid var(--red);font:500 34px/1.45 Mont;color:#fff">«Когда ты пропадаешь на весь вечер, я волнуюсь. Мне важно знать, что ты в порядке. <b style="color:#f3dcae">Давай ты просто напишешь "задерживаюсь"?</b>»</div>`,'Остановка 2'),
+ <div class="c" style="position:absolute;left:120px;right:120px;top:660px;border-left:5px solid var(--red);font:500 34px/1.45 Mont;color:#fff">«Когда ты пропадаешь на весь вечер, я волнуюсь. Мне важно знать, что ты в порядке. <b style="color:#f3dcae">Давай ты просто напишешь "задерживаюсь"?</b>»</div><div class="hw" style="right:140px;top:200px;font-size:58px">скринь, пригодится ♡</div><div class="hw" style="left:130px;top:880px;font-size:46px;transform:rotate(-2deg)">↑ без обвинений и крика — просто факт и просьба</div>`,'Остановка 2'),
 'd':P(`<div class="tag">Остановка 3 · Синдром «я сама»</div><div class="h" style="right:760px">Почему тебе <span class="p">трудно просить</span></div>
  <div class="gridc" style="top:400px;right:760px;grid-template-columns:1fr;gap:16px">
  ${[['01','«Просить — значит быть слабой»'],['02','«Попрошу — буду должна»'],['03','Страх отказа'],['04','«Хорошая девочка не хочет многого»'],['05','Мама всё тащила сама']].map(([n,t])=>`<div class="c" style="padding:18px 28px;display:flex;gap:24px;align-items:center"><span class="num">${n}</span><div class="t" style="margin:0;font-size:34px">${t}</div></div>`).join('')}</div>
- <div class="ph"><img src="file://${IMG}/n_gifts.jpg"></div><div class="tape" style="right:560px;top:80px"></div><div class="tape" style="right:90px;bottom:70px"></div>`,'Остановка 3'),
+ <div class="ph"><img src="file://${IMG}/n_gifts.jpg"></div><div class="tape" style="right:560px;top:80px"></div><div class="hw" style="left:150px;top:948px;font-size:44px;transform:rotate(-2deg)">узнала себя? ставь «+» в чат</div><div class="tape" style="right:90px;bottom:70px"></div>`,'Остановка 3'),
 };
 (async()=>{const b=await chromium.launch();const pg=await b.newPage({viewport:{width:1920,height:1080}});
 for(const [k,h] of Object.entries(S)){fs.writeFileSync(OUT+'/t.html',h);await pg.goto('file://'+OUT+'/t.html');await pg.evaluate(()=>document.fonts.ready);await pg.screenshot({path:OUT+'/'+k+'.jpg',type:'jpeg',quality:88});}

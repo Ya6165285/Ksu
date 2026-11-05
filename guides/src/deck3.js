@@ -134,7 +134,7 @@ function slide(s, n, total) {
       <div class="hw" style="left:130px;top:905px;font-size:44px">внешность та же — изменилось то, что я считаю нормой</div>`);
     case 'review': return wrap(`${tag('Уже работает')}${H(['После', 'прошлого эфира'])}
       <div class="abs" style="left:120px;top:320px;width:1000px"><img src="file://${IMG}/review_solved.jpg" style="width:100%;border-radius:26px;border:3px solid #c9a46a;box-shadow:0 20px 60px rgba(0,0,0,.6)"></div>
-      <div class="c abs" style="right:120px;top:340px;width:560px"><div class="k" style="font-size:96px;color:var(--gold)">[3]</div><div class="t" style="margin-top:8px">девочки уже в новом потоке «Девушки на миллион»</div></div>
+      <div class="c abs" style="right:120px;top:340px;width:560px"><div class="k" style="font-size:96px;color:var(--gold)">3 из 6</div><div class="t" style="margin-top:8px">мест в новом потоке «Девушки на миллион» уже занято</div></div>
       <div class="hw" style="left:140px;top:900px;font-size:54px">«решила свой запрос прямо на эфире» ♡</div>`);
     case 'case': {
       const im = x => { const [f, p] = x.split('|'); return `<img src="file://${IMG}/${f}" style="object-position:${p || '50% 25%'}">`; };

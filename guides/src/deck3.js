@@ -58,7 +58,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#efe3cf;
 `;
 const PHOTOS = ['n_marble.jpg', 's_flowers.jpg', 'n_gifts.jpg', 'n_selfie.jpg', 'p_full.jpg', 'n_balloons.jpg', 's_mirror.jpg', 'n_roses.jpg', 'n_yacht.jpg', 's_pajama.jpg', 'p_bags.jpg', 's_walk.jpg', 'p_roses_gifts.jpg', 'p_face.jpg', 's_blueflowers.jpg', 'o_after.jpg'];
 let seed = 11; const R = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-const photo = (f, pos = '50% 25%', extra = '') => `<div class="ph" style="${extra}"><img src="file://${IMG}/${f}" style="object-position:${pos}"></div><div class="tape" style="right:${extra.includes('left') ? 'auto' : '560px'};top:70px;transform:rotate(-24deg)"></div>`;
+const photo = (f0, pos0 = '50% 25%', extra = '') => { const [f, p2] = f0.split('|'); const pos = p2 || pos0; return `<div class="ph" style="${extra}"><img src="file://${IMG}/${f}" style="object-position:${pos}"></div><div class="tape" style="right:${extra.includes('left') ? 'auto' : '560px'};top:70px;transform:rotate(-24deg)"></div>`; };
 const H = (h, right = 120) => `<div class="h" style="right:${right}px">${h[0]} <span class="p">${h[1] || ''}</span></div>`;
 const note = n => n ? `<div class="hw" style="${n[1]}">${n[0]}</div>` : '';
 const tag = t => `<div class="tag">${t}</div>`;
@@ -94,7 +94,7 @@ function slide(s, n, total) {
         <div class="c hl"><div class="k">Новая я · 2027</div>${['Знаю свою ценность', 'Говорю «мне важно» — и меня слышат', 'Принимаю заботу без вины', 'Рядом мужчина, который выбирает меня'].map(x => `<div class="d" style="font-size:30px;margin-top:14px;color:#fff3dc">✔ ${x}</div>`).join('')}</div></div>
       ${tree(1500, 400, 560)}<div class="hw" style="left:130px;top:930px">оставь старую себя в 2026-м ♡</div>`);
     case 'route': {
-      const k = s.k, ph = PHOTOS[(k * 3 + 2) % PHOTOS.length];
+      const k = s.k, ph = ({ 3: 'n_selfie.jpg', 5: 'me_blue.jpg' })[k] || PHOTOS[(k * 3 + 2) % PHOTOS.length];
       const hdr = k === 0 ? ['Маршрут', 'генеральной уборки'] : k === 6 ? ['Твой маршрут', 'пройден'] : [`Остановка ${k}`, 'из 5'];
       return wrap(`${tag('Маршрут генеральной уборки')}${H(hdr, 760)}
         <div class="gridc abs" style="left:120px;right:760px;top:${k === 0 || k === 6 ? 330 : 290}px;gap:14px">${STOPS.map((t, i) => { const st = k === 6 || i + 1 < k ? 'done' : i + 1 === k ? 'cur' : 'next'; return `<div class="c ${st === 'cur' ? 'hl' : ''}" style="padding:16px 26px;${st === 'done' ? 'opacity:.6' : ''}"><div class="row"><span class="num">${st === 'done' ? '✔' : '0' + (i + 1)}</span><div class="t">${t}</div>${st === 'cur' ? '<span class="hw" style="position:static;font-size:44px;margin-left:auto;transform:none">← мы здесь</span>' : ''}</div></div>`; }).join('')}
@@ -107,9 +107,9 @@ function slide(s, n, total) {
       const body = `<div class="gridc" style="grid-template-columns:repeat(${cols},1fr);${s.small ? 'gap:16px' : ''}">${s.items.map(it => s.small && it.n && it.d ? `<div class="c ${it.hl ? 'hl' : ''}" style="padding:18px 28px"><div class="row"><span class="num">${it.n}</span><div class="t">${it.t} <span style="font-weight:500;color:#d9c8ad">· ${it.d}</span></div></div></div>` : card(it)).join('')}</div>${s.example ? `<div class="c" style="border-left:5px solid var(--red);font:500 32px/1.45 Mont;color:#fff3dc">${s.example}</div>` : ''}`;
       return wrap(`${frame(s.tag, s.h, right, body, s.result, s.note)}${ph ? photo(ph) : ''}`);
     }
-    case 'twocol': return wrap(frame(s.tag, s.h, 120, `<div class="gridc" style="grid-template-columns:1fr 1fr">
+    case 'twocol': return wrap(frame(s.tag, s.h, s.ph ? 760 : 120, `<div class="gridc" style="grid-template-columns:${s.ph ? '1fr' : '1fr 1fr'}">
       <div class="c"><div class="k" style="color:#bfae95">${s.a[0]}</div>${s.a[1].map(x => `<div class="t" style="font-weight:600;font-size:40px;margin-top:18px;color:#d9c8ad">${s.neutral ? '•' : '✖'} ${x}</div>`).join('')}</div>
-      <div class="c hl"><div class="k">${s.b[0]}</div>${s.b[1].map(x => `<div class="t" style="font-weight:600;font-size:40px;margin-top:18px">${s.neutral ? '•' : '✔'} ${x}</div>`).join('')}</div></div>`, s.result, s.note));
+      <div class="c hl"><div class="k">${s.b[0]}</div>${s.b[1].map(x => `<div class="t" style="font-weight:600;font-size:40px;margin-top:18px">${s.neutral ? '•' : '✔'} ${x}</div>`).join('')}</div></div>`, s.result, s.note) + (s.ph ? photo(s.ph) : ''));
     case 'quote': return wrap(`${tag(s.tag)}${s.scr ? '<div class="hw" style="left:130px;top:950px;font-size:44px">📸 скринь этот слайд</div>' : ''}
       <div class="abs" style="left:120px;right:780px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:34px">
         <div style="font:700 84px/1.04 Osw;text-transform:uppercase;color:var(--cream)">${s.q}</div>
@@ -137,7 +137,8 @@ function slide(s, n, total) {
       <div class="c abs" style="right:120px;top:340px;width:560px"><div class="k" style="font-size:96px;color:var(--gold)">[3]</div><div class="t" style="margin-top:8px">девочки уже в новом потоке «Девушки на миллион»</div></div>
       <div class="hw" style="left:140px;top:900px;font-size:54px">«решила свой запрос прямо на эфире» ♡</div>`);
     case 'case': {
-      const ph = s.ph.length === 2 ? `<div class="ph" style="width:330px;right:340px;top:100px;bottom:auto;height:520px;transform:rotate(-3deg)"><img src="file://${IMG}/${s.ph[0]}"></div><div class="ph" style="width:330px;right:110px;top:400px;bottom:auto;height:540px;transform:rotate(3deg)"><img src="file://${IMG}/${s.ph[1]}"></div>` : photo(s.ph[0]);
+      const im = x => { const [f, p] = x.split('|'); return `<img src="file://${IMG}/${f}" style="object-position:${p || '50% 25%'}">`; };
+      const ph = s.ph.length === 2 ? `<div class="ph" style="width:330px;right:340px;top:100px;bottom:auto;height:520px;transform:rotate(-3deg)">${im(s.ph[0])}</div><div class="ph" style="width:330px;right:110px;top:400px;bottom:auto;height:540px;transform:rotate(3deg)">${im(s.ph[1])}</div>` : photo(s.ph[0]);
       return wrap(`${tag('Результаты учениц')}<div class="h" style="right:820px">${s.name}</div><div class="hw" style="left:124px;top:262px;font-size:54px;transform:rotate(-1deg)">${s.sub}</div>
         <div class="gridc abs" style="left:120px;right:820px;top:370px">
           <div class="c"><div class="k" style="font-size:30px;color:#bfae95">До</div><div class="t" style="font-weight:500;font-size:34px;margin-top:8px;color:#d9c8ad">${s.before}</div></div>
@@ -162,6 +163,20 @@ function slide(s, n, total) {
     case 'sit-a': return wrap(`${tag('Игра · Ситуация ' + s.i + ' из 5')}${H(['Как ответить', 'экологично'], 760)}
       <div class="c hl abs" style="left:120px;right:760px;top:320px;font:600 38px/1.4 Mont;color:#fff3dc;padding:40px 44px">${s.a}</div>
       ${photo(PHOTOS[(s.i * 5) % PHOTOS.length])}<div class="hw" style="left:130px;top:920px">спокойно, без обвинений — и граница сохранена ♡</div>`);
+    case 'students': return wrap(`${tag('Результаты учениц')}${H(['1 000+', 'учениц'], 1000)}
+      <div class="abs" style="left:120px;top:330px;width:760px;font:700 64px/1.1 Osw;text-transform:uppercase;color:var(--cream)">1 успех — везение.<br><span style="color:var(--red)">1 000 — система</span></div>
+      <div class="hw" style="left:130px;top:560px;font-size:52px">и следующей можешь быть ты ♡</div>
+      <div class="ph" style="left:900px;right:110px;width:auto;top:220px;bottom:200px;transform:rotate(1.5deg)"><img src="file://${IMG}/students.jpg" style="object-position:50% 50%"></div><div class="tape" style="left:880px;top:200px;transform:rotate(-20deg)"></div>`);
+    case 'reviews': {
+      const bgs = ['p_roses_gifts.jpg', 'n_roses.jpg', 's_blueflowers.jpg', 'n_gifts.jpg', 'n_balloons.jpg', 's_flowers.jpg'];
+      return wrap(`<div class="abs" style="inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;opacity:.38;filter:blur(2px)">${bgs.map(b => `<img src="file://${IMG}/${b}" style="width:100%;height:100%;object-fit:cover">`).join('')}</div><div class="abs" style="inset:0;background:rgba(18,12,8,.55)"></div>
+        ${tag('Отзывы')}${H(['Отзывы', 'о моих программах'])}
+        <img class="abs" src="file://${IMG}/rv_katya.jpg" style="left:120px;top:290px;width:620px;border-radius:20px;border:3px solid #c9a46a;transform:rotate(-2deg);box-shadow:0 20px 50px rgba(0,0,0,.6)">
+        <img class="abs" src="file://${IMG}/rv_carry.jpg" style="left:800px;top:270px;width:560px;border-radius:20px;border:3px solid #c9a46a;transform:rotate(2deg);box-shadow:0 20px 50px rgba(0,0,0,.6)">
+        <img class="abs" src="file://${IMG}/rv_changed.jpg" style="left:1180px;top:640px;width:600px;border-radius:20px;border:3px solid #c9a46a;transform:rotate(-2deg);box-shadow:0 20px 50px rgba(0,0,0,.6)">
+        <img class="abs" src="file://${IMG}/review_solved.jpg" style="left:200px;top:700px;width:600px;border-radius:20px;border:3px solid #c9a46a;transform:rotate(1.5deg);box-shadow:0 20px 50px rgba(0,0,0,.6)">
+        <div class="hw" style="left:860px;top:900px;font-size:52px">ради этих слов я и работаю ♡</div>`);
+    }
     case 'chain': return wrap(`${tag('Программа')}${H(['Отношения —', 'это цепочка'])}
       <div class="abs row" style="left:120px;right:120px;top:360px;gap:14px">${['Самоценность', 'Границы', 'Умение принимать', 'Свобода от прошлого', 'Новая среда'].map((t, i) => `<div class="c" style="flex:1;text-align:center;padding:30px 14px"><span class="num">${i + 1}</span><div class="t" style="font-size:30px;margin-top:14px">${t}</div></div>${i < 4 ? '<div style="font:700 50px Osw;color:var(--gold)">→</div>' : ''}`).join('')}</div>
       <div class="result">Выпадает одно звено — рвётся вся цепочка</div><div class="hw" style="left:130px;top:700px;font-size:46px">нужен не один секрет, а система ♡</div>`);
@@ -172,13 +187,13 @@ function slide(s, n, total) {
       <div class="gridc abs" style="left:120px;right:120px;top:300px;grid-template-columns:1fr 1fr;gap:18px">
         ${[['💎', 'Личный видеосозвон со мной', 'Твоя ситуация · моя консультация 50 000 ₽'], ['💎', 'Разбор «Тот или не тот?»', 'Переписка или прошлый мужчина + стратегия'], ['💎', 'Повторный поток бесплатно', 'Не увидишь результат — пройдёшь ещё раз'], ['🤍', 'Доступ навсегда + чат', 'Уроки остаются с тобой']].map(([e, t, d]) => `<div class="c"><div class="t">${e} ${t}</div><div class="d">${d}</div></div>`).join('')}
         <div class="c hl" style="grid-column:1/3"><div class="t">🤫 Секретный подарок — гайд «Где он?» по сайтам знакомств</div><div class="d" style="color:#f3e6d0">Как я знакомилась с обеспеченными мужчинами, которые меня одаривали. Только при покупке программы</div></div></div>
-      <div class="hw" style="left:130px;top:965px">бонусы сгорают через 24 часа</div>`);
+      <div class="hw" style="right:140px;top:110px">бонусы сгорают через 24 часа</div>`);
     case 'codeword': return wrap(`${tag('Подарки')}${H(['Кодовое', 'слово'], 600)}
       <div class="abs" style="left:120px;top:330px"><span class="word" style="font-size:120px;padding:20px 60px">УБОРКА</span></div>
-      <div class="abs" style="left:120px;top:540px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b> — и забирай 3 гайда</div>
-      <div class="gridc abs" style="left:120px;right:600px;top:640px;grid-template-columns:repeat(3,1fr);gap:16px">${['Спроси это', 'Как просить', 'Ты не любишь, ты терпишь'].map(t => `<div class="c" style="padding:18px 22px"><span class="num" style="height:36px;font-size:20px">ГАЙД</span><div class="t" style="font-size:28px;margin-top:10px">${t}</div></div>`).join('')}</div>
-      <div class="abs" style="right:140px;top:300px;text-align:center"><div class="qr"><img src="file://${IMG}/qr_iamheyksusha.png"></div></div>
-      <div class="hw" style="left:130px;top:880px;font-size:44px">🤫 секретный гайд «Где он?» — тем, кто в программе</div>`);
+      <div class="abs" style="left:120px;top:540px;width:780px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b><br>и забирай 3 гайда</div>
+      <div class="abs" style="left:980px;top:250px;display:flex;gap:26px">${[1, 2, 3].map((i) => `<img src="file://${IMG}/gcov${i}-1.jpg" style="width:270px;border-radius:14px;border:3px solid #c9a46a;box-shadow:0 20px 50px rgba(0,0,0,.6);transform:rotate(${(i - 2) * 4}deg)">`).join('')}</div>
+      <div class="abs" style="left:120px;top:700px;text-align:center"><div class="qr"><img src="file://${IMG}/qr_iamheyksusha.png" style="width:200px"></div></div>
+      <div class="hw" style="left:420px;top:820px;font-size:44px">🤫 секретный гайд «Где он?» — тем, кто в программе</div>`);
     case 'final': return wrap(`${garland()}${snow(80)}<div class="abs" style="left:120px;right:780px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:30px">
       <div style="font:700 60px/1.15 Osw;text-transform:uppercase;color:var(--cream)">Твоя жизнь меняется не когда появляется новый мужчина, а когда ты впервые <span style="color:var(--red)">выбираешь себя</span></div>
       <div class="hw" style="position:static;font-size:72px">В 2027-й заходит новая ты ♡</div><div class="hw" style="position:static;font-size:52px;transform:rotate(-1deg)">Ксюша</div></div>

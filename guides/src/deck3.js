@@ -161,8 +161,8 @@ function slide(s, n, total) {
       <div class="c abs" style="left:120px;right:900px;top:610px"><div class="k" style="font-size:30px;color:#bfae95">Ты:</div><div class="t" style="font-weight:500;color:#d9c8ad;margin-top:8px">${s.you}</div></div>
       <div class="result" style="left:1080px">Т или В? Пиши в чат</div>`);
     case 'sit-a': return wrap(`${tag('Игра · Ситуация ' + s.i + ' из 5')}${H(['Как ответить', 'экологично'], 760)}
-      <div class="c hl abs" style="left:120px;right:760px;top:320px;font:600 38px/1.4 Mont;color:#fff3dc;padding:40px 44px">${s.a}</div>
-      ${photo(PHOTOS[(s.i * 5) % PHOTOS.length])}<div class="hw" style="left:130px;top:920px">спокойно, без обвинений — и граница сохранена ♡</div>`);
+      <div class="c hl abs" style="left:120px;right:760px;top:${s.a2 ? 350 : 340}px;font:600 ${s.a2 ? 34 : 38}px/1.4 Mont;color:#fff3dc;padding:${s.a2 ? '30px 40px' : '40px 44px'}">${s.a}</div>${s.a2 ? `<div class="hw" style="left:130px;top:650px;font-size:42px">а когда он ответит ↓</div><div class="c abs" style="left:120px;right:760px;top:710px;font:600 34px/1.4 Mont;color:#fff3dc;padding:26px 40px;border-left:5px solid var(--red)">${s.a2}</div>` : ''}
+      ${photo(PHOTOS[(s.i * 5) % PHOTOS.length])}<div class="hw" style="left:130px;top:${s.a2 ? 900 : 880}px">спокойно, без обвинений — и граница сохранена ♡</div>`);
     case 'students': return wrap(`${tag('Результаты учениц')}${H(['1 000+', 'учениц'], 1000)}
       <div class="abs" style="left:120px;top:330px;width:760px;font:700 64px/1.1 Osw;text-transform:uppercase;color:var(--cream)">1 успех — везение.<br><span style="color:var(--red)">1 000 — система</span></div>
       <div class="hw" style="left:130px;top:560px;font-size:52px">и следующей можешь быть ты ♡</div>
@@ -193,7 +193,8 @@ function slide(s, n, total) {
       <div class="abs" style="left:120px;top:540px;width:780px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b><br>и забирай 3 гайда</div>
       <div class="abs" style="left:980px;top:250px;display:flex;gap:26px">${[1, 2, 3].map((i) => `<img src="file://${IMG}/gcov${i}-1.jpg" style="width:270px;border-radius:14px;border:3px solid #c9a46a;box-shadow:0 20px 50px rgba(0,0,0,.6);transform:rotate(${(i - 2) * 4}deg)">`).join('')}</div>
       <div class="abs" style="left:120px;top:700px;text-align:center"><div class="qr"><img src="file://${IMG}/qr_iamheyksusha.png" style="width:200px"></div></div>
-      <div class="hw" style="left:420px;top:820px;font-size:44px">🤫 секретный гайд «Где он?» — тем, кто в программе</div>`);
+      <div class="abs" style="left:420px;top:700px;width:520px;font:700 34px/1.3 Mont;color:#fff3dc">+ бесплатный разбор твоей ситуации <s style="color:#bfae95">50 000 ₽</s> <span style="color:var(--red)">бесплатно</span></div>
+      <div class="hw" style="left:420px;top:880px;font-size:42px">🤫 секретный гайд «Где он?» — тем, кто в программе</div>`);
     case 'final': return wrap(`${garland()}${snow(80)}<div class="abs" style="left:120px;right:780px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:30px">
       <div style="font:700 60px/1.15 Osw;text-transform:uppercase;color:var(--cream)">Твоя жизнь меняется не когда появляется новый мужчина, а когда ты впервые <span style="color:var(--red)">выбираешь себя</span></div>
       <div class="hw" style="position:static;font-size:72px">В 2027-й заходит новая ты ♡</div><div class="hw" style="position:static;font-size:52px;transform:rotate(-1deg)">Ксюша</div></div>

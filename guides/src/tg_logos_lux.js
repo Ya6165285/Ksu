@@ -70,17 +70,23 @@ const logos = {
         <ellipse cx="520" cy="430" rx="50" ry="26" fill="#fff" opacity=".35" transform="rotate(-30 520 430)"/></g>
       </svg>
       <div class=foil style="font:500 130px/1 Pf;letter-spacing:.25em;margin:10px 0 0 .25em">ЧАТ</div></div>`,
-  // 7 — чат: красное прямоугольное сообщение, чёрное сердце внутри, «ЧАТ» золотом
+  // 7 — чат: красная эмаль в золотой оправе, сердце — чёрная эмаль с золотым кантом
   'Чат_красный': `<div class=bg></div><div class=r1></div><div class=r2></div>
-    <div class=c style="margin-top:-20px">
-      <svg width="640" viewBox="0 0 240 200" style="filter:drop-shadow(0 14px 16px rgba(0,0,0,.75))">${foilDefs}
-        <defs><linearGradient id="rd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3242f"/><stop offset="1" stop-color="#9c0f1a"/></linearGradient>
-        <linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
-        <path d="M30 6h180a24 24 0 0 1 24 24v94a24 24 0 0 1-24 24H96l-50 44v-44H30a24 24 0 0 1-24-24V30A24 24 0 0 1 30 6z" fill="url(#rd)"/>
-        <path d="M30 6h180a24 24 0 0 1 24 24v40H6V30A24 24 0 0 1 30 6z" fill="url(#gl)"/>
-        <path d="M120 130C92 110 76 96 76 76a22 22 0 0 1 44-8 22 22 0 0 1 44 8c0 20-16 34-44 54z" fill="#0d0a09"/>
+    <div class=c style="margin-top:-10px">
+      <svg width="600" viewBox="0 0 240 200" style="filter:drop-shadow(0 18px 22px rgba(0,0,0,.8))">${foilDefs}
+        <defs>
+          <linearGradient id="en" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#a3121f"/><stop offset=".55" stop-color="#7a0a15"/><stop offset="1" stop-color="#4a050c"/></linearGradient>
+          <radialGradient id="sp" cx=".3" cy=".15" r=".55"><stop offset="0" stop-color="#ffd9d9" stop-opacity=".45"/><stop offset="1" stop-color="#ffd9d9" stop-opacity="0"/></radialGradient>
+          <linearGradient id="hb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2422"/><stop offset="1" stop-color="#050404"/></linearGradient>
+          <pattern id="fs" patternUnits="userSpaceOnUse" width="240" height="200"><image href="file://${T}/foil.jpg" width="240" height="240" preserveAspectRatio="xMidYMid slice"/></pattern>
+        </defs>
+        <path id="bub" d="M32 10h176a22 22 0 0 1 22 22v86a22 22 0 0 1-22 22H98l-44 40v-40H32a22 22 0 0 1-22-22V32a22 22 0 0 1 22-22z" fill="url(#en)" stroke="url(#fs)" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M32 18h176a14 14 0 0 1 14 14v86a14 14 0 0 1-14 14H95l-33 30v-30H32a14 14 0 0 1-14-14V32a14 14 0 0 1 14-14z" fill="none" stroke="url(#fs)" stroke-width="1" opacity=".7"/>
+        <path d="M32 10h176a22 22 0 0 1 22 22v86a22 22 0 0 1-22 22H98l-44 40v-40H32a22 22 0 0 1-22-22V32a22 22 0 0 1 22-22z" fill="url(#sp)"/>
+        <path d="M120 124C94 106 80 93 80 75a20 20 0 0 1 40-7 20 20 0 0 1 40 7c0 18-14 31-40 49z" fill="url(#hb)" stroke="url(#fs)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M97 66c4-6 11-8 16-5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2.4" stroke-linecap="round"/>
       </svg>
-      <div class=foil style="font:500 150px/1 Pf;letter-spacing:.22em;margin:40px 0 0 .22em">ЧАТ</div>
+      <div class=foil style="font:500 120px/1 Pf;letter-spacing:.3em;margin:46px 0 0 .3em">ЧАТ</div>
     </div>`,
   // 4 — чат: тонкий золотой «пузырь» + ЧАТ
   'Чат': `<div class=bg></div><div class=r1></div><div class=r2></div>

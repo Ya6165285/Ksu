@@ -41,6 +41,14 @@ const logos = {
   'Канал_фото': `<img src="file://${T}/bw.jpg" style="position:absolute;inset:0;width:1280px;height:1280px">
     <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%)"></div>
     <div class=r1></div><div class=r2></div>`,
+  // 3b — цветное фото + золотая надпись снизу
+  'Канал_фото_надпись': `<img src="file://${T}/color.jpg" style="position:absolute;inset:0;width:1280px;height:1280px">
+    <div style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0) 50%,rgba(8,6,5,.55) 68%,rgba(8,6,5,.88) 85%)"></div>
+    <div class=r1></div><div class=r2></div>
+    <div class=c style="justify-content:flex-end;padding-bottom:205px">
+      <div class=foil style="font:400 112px/1 Pf;letter-spacing:.03em">Девушка</div>
+      <div class=foil style="font:italic 400 100px/1.1 Pf">на миллион</div>
+    </div>`,
   // 4 — чат: тонкий золотой «пузырь» + ЧАТ
   'Чат': `<div class=bg></div><div class=r1></div><div class=r2></div>
     <div class=c>

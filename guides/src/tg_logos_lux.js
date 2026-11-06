@@ -49,6 +49,27 @@ const logos = {
       <div class=foil style="font:500 150px/1 Pf;letter-spacing:.02em;filter:drop-shadow(0 4px 4px rgba(0,0,0,.8)) drop-shadow(0 0 18px rgba(255,215,140,.35))">Девушка</div>
       <div class=foil style="font:italic 400 132px/1.08 Pf;filter:drop-shadow(0 4px 4px rgba(0,0,0,.8)) drop-shadow(0 0 18px rgba(255,215,140,.35))">на миллион</div>
     </div>`,
+  // 5 — чат: эмодзи-сообщение с сердечком
+  'Чат_сердечко': `<div class=bg></div><div class=r1></div><div class=r2></div>
+    <div class=c><svg width="820" viewBox="0 0 1280 1138" style="filter:drop-shadow(0 14px 18px rgba(0,0,0,.7))">${foilDefs}
+        <defs><radialGradient id="hl" cx=".35" cy=".25" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <linearGradient id="hr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3162a"/><stop offset="1" stop-color="#5c0614"/></linearGradient></defs>
+        <path d="M640 150C365 150 160 320 160 530c0 108 54 206 142 274l-52 170 196-90c62 18 126 27 194 27 275 0 480-170 480-381S915 150 640 150z" fill="url(#fo)"/>
+        <path d="M640 150C365 150 160 320 160 530c0 108 54 206 142 274l-52 170 196-90c62 18 126 27 194 27 275 0 480-170 480-381S915 150 640 150z" fill="url(#hl)"/>
+        <g transform="translate(640 540) scale(.8) translate(-640 -560)"><path d="M640 760C480 650 380 570 380 455a120 120 0 0 1 260-60 120 120 0 0 1 260 60c0 115-100 195-260 305z" fill="url(#hr)" stroke="#2a0208" stroke-width="6"/>
+        <ellipse cx="520" cy="430" rx="50" ry="26" fill="#fff" opacity=".35" transform="rotate(-30 520 430)"/></g>
+      </svg></div>`,
+  // 6 — то же + ЧАТ
+  'Чат_сердечко_надпись': `<div class=bg></div><div class=r1></div><div class=r2></div>
+    <div class=c style="margin-top:-30px"><svg width="620" viewBox="0 0 1280 1138" style="filter:drop-shadow(0 14px 18px rgba(0,0,0,.7))">${foilDefs}
+        <defs><radialGradient id="hl" cx=".35" cy=".25" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <linearGradient id="hr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3162a"/><stop offset="1" stop-color="#5c0614"/></linearGradient></defs>
+        <path d="M640 150C365 150 160 320 160 530c0 108 54 206 142 274l-52 170 196-90c62 18 126 27 194 27 275 0 480-170 480-381S915 150 640 150z" fill="url(#fo)"/>
+        <path d="M640 150C365 150 160 320 160 530c0 108 54 206 142 274l-52 170 196-90c62 18 126 27 194 27 275 0 480-170 480-381S915 150 640 150z" fill="url(#hl)"/>
+        <g transform="translate(640 540) scale(.8) translate(-640 -560)"><path d="M640 760C480 650 380 570 380 455a120 120 0 0 1 260-60 120 120 0 0 1 260 60c0 115-100 195-260 305z" fill="url(#hr)" stroke="#2a0208" stroke-width="6"/>
+        <ellipse cx="520" cy="430" rx="50" ry="26" fill="#fff" opacity=".35" transform="rotate(-30 520 430)"/></g>
+      </svg>
+      <div class=foil style="font:500 130px/1 Pf;letter-spacing:.25em;margin:10px 0 0 .25em">ЧАТ</div></div>`,
   // 4 — чат: тонкий золотой «пузырь» + ЧАТ
   'Чат': `<div class=bg></div><div class=r1></div><div class=r2></div>
     <div class=c>

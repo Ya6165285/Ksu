@@ -107,6 +107,25 @@ const logos = {
       </svg>
       <div class=foil style="font:500 120px/1 Pf;letter-spacing:.3em;margin:46px 0 0 .3em">ЧАТ</div>
     </div>`,
+  // 9 — чат: овальное золотое сообщение, красное сердце, крупное ЧАТ
+  'Чат_золото_овал': `<div class=bg></div><div class=r1></div><div class=r2></div>
+    <div class=c style="margin-top:-20px">
+      <svg width="620" viewBox="0 0 240 200" style="filter:drop-shadow(0 18px 22px rgba(0,0,0,.8))">
+        <defs>
+          <pattern id="fs3" patternUnits="userSpaceOnUse" width="240" height="200"><image href="file://${T}/foil.jpg" width="240" height="240" preserveAspectRatio="xMidYMid slice"/></pattern>
+          <linearGradient id="dk3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3a2508" stop-opacity=".35"/></linearGradient>
+          <radialGradient id="sp3" cx=".32" cy=".18" r=".55"><stop offset="0" stop-color="#fff8dc" stop-opacity=".55"/><stop offset="1" stop-color="#fff8dc" stop-opacity="0"/></radialGradient>
+          <linearGradient id="re3" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#c41a28"/><stop offset=".6" stop-color="#860b17"/><stop offset="1" stop-color="#4f040c"/></linearGradient>
+        </defs>
+        <path d="M120 12C62 12 16 46 16 90c0 25 13 47 34 62l-12 38 44-20c12 4 25 6 38 6 58 0 104-34 104-78S178 12 120 12z" fill="url(#fs3)" stroke="#6b4a14" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M120 12C62 12 16 46 16 90c0 25 13 47 34 62l-12 38 44-20c12 4 25 6 38 6 58 0 104-34 104-78S178 12 120 12z" fill="url(#dk3)"/>
+        <path d="M120 12C62 12 16 46 16 90c0 25 13 47 34 62l-12 38 44-20c12 4 25 6 38 6 58 0 104-34 104-78S178 12 120 12z" fill="none" stroke="#7a5418" stroke-width="1.6" opacity=".5" transform="translate(120 92) scale(.9) translate(-120 -92)"/>
+        <path d="M120 12C62 12 16 46 16 90c0 25 13 47 34 62l-12 38 44-20c12 4 25 6 38 6 58 0 104-34 104-78S178 12 120 12z" fill="url(#sp3)"/>
+        <g transform="translate(0 6)"><path d="M120 128C94 110 80 97 80 79a20 20 0 0 1 40-7 20 20 0 0 1 40 7c0 18-14 31-40 49z" fill="url(#re3)" stroke="#6b4a14" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M97 70c4-6 11-8 16-5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2.6" stroke-linecap="round"/></g>
+      </svg>
+      <div class=foil style="font:500 170px/1 Pf;letter-spacing:.2em;margin:30px 0 0 .2em">ЧАТ</div>
+    </div>`,
   // 4 — чат: тонкий золотой «пузырь» + ЧАТ
   'Чат': `<div class=bg></div><div class=r1></div><div class=r2></div>
     <div class=c>

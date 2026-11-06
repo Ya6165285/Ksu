@@ -43,11 +43,11 @@ const logos = {
     <div class=r1></div><div class=r2></div>`,
   // 3b — цветное фото + золотая надпись снизу
   'Канал_фото_надпись': `<img src="file://${T}/color.jpg" style="position:absolute;inset:0;width:1280px;height:1280px">
-    <div style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0) 50%,rgba(8,6,5,.55) 68%,rgba(8,6,5,.88) 85%)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0) 48%,rgba(8,6,5,.6) 64%,rgba(8,6,5,.92) 82%)"></div>
     <div class=r1></div><div class=r2></div>
-    <div class=c style="justify-content:flex-end;padding-bottom:205px">
-      <div class=foil style="font:400 112px/1 Pf;letter-spacing:.03em">Девушка</div>
-      <div class=foil style="font:italic 400 100px/1.1 Pf">на миллион</div>
+    <div class=c style="justify-content:flex-end;padding-bottom:175px">
+      <div class=foil style="font:500 150px/1 Pf;letter-spacing:.02em;filter:drop-shadow(0 4px 4px rgba(0,0,0,.8)) drop-shadow(0 0 18px rgba(255,215,140,.35))">Девушка</div>
+      <div class=foil style="font:italic 400 132px/1.08 Pf;filter:drop-shadow(0 4px 4px rgba(0,0,0,.8)) drop-shadow(0 0 18px rgba(255,215,140,.35))">на миллион</div>
     </div>`,
   // 4 — чат: тонкий золотой «пузырь» + ЧАТ
   'Чат': `<div class=bg></div><div class=r1></div><div class=r2></div>

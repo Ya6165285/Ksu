@@ -189,11 +189,11 @@ function slide(s, n, total) {
         <div class="c hl" style="grid-column:1/3"><div class="t">🤫 Секретный подарок — гайд «Где он?» по сайтам знакомств</div><div class="d" style="color:#f3e6d0">Как я знакомилась с обеспеченными мужчинами, которые меня одаривали. Только при покупке программы</div></div></div>
       <div class="hw" style="right:140px;top:110px">бонусы сгорают через 24 часа</div>`);
     case 'codeword': return wrap(`${tag('Подарки')}${H(['Кодовое', 'слово'], 600)}
-      <div class="abs" style="left:120px;top:330px"><span class="word" style="font-size:120px;padding:20px 60px">УБОРКА</span></div>
-      <div class="abs" style="left:120px;top:540px;width:780px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b><br>и забирай 3 гайда</div>
+      <div class="abs" style="left:120px;top:330px"><span class="word" style="font-size:120px;padding:20px 60px">БОНУС</span></div>
+      <div class="abs" style="left:120px;top:540px;width:780px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b><br>и забирай 3 гайда + разбор</div>
       <div class="abs" style="left:980px;top:250px;display:flex;gap:26px">${[1, 2, 3].map((i) => `<img src="file://${IMG}/gcov${i}-1.jpg" style="width:270px;border-radius:14px;border:3px solid #c9a46a;box-shadow:0 20px 50px rgba(0,0,0,.6);transform:rotate(${(i - 2) * 4}deg)">`).join('')}</div>
       <div class="abs" style="left:120px;top:700px;text-align:center"><div class="qr"><img src="file://${IMG}/qr_iamheyksusha.png" style="width:200px"></div></div>
-      <div class="abs" style="left:380px;top:690px;width:600px"><div style="font:700 44px/1.15 Osw;text-transform:uppercase;color:var(--cream)">+ <span style="color:var(--red)">личный созвон 15 минут</span><br>«твой план уборки на 2027»</div><div style="font:600 30px/1.35 Mont;color:#f3e6d0;margin-top:10px">Разберём, что убрать из твоей жизни и с чего начать. Мест мало ♡</div></div>
+      <div class="abs" style="left:380px;top:690px;width:600px"><div style="font:700 44px/1.15 Osw;text-transform:uppercase;color:var(--cream)">+ <span style="color:var(--red)">разбор твоей ситуации</span><br>на личном созвоне</div><div style="font:600 30px/1.35 Mont;color:#f3e6d0;margin-top:10px">И подарки, и разбор — в одном слове. Мест мало ♡</div></div>
       <div class="hw" style="left:130px;top:930px;font-size:40px">🤫 секретный гайд «Где он?» — тем, кто в программе</div>`);
     case 'final': return wrap(`${garland()}${snow(80)}<div class="abs" style="left:120px;right:780px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:30px">
       <div style="font:700 60px/1.15 Osw;text-transform:uppercase;color:var(--cream)">Твоя жизнь меняется не когда появляется новый мужчина, а когда ты впервые <span style="color:var(--red)">выбираешь себя</span></div>

@@ -188,6 +188,13 @@ function slide(s, n, total) {
         ${[['💎', 'Личный видеосозвон со мной', 'Твоя ситуация · моя консультация 50 000 ₽'], ['💎', 'Разбор «Тот или не тот?»', 'Переписка или прошлый мужчина + стратегия'], ['💎', 'Повторный поток бесплатно', 'Не увидишь результат — пройдёшь ещё раз'], ['🤍', 'Доступ навсегда + чат', 'Уроки остаются с тобой']].map(([e, t, d]) => `<div class="c"><div class="t">${e} ${t}</div><div class="d">${d}</div></div>`).join('')}
         <div class="c hl" style="grid-column:1/3"><div class="t">🤫 Секретный подарок — гайд «Где он?» по сайтам знакомств</div><div class="d" style="color:#f3e6d0">Как я знакомилась с обеспеченными мужчинами, которые меня одаривали. Только при покупке программы</div></div></div>
       <div class="hw" style="right:140px;top:110px">бонусы сгорают через 24 часа</div>`);
+    case 'both': return wrap(`${tag('Всё в одном месте')}${H(['Пиши мне', 'в Telegram'], 600)}
+      <div class="abs" style="left:120px;top:300px;font:700 72px Osw;color:var(--cream)">@iamheyksusha</div>
+      <div class="gridc abs" style="left:120px;right:640px;top:440px;gap:22px">
+        <div class="c" style="padding:26px 30px"><div class="row"><span class="word" style="font-size:54px;padding:10px 30px">РАЗБОР</span><div class="t" style="font-size:34px">бесплатный разбор твоей ситуации<br><span style="color:var(--gold)">первым 15</span></div></div></div>
+        <div class="c hl" style="padding:26px 30px"><div class="row"><span class="word" style="font-size:54px;padding:10px 30px">БОНУС</span><div class="t" style="font-size:34px">3 гайда + разбор<br><span style="color:var(--gold)">на личном созвоне</span></div></div></div>
+      </div>
+      <div class="abs" style="right:150px;top:330px;text-align:center"><div class="qr"><img src="file://${IMG}/qr_iamheyksusha.png" style="width:330px"></div><div class="hw" style="position:static;font-size:44px;margin-top:18px">наведи камеру ♡</div></div>`);
     case 'codeword': return wrap(`${tag('Подарки')}${H(['Кодовое', 'слово'], 600)}
       <div class="abs" style="left:120px;top:330px"><span class="word" style="font-size:120px;padding:20px 60px">БОНУС</span></div>
       <div class="abs" style="left:120px;top:540px;width:780px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b><br>и забирай 3 гайда + разбор</div>

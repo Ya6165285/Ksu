@@ -193,7 +193,7 @@ function slide(s, n, total) {
       <div class="abs" style="left:120px;top:540px;width:780px;font:600 40px Mont;color:#f3e6d0">→ <b style="color:var(--cream)">@iamheyksusha</b><br>и забирай 3 гайда</div>
       <div class="abs" style="left:980px;top:250px;display:flex;gap:26px">${[1, 2, 3].map((i) => `<img src="file://${IMG}/gcov${i}-1.jpg" style="width:270px;border-radius:14px;border:3px solid #c9a46a;box-shadow:0 20px 50px rgba(0,0,0,.6);transform:rotate(${(i - 2) * 4}deg)">`).join('')}</div>
       <div class="abs" style="left:120px;top:700px;text-align:center"><div class="qr"><img src="file://${IMG}/qr_iamheyksusha.png" style="width:200px"></div></div>
-      <div class="abs" style="left:420px;top:700px;width:520px;font:700 34px/1.3 Mont;color:#fff3dc">+ бесплатный разбор твоей ситуации <s style="color:#bfae95">50 000 ₽</s> <span style="color:var(--red)">бесплатно</span></div>
+      <div class="abs" style="left:420px;top:700px;width:540px;font:700 32px/1.35 Mont;color:#fff3dc">Хочешь разбор своей ситуации? Слово <span style="color:var(--red)">ДОСТОЙНА</span> — первым 15 <s style="color:#bfae95">50 000 ₽</s> <span style="color:var(--red)">бесплатно</span></div>
       <div class="hw" style="left:420px;top:880px;font-size:42px">🤫 секретный гайд «Где он?» — тем, кто в программе</div>`);
     case 'final': return wrap(`${garland()}${snow(80)}<div class="abs" style="left:120px;right:780px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:30px">
       <div style="font:700 60px/1.15 Osw;text-transform:uppercase;color:var(--cream)">Твоя жизнь меняется не когда появляется новый мужчина, а когда ты впервые <span style="color:var(--red)">выбираешь себя</span></div>

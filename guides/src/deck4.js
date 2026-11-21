@@ -60,6 +60,7 @@ const L = {
       ${s.lead ? `<div class="p" style="font-size:32px">${s.lead}</div>` : ''}
       ${items(s.items, s.opt || {})}
       ${s.q ? `<div class="quote" style="font-size:${s.qs || 42}px">${s.q}</div>` : ''}
+      ${s.prog ? `<div class="card" style="padding:16px 26px;border-color:rgba(236,201,150,.75)"><span class="caps" style="font-size:18px;letter-spacing:.2em;color:#f3d6a6">Без этого не получится · </span><span class="p" style="font-size:25px">${s.prog}</span></div>` : ''}
     </div>`,
   big: s => `${bg({ gx: 610, gy: 330 })}
     <div class="abs" style="left:180px;right:180px;top:0;bottom:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px">

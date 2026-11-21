@@ -108,6 +108,27 @@ const L = {
       <div class="quote" style="margin-top:10px">В 2027-й заходит новая ты</div>
       <div class="caps" style="font-size:20px;letter-spacing:.3em;margin-top:40px;color:rgba(236,201,150,.75)">Ксюша @iamheyksusha · Оля @ola_nvkv</div>
     </div>`,
+  case: s => `${bg()}${s.ph.length > 1 ? arch(s.ph[0], s.pos?.[0] || '50% 30%', 1080, 140, 340, 640) + arch(s.ph[1], s.pos?.[1] || '50% 30%', 1460, 220, 340, 640) : arch(s.ph[0], s.pos?.[0] || '50% 30%')}
+    <div class="abs" style="left:150px;top:100px;width:860px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:26px">
+      <div>${tag(s.tag || 'Кейс ученицы')}</div>${H(s.name + '<br><i>' + s.sub + '</i>', s.hs || 84)}
+      <div class="card" style="padding:24px 32px"><div class="caps" style="font-size:19px;letter-spacing:.24em;color:#a9998a;margin-bottom:6px">◇ Было</div><div class="p" style="font-size:31px;color:#cdbfae">${s.before}</div></div>
+      <div class="card" style="padding:24px 32px;border-color:rgba(236,201,150,.8)"><div class="caps" style="font-size:19px;letter-spacing:.24em;color:#f3d6a6;margin-bottom:6px">◆ Стало</div><div class="p" style="font-size:31px">${s.after}</div></div>
+      ${s.q ? `<div class="quote" style="font-size:38px">${s.q}</div>` : ''}
+    </div>`,
+  chain: s => `${bg()}
+    <div class="abs" style="left:150px;right:150px;top:90px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:46px">
+      <div>${tag(s.tag)}</div>${H(s.h, 88)}
+      <div style="display:flex;align-items:center;gap:14px">${s.links.map((t, i) => `<div class="card" style="flex:1;text-align:center;padding:30px 14px"><div class="num" style="margin:0 auto 16px">${i + 1}</div><div class="t" style="font-size:29px">${t}</div></div>${i < s.links.length - 1 ? '<div class="serif g-txt" style="font-size:54px">→</div>' : ''}`).join('')}</div>
+      <div style="text-align:center"><span class="pill" style="font-size:30px;padding:20px 50px">${s.res}</span></div>
+      ${s.q ? `<div class="quote" style="text-align:center">${s.q}</div>` : ''}
+    </div>`,
+  bridge: s => `${bg()}${s.ph ? arch(s.ph, s.pos) : ''}
+    <div class="abs" style="left:150px;top:100px;width:${s.ph ? 1000 : 1620}px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:30px">
+      <div>${tag(s.tag)}</div>${H(s.h || 'Почему без этого <i>не получится</i>', s.hs || 84)}
+      <div class="card" style="padding:30px 36px"><div class="caps" style="font-size:20px;letter-spacing:.24em;color:#f3d6a6;margin-bottom:10px">Почему это важно</div><div class="p" style="font-size:33px">${s.why}</div></div>
+      <div class="card" style="padding:30px 36px"><div class="caps" style="font-size:20px;letter-spacing:.24em;color:#f3d6a6;margin-bottom:10px">Что будет, если оставить как есть</div><div class="p" style="font-size:33px">${s.next}</div></div>
+      <div><span class="pill" style="font-size:24px">→ В программе: ${s.prog}</span></div>
+    </div>`,
   about: s => `${bg()}${s.two ? two() : s.wide ? arch(s.ph, s.pos, 1120, 150, 680, 760) : arch(s.ph, s.pos)}
     <div class="abs" style="left:150px;top:100px;width:${s.two ? 880 : s.wide ? 900 : 1000}px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:28px">
       <div>${tag(s.tag)}</div>${H(s.h, s.hs || 84)}

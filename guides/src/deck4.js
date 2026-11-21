@@ -55,7 +55,7 @@ const L = {
       <div class="caps" style="font-size:20px;letter-spacing:.3em;margin-top:44px;color:rgba(236,201,150,.75)">Ксюша @iamheyksusha · Ольга Новикова @ola_nvkv</div>
     </div>`,
   list: s => `${bg()}${s.two ? two() : s.ph ? (s.wide ? arch(s.ph, s.pos, 1120, 150, 680, 760) : arch(s.ph, s.pos)) : ''}
-    <div class="abs" style="left:150px;top:100px;width:${s.two ? 880 : s.ph ? (s.wide ? 900 : 1000) : 1620}px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:30px">
+    <div class="abs" style="left:150px;top:80px;width:${s.two ? 880 : s.ph ? (s.wide ? 900 : 1000) : 1620}px;bottom:120px;display:flex;flex-direction:column;justify-content:center;gap:24px">
       ${s.tag ? `<div>${tag(s.tag)}</div>` : ''}${H(s.h, s.hs || 84)}
       ${s.lead ? `<div class="p" style="font-size:32px">${s.lead}</div>` : ''}
       ${items(s.items, s.opt || {})}
@@ -82,7 +82,7 @@ const L = {
     </div>`,
   q: s => `${bg({ gx: 900 })}${arch(s.ph || 'olya2.jpg', s.pos || '50% 20%', 140, 110, 520, 840)}
     <div class="abs" style="left:780px;right:140px;top:0;bottom:60px;display:flex;flex-direction:column;justify-content:center;gap:40px">
-      <div>${tag('Вопрос психологу')}</div>
+      <div>${tag(s.tag ? s.tag + ' · вопрос Оле' : 'Вопрос психологу')}</div>
       <div class="serif g-txt" style="font-size:${s.hs || 86}px;line-height:1.02"><i>${s.h}</i></div>
       <img src="${u('diamond.png')}" style="width:220px;margin-left:-20px">
       <div class="caps" style="font-size:24px;letter-spacing:.24em">Отвечает Ольга Новикова · психолог</div>
@@ -129,6 +129,13 @@ const L = {
       <div class="card" style="padding:30px 36px"><div class="caps" style="font-size:20px;letter-spacing:.24em;color:#f3d6a6;margin-bottom:10px">Что будет, если оставить как есть</div><div class="p" style="font-size:33px">${s.next}</div></div>
       <div><span class="pill" style="font-size:24px">→ В программе: ${s.prog}</span></div>
     </div>`,
+  route: s => { const G = require('./deck4_data').GR; return `${bg()}
+    <div class="abs" style="left:150px;right:150px;top:90px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+      <div>${tag(s.k ? `Маршрут огранки · грань ${s.k} из 5` : 'Маршрут огранки · скринь')}</div>
+      ${H(s.k ? G[s.k - 1].t : 'Сегодня — <i>5 граней тебя</i>', s.k ? 92 : 96)}
+      <div style="display:flex;gap:18px">${G.map((g, i) => { const cur = s.k === i + 1, past = s.k && i + 1 < s.k; return `<div class="card" style="flex:1;padding:28px 20px;text-align:center;${cur ? 'border:2px solid #f0cf98;box-shadow:0 0 50px rgba(240,207,152,.25);background:linear-gradient(160deg,rgba(110,72,40,.7),rgba(30,18,10,.8))' : ''};${past ? 'opacity:.45' : ''}"><div class="serif g-txt" style="font-size:30px;letter-spacing:.2em">${past ? '✓' : '◆'} ${i + 1}</div><div class="t" style="font-size:28px;margin-top:12px">${g.s}</div></div>`; }).join('')}</div>
+      ${s.k ? `<div class="quote" style="text-align:center">${G[s.k - 1].d}</div>` : `<div class="quote" style="text-align:center">Каждая грань — то, что сейчас закрывает твой блеск</div>`}
+    </div>`; },
   about: s => `${bg()}${s.two ? two() : s.wide ? arch(s.ph, s.pos, 1120, 150, 680, 760) : arch(s.ph, s.pos)}
     <div class="abs" style="left:150px;top:100px;width:${s.two ? 880 : s.wide ? 900 : 1000}px;bottom:110px;display:flex;flex-direction:column;justify-content:center;gap:28px">
       <div>${tag(s.tag)}</div>${H(s.h, s.hs || 84)}

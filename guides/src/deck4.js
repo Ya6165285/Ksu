@@ -104,9 +104,9 @@ const L = {
     ${two(1080, 120)}
     <div class="abs" style="left:120px;top:200px;width:900px">
       ${tag('Из алмаза в бриллиант')}
-      <div class="serif g-txt" style="font-size:150px;margin-top:44px;line-height:.95">Спасибо,<br><i>красотки</i></div>
+      <div class="serif g-txt" style="font-size:130px;margin-top:34px;line-height:.95">Спасибо,<br><i>красотки</i></div>
       ${diamond(330, 'position:relative;display:block;margin:16px 0 0 220px')}
-      <div class="quote" style="margin-top:10px">В 2027-й заходит новая ты</div>
+      <div class="quote" style="margin-top:10px;font-size:${s.q ? 36 : 46}px;max-width:860px">${s.q || 'В 2027-й заходит новая ты'}</div>
       <div class="caps" style="font-size:20px;letter-spacing:.3em;margin-top:40px;color:rgba(236,201,150,.75)">Ксюша @iamheyksusha · Оля @ola_nvkv</div>
     </div>`,
   case: s => `${bg()}${s.ph.length > 1 ? arch(s.ph[0], s.pos?.[0] || '50% 30%', 1080, 140, 340, 640) + arch(s.ph[1], s.pos?.[1] || '50% 30%', 1460, 220, 340, 640) : arch(s.ph[0], s.pos?.[0] || '50% 30%')}

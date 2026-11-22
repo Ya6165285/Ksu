@@ -95,10 +95,10 @@ const L = {
       ${s.lead ? `<div class="p">${s.lead}</div>` : ''}
     </div>
     <div class="abs" style="left:1260px;right:120px;top:120px;bottom:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;text-align:center">
-      <div class="qr"><img src="${u('qr_iamheyksusha.png')}"></div>
+      <div class="qr"><img src="${u('qr_yoursksu2.png')}"></div>
       <div class="caps" style="font-size:24px">Напиши слово</div>
       ${[].concat(s.word).map(w => `<span class="pill word" style="${[].concat(s.word).length > 1 ? 'font-size:34px;padding:16px 44px' : ''}"><b>${w}</b></span>`).join('')}
-      <div class="caps" style="font-size:28px;color:#f3d6a6">→ @iamheyksusha</div>
+      <div class="caps" style="font-size:28px;color:#f3d6a6">→ @yoursksu2</div>
     </div>`,
   cover2: s => `${bg({ silk: true, silkH: 230, chand: false })}
     ${two(1080, 120)}

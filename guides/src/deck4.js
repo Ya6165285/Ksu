@@ -54,8 +54,8 @@ const L = {
       <div class="caps" style="font-size:28px;line-height:1.55;margin-top:18px">Психологическая огранка: снимаем старые сценарии,<br>раскрываем новые грани тебя</div>
       <div class="caps" style="font-size:20px;letter-spacing:.3em;margin-top:44px;color:rgba(236,201,150,.75)">Ксюша @iamheyksusha · Ольга Новикова @ola_nvkv</div>
     </div>`,
-  list: s => `${bg()}${s.two ? two() : s.ph ? (s.wide ? arch(s.ph, s.pos, 1120, 150, 680, 760) : arch(s.ph, s.pos)) : ''}
-    <div class="abs" style="left:150px;top:80px;width:${s.two ? 880 : s.ph ? (s.wide ? 900 : 1000) : 1620}px;bottom:120px;display:flex;flex-direction:column;justify-content:center;gap:24px">
+  list: s => `${bg()}${s.covers ? `<img class="abs" src="${u(s.covers[0])}" style="left:1180px;top:170px;width:400px;border-radius:14px;transform:rotate(-6deg);box-shadow:0 30px 70px rgba(0,0,0,.7);border:1.5px solid rgba(236,201,150,.6)"><img class="abs" src="${u(s.covers[1])}" style="left:1420px;top:250px;width:400px;border-radius:14px;transform:rotate(5deg);box-shadow:0 30px 70px rgba(0,0,0,.7);border:1.5px solid rgba(236,201,150,.6)">` : ''}${s.two ? two() : s.ph ? (s.wide ? arch(s.ph, s.pos, 1120, 150, 680, 760) : arch(s.ph, s.pos)) : ''}
+    <div class="abs" style="left:150px;top:80px;width:${s.covers ? 960 : s.two ? 880 : s.ph ? (s.wide ? 900 : 1000) : 1620}px;bottom:120px;display:flex;flex-direction:column;justify-content:center;gap:24px">
       ${s.tag ? `<div>${tag(s.tag)}</div>` : ''}${H(s.h, s.hs || 84)}
       ${s.lead ? `<div class="p" style="font-size:32px">${s.lead}</div>` : ''}
       ${items(s.items, s.opt || {})}

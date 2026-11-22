@@ -83,7 +83,7 @@ const L = {
     </div>`,
   q: s => `${bg({ gx: 900 })}${arch(s.ph || 'olya2.jpg', s.pos || '50% 20%', 140, 110, 520, 840)}
     <div class="abs" style="left:780px;right:140px;top:0;bottom:60px;display:flex;flex-direction:column;justify-content:center;gap:40px">
-      <div>${tag(s.tag ? s.tag + ' · вопрос Оле' : 'Вопрос психологу')}</div>
+      <div>${tag('Слайд Оли')}</div>
       <div class="serif g-txt" style="font-size:${s.hs || 86}px;line-height:1.02"><i>${s.h}</i></div>
       <img src="${u('diamond.png')}" style="width:220px;margin-left:-20px">
       <div class="caps" style="font-size:24px;letter-spacing:.24em">Отвечает Ольга Новикова · психолог</div>

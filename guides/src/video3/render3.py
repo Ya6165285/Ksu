@@ -34,7 +34,7 @@ def ksu_crop(a0, b0, z=1.1):
     return f'crop={cw}:{ch}:{x}:{y},scale={PW}:1080:flags=lanczos'
 def job(blk):
     (src, slide, bg), cl = blk
-    out = V + '/seg/' + hashlib.md5(json.dumps(['v3', src, slide, bg, cl, GAIN, len(FM)]).encode()).hexdigest()[:16]
+    out = V + '/seg/' + hashlib.md5(json.dumps(['v3b', src, slide, bg, cl, GAIN, len(FM)]).encode()).hexdigest()[:16]
     if os.path.exists(out + '.done'): return out
     a0, b0 = cl[0]['a'], cl[-1]['b']; dur = f'{b0 - a0 + 0.1:.3f}'
     sel = '+'.join(f"between(t,{c['a'] - a0:.3f},{c['b'] - a0:.3f})" for c in cl)
